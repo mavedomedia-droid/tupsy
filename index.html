@@ -7,8 +7,10 @@
 <meta name="description" content="Tupsy is a creative fashion and merchandise studio. From the first sketch to the final piece — creative direction, design, sourcing, sampling, production, and optional selling and fulfilment.">
 <meta name="theme-color" content="#102C24">
 
-<!-- Favicon placeholder — replace with approved Tupsy icon when available -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23102C24'/%3E%3Ctext x='50' y='68' font-family='Arial,sans-serif' font-weight='800' font-size='62' fill='%23F7F2E9' text-anchor='middle'%3ET%3C/text%3E%3Ccircle cx='72' cy='62' r='7' fill='%23E65B32'/%3E%3C/svg%3E">
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +21,6 @@
    TUPSY — DESIGN TOKENS
    ============================================================ */
 :root{
-  /* Brand palette */
   --forest:#102C24;
   --forest-soft:#16382D;
   --terracotta:#E65B32;
@@ -28,17 +29,13 @@
   --sage:#C8C7B9;
   --charcoal:#252627;
 
-  /* Typography */
   --display:'Archivo', 'Helvetica Neue', Arial, sans-serif;
   --body:'Inter', system-ui, -apple-system, sans-serif;
 
-  /* Utility */
   --edge:rgba(16,44,36,.14);
   --edge-light:rgba(247,242,233,.16);
-  --edge-sage:rgba(200,199,185,.5);
 
   --pad:clamp(72px, 9vw, 140px);
-  --gap:clamp(20px, 3vw, 40px);
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -68,8 +65,6 @@ button{font:inherit;color:inherit}
 .section--tight{padding:clamp(56px,6vw,88px) 0}
 .section--forest{background:var(--forest);color:var(--ivory)}
 .section--sage{background:var(--sage)}
-.section--terracotta{background:var(--terracotta);color:var(--forest)}
-.section--charcoal{background:var(--charcoal);color:var(--ivory)}
 
 [id]{scroll-margin-top:96px}
 
@@ -118,7 +113,6 @@ button{font:inherit;color:inherit}
   margin:0 0 18px;
   max-width:46ch;
 }
-.muted{opacity:.68}
 .hl{
   background-image:linear-gradient(transparent 64%, rgba(230,91,50,.32) 64%);
   background-repeat:no-repeat;
@@ -150,8 +144,6 @@ button{font:inherit;color:inherit}
 .btn--terracotta:hover{background:var(--terracotta-dark)}
 .btn--forest{background:var(--forest);color:var(--ivory)}
 .btn--forest:hover{background:var(--forest-soft)}
-.btn--ivory{background:var(--ivory);color:var(--forest)}
-.btn--ivory:hover{background:#fff}
 .btn--ghost{border-color:var(--edge);color:var(--charcoal);background:transparent}
 .btn--ghost:hover{border-color:var(--forest);background:rgba(16,44,36,.04)}
 .btn--sm{padding:13px 22px;font-size:.7rem}
@@ -159,32 +151,12 @@ button{font:inherit;color:inherit}
 .btn:hover .arw{transform:translateX(3px)}
 
 /* ============================================================
-   LOGO — placeholder wordmark, replace with approved asset
+   LOGO
    ============================================================ */
-.logo{
-  display:inline-flex;
-  align-items:center;
-  gap:0;
-  font-family:var(--display);
-  font-weight:800;
-  font-size:24px;
-  letter-spacing:-.025em;
-  text-transform:uppercase;
-  line-height:1;
-  flex:none;
-  color:currentColor;
-}
-.logo__word{display:block}
-.logo__dot{
-  width:.42em;
-  height:.42em;
-  border-radius:50%;
-  background:var(--terracotta);
-  display:inline-block;
-  margin-left:.18em;
-  margin-top:-.35em;
-  flex:none;
-}
+.logo{display:inline-flex;align-items:center;flex:none;color:currentColor}
+.logo__img{display:block;height:28px;width:auto}
+.logo__img--light{height:30px}
+.logo__img--modal{height:22px}
 
 /* ============================================================
    HEADER
@@ -239,14 +211,8 @@ button{font:inherit;color:inherit}
   gap:clamp(28px,5vw,72px);
   align-items:end;
 }
-.hero__sub{
-  font-size:.95rem;
-  max-width:42ch;
-  margin:0 0 30px;
-  opacity:.7;
-}
+.hero__sub{font-size:.95rem;max-width:42ch;margin:0 0 30px;opacity:.7}
 .hero__actions{display:flex;flex-wrap:wrap;gap:12px}
-
 .hero__media{
   display:grid;
   grid-template-columns:1.35fr 1fr;
@@ -257,7 +223,7 @@ button{font:inherit;color:inherit}
 .hero__media .ph:first-child{grid-row:span 2}
 
 /* ============================================================
-   IMAGE PLACEHOLDERS
+   IMAGE FRAMES
    ============================================================ */
 .ph{
   position:relative;
@@ -280,13 +246,17 @@ button{font:inherit;color:inherit}
   color:rgba(16,44,36,.5);
   padding:14px;
   line-height:1.4;
+  pointer-events:none;
 }
-.ph--dark{
-  background:
-    repeating-linear-gradient(135deg, rgba(247,242,233,.07) 0 1.5px, transparent 1.5px 13px),
-    var(--forest-soft);
+.ph img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  z-index:1;
 }
-.ph--dark::after{color:rgba(247,242,233,.5)}
 
 /* ============================================================
    MARQUEE
@@ -298,17 +268,8 @@ button{font:inherit;color:inherit}
   padding:19px 0;
   border-top:1px solid var(--edge-light);
 }
-.marquee__track{
-  display:flex;
-  width:max-content;
-  animation:slide 44s linear infinite;
-}
-.marquee__set{
-  display:flex;
-  align-items:center;
-  gap:44px;
-  padding-right:44px;
-}
+.marquee__track{display:flex;width:max-content;animation:slide 44s linear infinite}
+.marquee__set{display:flex;align-items:center;gap:44px;padding-right:44px}
 .marquee__set span{
   font-family:var(--display);
   font-weight:600;
@@ -370,7 +331,7 @@ button{font:inherit;color:inherit}
 }
 
 /* ============================================================
-   SERVICES — rows
+   SERVICES
    ============================================================ */
 .rows{margin-top:clamp(40px,5vw,72px);border-top:1px solid var(--edge)}
 .row{
@@ -666,12 +627,7 @@ button{font:inherit;color:inherit}
 /* ============================================================
    MODAL
    ============================================================ */
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:200;
-  display:none;
-}
+.modal{position:fixed;inset:0;z-index:200;display:none}
 .modal.is-open{display:block}
 .modal__backdrop{
   position:absolute;
@@ -706,7 +662,6 @@ button{font:inherit;color:inherit}
   background:var(--ivory);
   flex:none;
 }
-.modal__bar .logo{font-size:19px}
 .modal__close{
   width:38px;height:38px;
   border-radius:50%;
@@ -745,12 +700,7 @@ button{font:inherit;color:inherit}
 }
 .pills{display:flex;flex-wrap:wrap;gap:9px}
 .pill{position:relative;display:inline-flex}
-.pill input{
-  position:absolute;
-  width:1px;height:1px;
-  opacity:0;
-  pointer-events:none;
-}
+.pill input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
 .pill span{
   display:inline-flex;
   align-items:center;
@@ -764,11 +714,7 @@ button{font:inherit;color:inherit}
   user-select:none;
 }
 .pill span:hover{border-color:rgba(16,44,36,.4)}
-.pill input:checked + span{
-  background:var(--forest);
-  color:var(--ivory);
-  border-color:var(--forest);
-}
+.pill input:checked + span{background:var(--forest);color:var(--ivory);border-color:var(--forest)}
 .pill input:focus-visible + span{outline:2px solid var(--terracotta);outline-offset:2px}
 
 .input, .textarea{
@@ -790,32 +736,8 @@ button{font:inherit;color:inherit}
 }
 .textarea{min-height:132px;resize:vertical;line-height:1.6}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.form__submit{
-  width:100%;
-  margin-top:8px;
-  padding:20px 30px;
-  font-size:.82rem;
-}
-.form__foot{
-  font-size:.78rem;
-  opacity:.5;
-  text-align:center;
-  margin:16px 0 0;
-  line-height:1.5;
-}
-
-/* Thank you */
-.done{text-align:center;padding:clamp(20px,4vw,50px) 0}
-.done__mark{
-  width:66px;height:66px;
-  border-radius:50%;
-  background:var(--terracotta);
-  color:#fff;
-  display:grid;
-  place-items:center;
-  margin:0 auto 28px;
-}
-.done p{font-size:1rem;opacity:.72;max-width:40ch;margin:18px auto 32px;line-height:1.65}
+.form__submit{width:100%;margin-top:8px;padding:20px 30px;font-size:.82rem}
+.form__foot{font-size:.78rem;opacity:.5;text-align:center;margin:16px 0 0;line-height:1.5}
 
 /* ============================================================
    RESPONSIVE
@@ -840,7 +762,7 @@ button{font:inherit;color:inherit}
 @media (max-width:680px){
   .container{width:calc(100% - 32px)}
   .header__inner{height:66px}
-  .logo{font-size:20px}
+  .logo__img{height:22px}
   .row{grid-template-columns:44px minmax(0,1fr);gap:14px}
   .row__desc{grid-column:2}
   .step{grid-template-columns:44px minmax(0,1fr)}
@@ -870,8 +792,8 @@ button{font:inherit;color:inherit}
 <header class="header">
   <div class="container header__inner">
     <a href="#top" class="logo" aria-label="Tupsy — home">
-      <span class="logo__word">TUPSY</span>
-      <span class="logo__dot" aria-hidden="true"></span>
+      <img class="logo__img" src="/assets/tupsy-logo-dark.svg"
+           alt="Tupsy" width="132" height="28">
     </a>
 
     <nav class="nav" aria-label="Primary">
@@ -916,10 +838,22 @@ button{font:inherit;color:inherit}
           </div>
         </div>
 
-        <div class="hero__media" aria-hidden="true">
-          <div class="ph" data-label="Hero image — product / lifestyle"></div>
-          <div class="ph" data-label="Fabric detail"></div>
-          <div class="ph" data-label="On-body shot"></div>
+        <div class="hero__media">
+          <div class="ph" data-label="Hero image — product / lifestyle">
+            <img src="/assets/hero-main.jpg"
+                 alt="Tupsy merchandise — styled product lifestyle shot"
+                 width="1200" height="1600" loading="eager" onerror="this.remove()">
+          </div>
+          <div class="ph" data-label="Fabric detail">
+            <img src="/assets/hero-fabric.jpg"
+                 alt="Close-up of garment fabric and print detail"
+                 width="800" height="800" loading="eager" onerror="this.remove()">
+          </div>
+          <div class="ph" data-label="On-body shot">
+            <img src="/assets/hero-onbody.jpg"
+                 alt="Person wearing a Tupsy produced garment"
+                 width="800" height="800" loading="eager" onerror="this.remove()">
+          </div>
         </div>
       </div>
     </div>
@@ -993,7 +927,6 @@ button{font:inherit;color:inherit}
             and materials to the little details that make it feel right.
           </p>
         </div>
-
         <div class="row">
           <span class="row__num">02</span>
           <h3 class="h4">Sourcing</h3>
@@ -1002,7 +935,6 @@ button{font:inherit;color:inherit}
             makes sense for what you're trying to make.
           </p>
         </div>
-
         <div class="row">
           <span class="row__num">03</span>
           <h3 class="h4">Sampling</h3>
@@ -1011,7 +943,6 @@ button{font:inherit;color:inherit}
             move into a full run.
           </p>
         </div>
-
         <div class="row">
           <span class="row__num">04</span>
           <h3 class="h4">Production</h3>
@@ -1020,7 +951,6 @@ button{font:inherit;color:inherit}
             getting everything made properly.
           </p>
         </div>
-
         <div class="row">
           <span class="row__num">05</span>
           <h3 class="h4">Online Selling</h3>
@@ -1029,7 +959,6 @@ button{font:inherit;color:inherit}
             own branded page on Tupsy.
           </p>
         </div>
-
         <div class="row">
           <span class="row__num">06</span>
           <h3 class="h4">Fulfilment</h3>
@@ -1060,7 +989,6 @@ button{font:inherit;color:inherit}
             <p>Tell us a little about what you're looking to make.</p>
           </div>
         </li>
-
         <li class="step">
           <span class="step__num">02</span>
           <div class="step__body">
@@ -1075,7 +1003,6 @@ button{font:inherit;color:inherit}
             </span>
           </div>
         </li>
-
         <li class="step">
           <span class="step__num">03</span>
           <div class="step__body">
@@ -1086,7 +1013,6 @@ button{font:inherit;color:inherit}
             </p>
           </div>
         </li>
-
         <li class="step">
           <span class="step__num">04</span>
           <div class="step__body">
@@ -1097,7 +1023,6 @@ button{font:inherit;color:inherit}
             </p>
           </div>
         </li>
-
         <li class="step">
           <span class="step__num">05</span>
           <div class="step__body">
@@ -1152,17 +1077,26 @@ button{font:inherit;color:inherit}
             </div>
             <div class="store__grid">
               <div class="store__item">
-                <div class="ph"></div>
+                <div class="ph">
+                  <img src="/assets/store-item-01.jpg" alt=""
+                       width="600" height="690" loading="lazy" onerror="this.remove()">
+                </div>
                 <span class="store__line"></span>
                 <span class="store__line store__line--sm"></span>
               </div>
               <div class="store__item">
-                <div class="ph"></div>
+                <div class="ph">
+                  <img src="/assets/store-item-02.jpg" alt=""
+                       width="600" height="690" loading="lazy" onerror="this.remove()">
+                </div>
                 <span class="store__line"></span>
                 <span class="store__line store__line--sm"></span>
               </div>
               <div class="store__item">
-                <div class="ph"></div>
+                <div class="ph">
+                  <img src="/assets/store-item-03.jpg" alt=""
+                       width="600" height="690" loading="lazy" onerror="this.remove()">
+                </div>
                 <span class="store__line"></span>
                 <span class="store__line store__line--sm"></span>
               </div>
@@ -1183,7 +1117,11 @@ button{font:inherit;color:inherit}
 
       <div class="work-grid">
         <article class="card card--wide">
-          <div class="ph" data-label="AfroCue × Tupsy — project imagery"></div>
+          <div class="ph" data-label="AfroCue × Tupsy — project imagery">
+            <img src="/assets/work-afrocue.jpg"
+                 alt="AfroCue × Tupsy merchandise collaboration"
+                 width="1600" height="1000" loading="lazy" onerror="this.remove()">
+          </div>
           <div class="card__meta">
             <span class="card__title">AfroCue × Tupsy</span>
             <span class="card__tag">In development</span>
@@ -1191,7 +1129,10 @@ button{font:inherit;color:inherit}
         </article>
 
         <article class="card">
-          <div class="ph" data-label="Project 02"></div>
+          <div class="ph" data-label="Project 02">
+            <img src="/assets/work-02.jpg" alt="Tupsy project 02"
+                 width="1000" height="1250" loading="lazy" onerror="this.remove()">
+          </div>
           <div class="card__meta">
             <span class="card__title">Project 02</span>
             <span class="card__tag">Placeholder</span>
@@ -1199,7 +1140,10 @@ button{font:inherit;color:inherit}
         </article>
 
         <article class="card">
-          <div class="ph" data-label="Project 03"></div>
+          <div class="ph" data-label="Project 03">
+            <img src="/assets/work-03.jpg" alt="Tupsy project 03"
+                 width="1000" height="1250" loading="lazy" onerror="this.remove()">
+          </div>
           <div class="card__meta">
             <span class="card__title">Project 03</span>
             <span class="card__tag">Placeholder</span>
@@ -1207,7 +1151,10 @@ button{font:inherit;color:inherit}
         </article>
 
         <article class="card">
-          <div class="ph" data-label="Project 04"></div>
+          <div class="ph" data-label="Project 04">
+            <img src="/assets/work-04.jpg" alt="Tupsy project 04"
+                 width="1000" height="1250" loading="lazy" onerror="this.remove()">
+          </div>
           <div class="card__meta">
             <span class="card__title">Project 04</span>
             <span class="card__tag">Placeholder</span>
@@ -1215,7 +1162,10 @@ button{font:inherit;color:inherit}
         </article>
 
         <article class="card">
-          <div class="ph" data-label="Project 05"></div>
+          <div class="ph" data-label="Project 05">
+            <img src="/assets/work-05.jpg" alt="Tupsy project 05"
+                 width="1000" height="1250" loading="lazy" onerror="this.remove()">
+          </div>
           <div class="card__meta">
             <span class="card__title">Project 05</span>
             <span class="card__tag">Placeholder</span>
@@ -1275,7 +1225,11 @@ button{font:inherit;color:inherit}
       </div>
 
       <div class="fay">
-        <div class="ph" data-label="Portrait"></div>
+        <div class="ph">
+          <img src="/assets/fay-portrait.jpg"
+               alt="Fay, lead fashion designer at Tupsy"
+               width="800" height="960" loading="lazy" onerror="this.remove()">
+        </div>
         <div>
           <p class="fay__label">Lead Fashion Designer</p>
           <p class="fay__name">Fay</p>
@@ -1311,8 +1265,8 @@ button{font:inherit;color:inherit}
     <div class="footer__top">
       <div>
         <a href="#top" class="logo" aria-label="Tupsy — home">
-          <span class="logo__word">TUPSY</span>
-          <span class="logo__dot" aria-hidden="true"></span>
+          <img class="logo__img logo__img--light" src="/assets/tupsy-logo-light.svg"
+               alt="Tupsy" width="140" height="30">
         </a>
         <p class="footer__tag">
           A creative fashion and merchandise studio. You bring the idea — we
@@ -1357,8 +1311,8 @@ button{font:inherit;color:inherit}
   <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal__bar">
       <span class="logo" aria-hidden="true">
-        <span class="logo__word">TUPSY</span>
-        <span class="logo__dot"></span>
+        <img class="logo__img logo__img--modal" src="/assets/tupsy-logo-dark.svg"
+             alt="Tupsy" width="104" height="22">
       </span>
       <button class="modal__close" type="button" data-close-modal aria-label="Close">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -1368,8 +1322,6 @@ button{font:inherit;color:inherit}
     </div>
 
     <div class="modal__scroll">
-
-      <!-- FORM -->
       <form id="project-form" novalidate>
         <h2 class="display h3 form__title" id="modal-title">Let's make something.</h2>
         <p class="form__sub">
@@ -1377,7 +1329,6 @@ button{font:inherit;color:inherit}
           take it from there.
         </p>
 
-        <!-- CLIENT TYPE -->
         <fieldset class="field">
           <legend class="field__label">Who are you?</legend>
           <div class="pills">
@@ -1390,7 +1341,6 @@ button{font:inherit;color:inherit}
           </div>
         </fieldset>
 
-        <!-- PRODUCT INTEREST -->
         <fieldset class="field">
           <legend class="field__label">What are you looking to make? <span class="opt">Select all that apply</span></legend>
           <div class="pills">
@@ -1406,21 +1356,18 @@ button{font:inherit;color:inherit}
           </div>
         </fieldset>
 
-        <!-- SHORT IDEA -->
         <div class="field">
           <label class="field__label" for="idea">What are you thinking of making?</label>
           <input class="input" type="text" id="idea" name="idea"
                  placeholder="e.g. A 3-piece capsule for my audience">
         </div>
 
-        <!-- LONG -->
         <div class="field">
           <label class="field__label" for="about">Tell us about it</label>
           <textarea class="textarea" id="about" name="about"
             placeholder="Tell us what you're imagining, who it's for, any references you already have, or anything else you think we should know."></textarea>
         </div>
 
-        <!-- SAMPLES -->
         <fieldset class="field">
           <legend class="field__label">How many samples?</legend>
           <div class="pills">
@@ -1431,7 +1378,6 @@ button{font:inherit;color:inherit}
           </div>
         </fieldset>
 
-        <!-- RUN -->
         <fieldset class="field">
           <legend class="field__label">Estimated first production run</legend>
           <div class="pills">
@@ -1444,7 +1390,6 @@ button{font:inherit;color:inherit}
           </div>
         </fieldset>
 
-        <!-- TIMELINE -->
         <fieldset class="field">
           <legend class="field__label">Desired timeline</legend>
           <div class="pills">
@@ -1456,7 +1401,6 @@ button{font:inherit;color:inherit}
           </div>
         </fieldset>
 
-        <!-- HOSTING INTEREST -->
         <fieldset class="field">
           <legend class="field__label">Would you like Tupsy to host and sell your collection? <span class="opt">Optional</span></legend>
           <div class="pills">
@@ -1466,7 +1410,6 @@ button{font:inherit;color:inherit}
           </div>
         </fieldset>
 
-        <!-- DETAILS -->
         <div class="field">
           <label class="field__label" for="name">Your details</label>
           <div class="grid-2" style="margin-bottom:16px">
@@ -1488,23 +1431,6 @@ button{font:inherit;color:inherit}
           We'll review your details and get back to you to talk it through.
         </p>
       </form>
-
-      <!-- THANK YOU -->
-      <div class="done" id="project-done" hidden>
-        <div class="done__mark" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-            <path d="M4 12.5l5.2 5.2L20 6.8" stroke="currentColor" stroke-width="2.4"
-                  stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <h2 class="display h3">We've got it.</h2>
-        <p>
-          Thanks for telling us what you're thinking. We'll review the details
-          and get back to you to discuss the project and next steps.
-        </p>
-        <button class="btn btn--forest" type="button" data-close-modal>Close</button>
-      </div>
-
     </div>
   </div>
 </div>
@@ -1515,7 +1441,6 @@ button{font:inherit;color:inherit}
 
   var modal   = document.getElementById('project-modal');
   var form    = document.getElementById('project-form');
-  var done    = document.getElementById('project-done');
   var scroll  = modal.querySelector('.modal__scroll');
   var lastFocus = null;
 
@@ -1528,8 +1453,7 @@ button{font:inherit;color:inherit}
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('is-locked');
 
-    form.hidden = false;
-    done.hidden = true;
+    form.reset();
     scroll.scrollTop = 0;
 
     var first = modal.querySelector('.modal__close');
@@ -1574,7 +1498,7 @@ button{font:inherit;color:inherit}
     }
   });
 
-  /* ---------- SUBMIT ---------- */
+  /* ---------- SUBMIT → REDIRECT TO THANK-YOU ---------- */
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -1587,7 +1511,7 @@ button{font:inherit;color:inherit}
     }
 
     /* ---- COLLECT PAYLOAD ----
-       Phase 1: log it. Later: POST to Google Sheets / CRM / email service.
+       Phase 1: log it. Later: POST to a real endpoint, then redirect.
     ---------------------------------------------------------- */
     var data = {
       who:     (form.querySelector('input[name="who"]:checked') || {}).value || '',
@@ -1610,10 +1534,22 @@ button{font:inherit;color:inherit}
     };
     console.log('Tupsy — new project enquiry:', data);
 
-    form.hidden = true;
-    done.hidden = false;
-    scroll.scrollTop = 0;
-    done.querySelector('.btn').focus();
+    /* TODO: replace this block with a real POST before launch.
+       Example with Formspree:
+
+       fetch('https://formspree.io/f/YOUR_ID', {
+         method: 'POST',
+         headers: { 'Accept': 'application/json' },
+         body: JSON.stringify(data)
+       }).then(function () {
+         window.location.href = 'thank-you.html';
+       }).catch(function () {
+         alert('Something went wrong. Please try again or email us directly.');
+       });
+
+       For now (no backend yet) we redirect immediately so the flow
+       works end-to-end for review. */
+    window.location.href = 'thank-you.html';
   });
 
   /* ---------- FOOTER YEAR ---------- */
