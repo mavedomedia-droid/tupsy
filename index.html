@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Thank you — Tupsy</title>
-<meta name="description" content="Thanks for telling us about your project. We'll be in touch soon.">
-<meta name="robots" content="noindex, nofollow">
+<title>Tupsy — Got an idea? Let's make it.</title>
+<meta name="description" content="Tupsy is a creative fashion and merchandise studio. From the first sketch to the final piece — creative direction, design, sourcing, sampling, production, and optional selling and fulfilment.">
 <meta name="theme-color" content="#102C24">
 
 <link rel="icon" type="image/svg+xml" href="https://tupsy.netlify.app/assets/favicon.svg">
@@ -17,274 +16,1496 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
+/* ============================================================
+   TUPSY — DESIGN TOKENS
+   ============================================================ */
 :root{
+  /* Foundation */
   --forest:#102C24;
   --forest-soft:#16382D;
+  --ivory:#F7F2E9;
+  --charcoal:#252627;
+
+  /* Pink system */
   --rose:#E8436B;
   --rose-dark:#C93359;
   --blush:#F4DAD3;
-  --ivory:#F7F2E9;
-  --charcoal:#252627;
+
+  /* Warm surprise (rare) */
+  --terracotta:#E65B32;
+  --terracotta-dark:#C74924;
+
+  /* Neutral */
+  --sage:#C8C7B9;
 
   --display:'Archivo', 'Helvetica Neue', Arial, sans-serif;
   --body:'Inter', system-ui, -apple-system, sans-serif;
 
+  --edge:rgba(16,44,36,.14);
   --edge-light:rgba(247,242,233,.16);
+
+  --pad:clamp(72px, 9vw, 140px);
 }
 
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{
   margin:0;
-  background:var(--forest);
-  color:var(--ivory);
+  background:var(--ivory);
+  color:var(--charcoal);
   font-family:var(--body);
   font-size:16px;
   line-height:1.62;
   -webkit-font-smoothing:antialiased;
-  min-height:100dvh;
-  display:flex;
-  flex-direction:column;
+  text-rendering:optimizeLegibility;
 }
-a{color:inherit;text-decoration:none}
+body.is-locked{overflow:hidden}
 img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
 
 ::selection{background:var(--rose);color:#fff}
 
-.top{
-  padding:24px 0;
-  border-bottom:1px solid var(--edge-light);
-}
-.top__inner{
-  width:min(1320px, 100% - 44px);
-  margin-inline:auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:24px;
-}
-.logo{display:inline-flex;align-items:center}
-.logo img{height:28px;width:auto;display:block}
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.container{width:min(1320px, 100% - 44px);margin-inline:auto}
+.section{padding:var(--pad) 0}
+.section--tight{padding:clamp(56px,6vw,88px) 0}
+.section--forest{background:var(--forest);color:var(--ivory)}
+.section--blush{background:var(--blush)}
 
-.top__home{
+[id]{scroll-margin-top:96px}
+
+/* ============================================================
+   TYPE
+   ============================================================ */
+.display{
   font-family:var(--display);
-  font-weight:600;
-  font-size:.72rem;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  opacity:.6;
-  transition:opacity .18s ease;
+  font-weight:800;
+  letter-spacing:-.025em;
+  line-height:1.02;
+  margin:0;
 }
-.top__home:hover{opacity:1}
-
-.main{
-  flex:1;
-  display:grid;
-  place-items:center;
-  padding:clamp(56px,8vw,110px) 0;
+.h1{font-size:clamp(2.6rem, 7.2vw, 6.4rem)}
+.h2{font-size:clamp(1.9rem, 4.6vw, 3.9rem)}
+.h3{font-size:clamp(1.4rem, 2.8vw, 2.2rem);letter-spacing:-.02em}
+.h4{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(1.1rem,1.8vw,1.5rem);
+  letter-spacing:-.015em;
+  line-height:1.15;
+  margin:0;
 }
-.card{
-  width:min(680px, 100% - 44px);
-  margin-inline:auto;
-  text-align:center;
-}
-
-.mark{
-  width:78px;height:78px;
-  border-radius:50%;
-  background:var(--rose);
-  color:#fff;
-  display:grid;
-  place-items:center;
-  margin:0 auto 34px;
-  animation:pop .5s cubic-bezier(.2,.8,.3,1.2) both;
-}
-@keyframes pop{from{opacity:0;transform:scale(.7)}}
-
 .eyebrow{
   font-family:var(--display);
   font-weight:600;
   font-size:.72rem;
-  letter-spacing:.22em;
+  letter-spacing:.2em;
   text-transform:uppercase;
-  color:var(--rose);
-  margin:0 0 22px;
-}
-
-.h1{
-  font-family:var(--display);
-  font-weight:800;
-  font-size:clamp(2.4rem, 6.5vw, 4.6rem);
-  letter-spacing:-.025em;
-  line-height:1.02;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
   margin:0 0 26px;
+  opacity:.75;
 }
-
+.eyebrow::before{
+  content:"";
+  width:7px;height:7px;border-radius:50%;
+  background:var(--rose);
+  flex:none;
+}
 .lede{
-  font-size:clamp(1rem,1.4vw,1.18rem);
-  line-height:1.6;
-  opacity:.78;
-  max-width:44ch;
-  margin:0 auto 44px;
-}
-
-.next{
-  list-style:none;
-  margin:0 auto 46px;
-  padding:0;
-  max-width:480px;
-  text-align:left;
-  border-top:1px solid var(--edge-light);
-}
-.next li{
-  display:grid;
-  grid-template-columns:44px 1fr;
-  gap:16px;
-  padding:18px 0;
-  border-bottom:1px solid var(--edge-light);
-  font-size:.95rem;
+  font-size:clamp(1.05rem,1.5vw,1.32rem);
   line-height:1.5;
-  opacity:.85;
+  margin:0 0 18px;
+  max-width:46ch;
 }
-.next b{
-  font-family:var(--display);
-  font-weight:700;
-  font-size:.68rem;
-  letter-spacing:.16em;
-  color:var(--rose);
-  padding-top:.45em;
+.hl{
+  background-image:linear-gradient(transparent 60%, rgba(244,218,211,.95) 60%);
+  background-repeat:no-repeat;
+  padding:.04em .1em;
+  margin:0 -.1em;
 }
 
+/* ============================================================
+   BUTTONS
+   ============================================================ */
 .btn{
   display:inline-flex;
   align-items:center;
   justify-content:center;
   gap:10px;
-  padding:18px 34px;
+  padding:17px 30px;
   border:1px solid transparent;
   border-radius:999px;
   font-family:var(--display);
   font-weight:700;
   font-size:.76rem;
-  letter-spacing:.12em;
+  letter-spacing:.11em;
   text-transform:uppercase;
   cursor:pointer;
   white-space:nowrap;
-  transition:background .18s ease, color .18s ease, transform .18s ease;
+  transition:background .18s ease, color .18s ease, transform .18s ease, border-color .18s ease;
 }
 .btn:active{transform:translateY(1px)}
 .btn--rose{background:var(--rose);color:#fff}
 .btn--rose:hover{background:var(--rose-dark)}
+.btn--forest{background:var(--forest);color:var(--ivory)}
+.btn--forest:hover{background:var(--forest-soft)}
+.btn--ghost{border-color:var(--edge);color:var(--charcoal);background:transparent}
+.btn--ghost:hover{border-color:var(--forest);background:rgba(16,44,36,.04)}
+.btn--sm{padding:13px 22px;font-size:.7rem}
 .btn .arw{transition:transform .2s ease}
 .btn:hover .arw{transform:translateX(3px)}
 
-.help{
-  margin:38px 0 0;
-  font-size:.85rem;
-  opacity:.5;
-  line-height:1.6;
-}
-.help a{
-  border-bottom:1px solid rgba(247,242,233,.35);
-  padding-bottom:1px;
-  transition:border-color .18s ease, opacity .18s ease;
-}
-.help a:hover{border-color:var(--rose);opacity:1}
+/* ============================================================
+   LOGO
+   ============================================================ */
+.logo{display:inline-flex;align-items:center;flex:none;color:currentColor}
+.logo__img{display:block;height:28px;width:auto}
+.logo__img--light{height:30px}
+.logo__img--modal{height:22px}
 
-.foot{
-  padding:22px 0;
-  border-top:1px solid var(--edge-light);
-  font-size:.74rem;
-  letter-spacing:.06em;
-  opacity:.4;
+/* ============================================================
+   HEADER
+   ============================================================ */
+.header{
+  position:sticky;
+  top:0;
+  z-index:60;
+  background:rgba(247,242,233,.88);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--edge);
 }
-.foot__inner{
-  width:min(1320px, 100% - 44px);
-  margin-inline:auto;
+.header__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  height:76px;
+}
+.nav{display:flex;gap:34px;margin-left:auto;margin-right:8px}
+.nav a{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:.76rem;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  position:relative;
+  padding:6px 0;
+  opacity:.75;
+  transition:opacity .18s ease;
+}
+.nav a::after{
+  content:"";
+  position:absolute;
+  left:0;bottom:0;
+  height:1.5px;width:0;
+  background:var(--rose);
+  transition:width .22s ease;
+}
+.nav a:hover{opacity:1}
+.nav a:hover::after{width:100%}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{padding:clamp(56px,7vw,96px) 0 clamp(48px,6vw,80px)}
+.hero__title{margin-bottom:clamp(38px,5vw,64px)}
+.hero__grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(28px,5vw,72px);
+  align-items:end;
+}
+.hero__sub{font-size:.95rem;max-width:42ch;margin:0 0 30px;opacity:.7}
+.hero__actions{display:flex;flex-wrap:wrap;gap:12px}
+.hero__media{
+  display:grid;
+  grid-template-columns:1.35fr 1fr;
+  grid-template-rows:1fr 1fr;
+  gap:12px;
+  aspect-ratio:1/.92;
+}
+.hero__media .ph:first-child{grid-row:span 2}
+
+/* ============================================================
+   IMAGE FRAMES
+   ============================================================ */
+.ph{
+  position:relative;
+  background:
+    repeating-linear-gradient(135deg, rgba(16,44,36,.05) 0 1.5px, transparent 1.5px 13px),
+    var(--sage);
+  border-radius:3px;
+  overflow:hidden;
+  display:flex;
+  align-items:flex-end;
+  min-height:60px;
+}
+.ph::after{
+  content:attr(data-label);
+  font-family:var(--display);
+  font-size:.6rem;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:rgba(16,44,36,.5);
+  padding:14px;
+  line-height:1.4;
+  pointer-events:none;
+}
+.ph img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  z-index:1;
+}
+
+/* ============================================================
+   MARQUEE
+   ============================================================ */
+.marquee{
+  background:var(--forest);
+  color:var(--ivory);
+  overflow:hidden;
+  padding:19px 0;
+  border-top:1px solid var(--edge-light);
+}
+.marquee__track{display:flex;width:max-content;animation:slide 44s linear infinite}
+.marquee__set{display:flex;align-items:center;gap:44px;padding-right:44px}
+.marquee__set span{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:.76rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  opacity:.9;
+}
+.marquee__set span::after{
+  content:"";
+  display:inline-block;
+  width:5px;height:5px;
+  border-radius:50%;
+  background:var(--rose);
+  margin-left:44px;
+  vertical-align:middle;
+}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ============================================================
+   SPLIT / AUDIENCE
+   ============================================================ */
+.split{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(32px,6vw,90px);
+  align-items:start;
+  margin-top:clamp(40px,5vw,64px);
+}
+.qlist{list-style:none;margin:0;padding:0}
+.qlist li{
+  display:flex;
+  gap:16px;
+  padding:17px 0;
+  border-top:1px solid var(--edge);
+  font-size:clamp(1rem,1.4vw,1.18rem);
+  line-height:1.42;
+}
+.qlist li:last-child{border-bottom:1px solid var(--edge)}
+.qlist b{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:.68rem;
+  letter-spacing:.14em;
+  color:var(--rose);
+  padding-top:.42em;
+  flex:none;
+}
+.split__note{font-size:1.02rem;margin:0 0 22px;max-width:42ch;opacity:.75}
+.split__kick{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(1.1rem,1.7vw,1.4rem);
+  letter-spacing:-.015em;
+  line-height:1.3;
+  margin:0;
+  max-width:26ch;
+}
+
+/* ============================================================
+   SERVICES
+   ============================================================ */
+.rows{margin-top:clamp(40px,5vw,72px);border-top:1px solid var(--edge)}
+.row{
+  display:grid;
+  grid-template-columns:64px minmax(0,.85fr) minmax(0,1.15fr);
+  gap:clamp(16px,3vw,44px);
+  align-items:baseline;
+  padding:clamp(26px,3vw,38px) 0;
+  border-bottom:1px solid var(--edge);
+  transition:padding-left .25s ease;
+}
+.row:hover{padding-left:10px}
+.row__num{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:.7rem;
+  letter-spacing:.16em;
+  color:var(--rose);
+}
+.row__desc{margin:0;font-size:.98rem;line-height:1.6;opacity:.72;max-width:52ch}
+
+/* ============================================================
+   HOW IT WORKS
+   ============================================================ */
+.how{
+  display:grid;
+  grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);
+  gap:clamp(32px,6vw,90px);
+  align-items:start;
+}
+.how__head{position:sticky;top:110px}
+.how__head p{opacity:.6;font-size:.95rem;max-width:30ch;margin:20px 0 0}
+.steps{list-style:none;margin:0;padding:0}
+.step{
+  display:grid;
+  grid-template-columns:64px minmax(0,1fr);
+  gap:clamp(12px,2vw,28px);
+  padding:clamp(22px,2.6vw,32px) 0;
+  border-top:1px solid var(--edge-light);
+}
+.step:last-child{border-bottom:1px solid var(--edge-light)}
+.step__num{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:.72rem;
+  letter-spacing:.16em;
+  color:var(--rose);
+  padding-top:.45em;
+}
+.step__body p{margin:10px 0 0;font-size:.96rem;line-height:1.6;opacity:.7;max-width:54ch}
+.step__body .fay{
+  display:block;
+  margin-top:14px;
+  padding-left:16px;
+  border-left:2px solid var(--rose);
+  font-size:.9rem;
+  opacity:.85;
+  max-width:48ch;
+}
+
+/* ============================================================
+   HOSTED MERCH
+   ============================================================ */
+.host{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
+  gap:clamp(36px,6vw,80px);
+  align-items:center;
+}
+.host__copy p{font-size:1rem;opacity:.75;max-width:44ch;margin:22px 0 30px}
+.url-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(.95rem,1.6vw,1.25rem);
+  letter-spacing:-.01em;
+  background:var(--forest);
+  color:var(--ivory);
+  padding:14px 22px;
+  border-radius:999px;
+  margin-bottom:28px;
+}
+.url-chip em{font-style:normal;color:var(--rose)}
+
+.browser{
+  background:#fff;
+  border:1px solid var(--edge);
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 30px 70px -40px rgba(16,44,36,.45);
+}
+.browser__bar{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:13px 16px;
+  border-bottom:1px solid var(--edge);
+  background:var(--ivory);
+}
+.browser__dot{width:9px;height:9px;border-radius:50%;background:var(--sage);flex:none}
+.browser__url{
+  margin-left:12px;
+  flex:1;
+  font-size:.72rem;
+  letter-spacing:.04em;
+  color:rgba(16,44,36,.55);
+  background:#fff;
+  border:1px solid var(--edge);
+  border-radius:999px;
+  padding:6px 14px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.browser__url strong{color:var(--forest)}
+.browser__body{background:var(--blush);padding:clamp(18px,2.4vw,30px)}
+.store__head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding-bottom:18px;
+  margin-bottom:20px;
+  border-bottom:1px solid rgba(16,44,36,.14);
+}
+.store__brand{
+  font-family:var(--display);
+  font-weight:800;
+  font-size:.86rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.store__nav{display:flex;gap:14px}
+.store__nav i{display:block;width:34px;height:6px;border-radius:99px;background:rgba(16,44,36,.16)}
+.store__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.store__item{display:flex;flex-direction:column;gap:8px}
+.store__item .ph{aspect-ratio:1/1.15}
+.store__item .ph::after{display:none}
+.store__line{height:7px;border-radius:99px;background:rgba(16,44,36,.16);width:78%}
+.store__line--sm{width:44%;background:var(--rose);opacity:.9}
+.store__note{
+  font-size:.72rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  opacity:.5;
+  margin:20px 0 0;
+  text-align:right;
+}
+
+/* ============================================================
+   WORK
+   ============================================================ */
+.work-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:clamp(14px,2vw,24px);
+  margin-top:clamp(36px,4vw,56px);
+}
+.card{display:flex;flex-direction:column;gap:14px}
+.card .ph{aspect-ratio:4/5}
+.card--wide{grid-column:span 2}
+.card--wide .ph{aspect-ratio:16/10}
+.card__meta{display:flex;align-items:baseline;justify-content:space-between;gap:14px}
+.card__title{font-family:var(--display);font-weight:700;font-size:1rem;letter-spacing:-.01em}
+.card__tag{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;opacity:.5}
+
+/* ============================================================
+   STATEMENT BAND
+   ============================================================ */
+.band{background:var(--terracotta);color:var(--forest)}
+.band__inner{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(30px,5vw,72px);
+  align-items:start;
+}
+.band__lines{margin:0;padding:0;list-style:none}
+.band__lines li{
+  font-family:var(--display);
+  font-weight:800;
+  letter-spacing:-.025em;
+  font-size:clamp(1.6rem,3.2vw,2.8rem);
+  line-height:1.12;
+  border-bottom:1px solid rgba(16,44,36,.22);
+  padding:12px 0;
+}
+.band__lines li:first-child{border-top:1px solid rgba(16,44,36,.22)}
+.band__copy p{font-size:1rem;line-height:1.65;margin:0 0 18px;max-width:44ch;opacity:.85}
+.band__copy .kick{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(1.05rem,1.7vw,1.3rem);
+  letter-spacing:-.015em;
+  opacity:1;
+}
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about{
+  display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);
+  gap:clamp(34px,5vw,80px);
+  align-items:start;
+}
+.about__copy p{font-size:1rem;line-height:1.68;margin:22px 0 0;max-width:46ch;opacity:.78}
+.fay{
+  background:var(--ivory);
+  border:1px solid rgba(16,44,36,.1);
+  border-radius:4px;
+  padding:clamp(20px,2.4vw,28px);
+  display:flex;
+  gap:20px;
+  align-items:flex-start;
+}
+.fay .ph{width:88px;aspect-ratio:1/1.2;flex:none}
+.fay .ph::after{display:none}
+.fay__label{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:.68rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--rose);
+  margin:0 0 8px;
+}
+.fay__text{font-size:.92rem;line-height:1.6;margin:0;opacity:.78}
+.fay__name{
+  font-family:var(--display);
+  font-weight:800;
+  font-size:1.05rem;
+  letter-spacing:-.01em;
+  margin:0 0 6px;
+}
+
+/* ============================================================
+   FINAL CTA
+   ============================================================ */
+.final{text-align:center}
+.final .display{margin-bottom:24px}
+.final p{
+  font-size:clamp(1rem,1.5vw,1.2rem);
+  opacity:.7;
+  max-width:38ch;
+  margin:0 auto 36px;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer{background:var(--forest);color:var(--ivory);padding:clamp(48px,6vw,72px) 0 34px}
+.footer__top{
   display:flex;
   flex-wrap:wrap;
-  gap:12px;
+  gap:32px;
   justify-content:space-between;
+  align-items:flex-start;
+  padding-bottom:38px;
+  border-bottom:1px solid var(--edge-light);
+}
+.footer__tag{font-size:.92rem;opacity:.6;max-width:30ch;margin:16px 0 0;line-height:1.6}
+.footer__links{display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,64px)}
+.footer__col h5{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:.66rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--rose);
+  margin:0 0 14px;
+}
+.footer__col a{
+  display:block;
+  font-size:.9rem;
+  opacity:.7;
+  padding:5px 0;
+  transition:opacity .18s ease, color .18s ease;
+}
+.footer__col a:hover{opacity:1;color:var(--rose)}
+.footer__bottom{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  justify-content:space-between;
+  padding-top:24px;
+  font-size:.76rem;
+  letter-spacing:.06em;
+  opacity:.45;
 }
 
-@media (max-width:520px){
-  .top__home{display:none}
-  .next li{grid-template-columns:36px 1fr;gap:12px}
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal{position:fixed;inset:0;z-index:200;display:none}
+.modal.is-open{display:block}
+.modal__backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(16,44,36,.62);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  animation:fade .22s ease both;
+}
+.modal__panel{
+  position:relative;
+  width:min(780px, calc(100% - 28px));
+  max-height:calc(100dvh - 48px);
+  margin:24px auto;
+  background:var(--ivory);
+  border-radius:6px;
+  box-shadow:0 40px 90px -40px rgba(0,0,0,.6);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  animation:rise .3s cubic-bezier(.2,.8,.25,1) both;
+}
+@keyframes fade{from{opacity:0}}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}}
+.modal__bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:18px 22px;
+  border-bottom:1px solid var(--edge);
+  background:var(--ivory);
+  flex:none;
+}
+.modal__close{
+  width:38px;height:38px;
+  border-radius:50%;
+  border:1px solid var(--edge);
+  background:transparent;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  transition:background .18s ease, border-color .18s ease;
+  flex:none;
+}
+.modal__close:hover{background:var(--forest);color:var(--ivory);border-color:var(--forest)}
+.modal__scroll{overflow-y:auto;padding:clamp(24px,3.4vw,40px);overscroll-behavior:contain}
+
+.form__title{margin-bottom:12px}
+.form__sub{font-size:.95rem;opacity:.7;margin:0 0 34px;max-width:52ch}
+
+.field{margin-bottom:30px;border:0;padding:0}
+.field__label{
+  display:block;
+  font-family:var(--display);
+  font-weight:700;
+  font-size:.7rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  margin-bottom:14px;
+  padding:0;
+}
+.field__label .opt{
+  font-family:var(--body);
+  font-weight:500;
+  letter-spacing:.06em;
+  text-transform:none;
+  opacity:.45;
+  margin-left:6px;
+}
+.pills{display:flex;flex-wrap:wrap;gap:9px}
+.pill{position:relative;display:inline-flex}
+.pill input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.pill span{
+  display:inline-flex;
+  align-items:center;
+  padding:11px 19px;
+  border:1px solid var(--edge);
+  border-radius:999px;
+  font-size:.86rem;
+  font-weight:500;
+  cursor:pointer;
+  transition:background .16s ease, color .16s ease, border-color .16s ease;
+  user-select:none;
+}
+.pill span:hover{border-color:var(--rose);background:rgba(244,218,211,.4)}
+.pill input:checked + span{background:var(--forest);color:var(--ivory);border-color:var(--forest)}
+.pill input:focus-visible + span{outline:2px solid var(--rose);outline-offset:2px}
+
+.input, .textarea{
+  width:100%;
+  background:#fff;
+  border:1px solid var(--edge);
+  border-radius:4px;
+  padding:15px 16px;
+  font-family:var(--body);
+  font-size:.95rem;
+  color:var(--charcoal);
+  transition:border-color .16s ease, box-shadow .16s ease;
+}
+.input::placeholder, .textarea::placeholder{color:rgba(37,38,39,.35)}
+.input:focus, .textarea:focus{
+  outline:none;
+  border-color:var(--rose);
+  box-shadow:0 0 0 3px rgba(232,67,107,.12);
+}
+.textarea{min-height:132px;resize:vertical;line-height:1.6}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form__submit{width:100%;margin-top:8px;padding:20px 30px;font-size:.82rem}
+.form__foot{font-size:.78rem;opacity:.5;text-align:center;margin:16px 0 0;line-height:1.5}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1080px){
+  .nav{display:none}
+  .how{grid-template-columns:1fr}
+  .how__head{position:static;margin-bottom:8px}
+  .band__inner{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+  .hero__grid,
+  .split,
+  .host,
+  .about{grid-template-columns:1fr}
+  .hero__media{aspect-ratio:4/3;max-width:620px}
+  .host__copy{order:1}
+  .browser{order:2}
+  .work-grid{grid-template-columns:1fr 1fr}
+  .card--wide{grid-column:span 2}
+}
+@media (max-width:680px){
+  .container{width:calc(100% - 32px)}
+  .header__inner{height:66px}
+  .logo__img{height:22px}
+  .row{grid-template-columns:44px minmax(0,1fr);gap:14px}
+  .row__desc{grid-column:2}
+  .step{grid-template-columns:44px minmax(0,1fr)}
+  .work-grid{grid-template-columns:1fr}
+  .card--wide{grid-column:span 1}
+  .card--wide .ph{aspect-ratio:4/5}
+  .fay{flex-direction:column}
+  .fay .ph{width:100%;aspect-ratio:16/9}
+  .grid-2{grid-template-columns:1fr}
+  .modal__panel{max-height:calc(100dvh - 20px);margin:10px auto;width:calc(100% - 20px)}
   .btn{width:100%}
+  .btn--sm{width:auto}
+  .hero__actions{flex-direction:column;align-items:stretch}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  html{scroll-behavior:auto}
 }
 </style>
 </head>
 
 <body>
 
-<header class="top">
-  <div class="top__inner">
-    <a href="/" class="logo" aria-label="Tupsy — home">
-      <img src="https://tupsy.netlify.app/assets/tupsy-logo-light.svg"
-           alt="Tupsy" width="140" height="30">
+<header class="header">
+  <div class="container header__inner">
+    <a href="#top" class="logo" aria-label="Tupsy — home">
+      <img class="logo__img" src="https://tupsy.netlify.app/assets/tupsy-logo-dark.svg"
+           alt="Tupsy" width="132" height="28">
     </a>
-    <a href="/" class="top__home">← Back to home</a>
+
+    <nav class="nav" aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="#how">How It Works</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <button class="btn btn--rose btn--sm" data-open-modal>Start a Project</button>
   </div>
 </header>
 
-<main class="main">
-  <div class="card">
-    <div class="mark" aria-hidden="true">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-        <path d="M4 12.5l5.2 5.2L20 6.8"
-              stroke="currentColor" stroke-width="2.4"
-              stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+<main id="top">
+
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Creative Fashion &amp; Merchandise Studio</p>
+
+      <h1 class="display h1 hero__title">
+        Got an idea?<br>
+        Let's <span class="hl">make it.</span>
+      </h1>
+
+      <div class="hero__grid">
+        <div class="hero__aside">
+          <p class="lede">
+            From the first sketch to the final piece, Tupsy helps you create and
+            produce merchandise that feels right for you. And if you want to
+            sell it, we can help with that too.
+          </p>
+          <p class="hero__sub">
+            Creative direction. Fashion. Production. Your own place to sell.
+          </p>
+          <div class="hero__actions">
+            <button class="btn btn--forest" data-open-modal>
+              Start a Project <span class="arw" aria-hidden="true">→</span>
+            </button>
+            <a class="btn btn--ghost" href="#how">How it works</a>
+          </div>
+        </div>
+
+        <div class="hero__media">
+          <div class="ph" data-label="Hero image — product / lifestyle">
+            <img src="https://tupsy.netlify.app/assets/hero-main.jpg"
+                 alt="Tupsy merchandise — styled product lifestyle shot"
+                 width="1200" height="1600" loading="eager" onerror="this.remove()">
+          </div>
+          <div class="ph" data-label="Fabric detail">
+            <img src="https://tupsy.netlify.app/assets/hero-fabric.jpg"
+                 alt="Close-up of garment fabric and print detail"
+                 width="800" height="800" loading="eager" onerror="this.remove()">
+          </div>
+          <div class="ph" data-label="On-body shot">
+            <img src="https://tupsy.netlify.app/assets/hero-onbody.jpg"
+                 alt="Person wearing a Tupsy produced garment"
+                 width="800" height="800" loading="eager" onerror="this.remove()">
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <p class="eyebrow">Project received</p>
-
-    <h1 class="h1">We've got it.</h1>
-
-    <p class="lede">
-      Thanks for telling us what you're thinking. We'll review the details and
-      get back to you to talk it through.
-    </p>
-
-    <ul class="next">
-      <li>
-        <b>01</b>
-        <span>We read through everything you sent us.</span>
-      </li>
-      <li>
-        <b>02</b>
-        <span>We reach out on WhatsApp or email to ask anything we need.</span>
-      </li>
-      <li>
-        <b>03</b>
-        <span>We set up a proper conversation about the idea, materials and timeline.</span>
-      </li>
-    </ul>
-
-    <a class="btn btn--rose" href="/">
-      Back to home <span class="arw" aria-hidden="true">→</span>
-    </a>
-
-    <p class="help">
-      In a hurry? Message us directly on
-      <a href="#">WhatsApp</a> or
-      <a href="#">Instagram</a>.
-    </p>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <div class="marquee__set">
+        <span>T-Shirts</span><span>Hoodies</span><span>Tops</span><span>Crop Tops</span>
+        <span>Jackets</span><span>Sets</span><span>Pants / Shorts</span><span>Accessories</span>
+        <span>Custom Projects</span>
+      </div>
+      <div class="marquee__set">
+        <span>T-Shirts</span><span>Hoodies</span><span>Tops</span><span>Crop Tops</span>
+        <span>Jackets</span><span>Sets</span><span>Pants / Shorts</span><span>Accessories</span>
+        <span>Custom Projects</span>
+      </div>
+    </div>
   </div>
+
+  <section class="section" id="who">
+    <div class="container">
+      <h2 class="display h2">
+        You have the idea.<br>
+        We'll figure out the rest.
+      </h2>
+
+      <div class="split">
+        <ul class="qlist">
+          <li><b>01</b> Are you a creator looking to make something for your audience?</li>
+          <li><b>02</b> A brand looking to create merch or a collection?</li>
+          <li><b>03</b> Planning something for a party or event?</li>
+          <li><b>04</b> A community that wants something people can wear?</li>
+          <li><b>05</b> Or maybe you just have a personal project in mind.</li>
+        </ul>
+
+        <div>
+          <p class="split__note">
+            Whatever you're thinking, Tupsy helps you take it from an idea to
+            something real — and something you're proud of.
+          </p>
+          <p class="split__kick">
+            Tell us what you're thinking. We'll take it from there.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight" id="services">
+    <div class="container">
+      <h2 class="display h2" style="max-width:16ch">
+        From idea to something you can actually wear.
+      </h2>
+
+      <div class="rows">
+        <div class="row">
+          <span class="row__num">01</span>
+          <h3 class="h4">Creative Direction</h3>
+          <p class="row__desc">
+            We help shape your idea into something that works — from the design
+            and materials to the little details that make it feel right.
+          </p>
+        </div>
+        <div class="row">
+          <span class="row__num">02</span>
+          <h3 class="h4">Sourcing</h3>
+          <p class="row__desc">
+            We work with trusted suppliers and production partners to find what
+            makes sense for what you're trying to make.
+          </p>
+        </div>
+        <div class="row">
+          <span class="row__num">03</span>
+          <h3 class="h4">Sampling</h3>
+          <p class="row__desc">
+            We develop a sample so you can see and feel the product before we
+            move into a full run.
+          </p>
+        </div>
+        <div class="row">
+          <span class="row__num">04</span>
+          <h3 class="h4">Production</h3>
+          <p class="row__desc">
+            From your first run to repeat orders, we manage the process of
+            getting everything made properly.
+          </p>
+        </div>
+        <div class="row">
+          <span class="row__num">05</span>
+          <h3 class="h4">Online Selling</h3>
+          <p class="row__desc">
+            Want somewhere to sell your merch? We can give your collection its
+            own branded page on Tupsy.
+          </p>
+        </div>
+        <div class="row">
+          <span class="row__num">06</span>
+          <h3 class="h4">Fulfilment</h3>
+          <p class="row__desc">
+            If you're selling through us, we can handle orders, packaging and
+            delivery — so you don't have to.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--forest" id="how">
+    <div class="container how">
+      <div class="how__head">
+        <h2 class="display h2">Keep it<br>simple.</h2>
+        <p>Five steps from the first message to something people can wear.</p>
+      </div>
+
+      <ol class="steps">
+        <li class="step">
+          <span class="step__num">01</span>
+          <div class="step__body">
+            <h3 class="h4">Start a Project</h3>
+            <p>Tell us a little about what you're looking to make.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step__num">02</span>
+          <div class="step__body">
+            <h3 class="h4">Consultation</h3>
+            <p>
+              We'll talk it through properly — concept, garments, materials,
+              sizing, quantities, budget and timeline.
+            </p>
+            <span class="fay">
+              Our lead fashion designer, <strong>Fay</strong>, brings her
+              fashion and garment-development experience into the process.
+            </span>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step__num">03</span>
+          <div class="step__body">
+            <h3 class="h4">Sample Development</h3>
+            <p>
+              We'll agree on the sample, send you a quote and timeline, and get
+              to work.
+            </p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step__num">04</span>
+          <div class="step__body">
+            <h3 class="h4">Production</h3>
+            <p>
+              Once you're happy with the sample, we agree on your first
+              production quantity and get it made.
+            </p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step__num">05</span>
+          <div class="step__body">
+            <h3 class="h4">Sell It — Optional</h3>
+            <p>
+              Take your merch and sell it yourself, or let Tupsy host, sell and
+              fulfil it for you.
+            </p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="host">
+    <div class="container host">
+      <div class="host__copy">
+        <h2 class="display h2">Make it. Then give people somewhere to get it.</h2>
+        <p>
+          If you want Tupsy to handle the selling side too, we'll create a
+          branded page for your collection.
+        </p>
+
+        <div class="url-chip">tupsy.com/<em>yourbrand</em></div>
+
+        <p>
+          Your page can feature your identity, products, images and pricing.
+          Share the link with your audience and customers can buy directly.
+          Tupsy handles the orders and fulfilment behind the scenes.
+        </p>
+
+        <button class="btn btn--rose" data-open-modal>
+          Start a Project <span class="arw" aria-hidden="true">→</span>
+        </button>
+      </div>
+
+      <div class="browser" aria-hidden="true">
+        <div class="browser__bar">
+          <span class="browser__dot"></span>
+          <span class="browser__dot"></span>
+          <span class="browser__dot"></span>
+          <div class="browser__url">tupsy.com/<strong>yourbrand</strong></div>
+        </div>
+        <div class="browser__body">
+          <div class="store">
+            <div class="store__head">
+              <span class="store__brand">Your Brand</span>
+              <span class="store__nav"><i></i><i></i></span>
+            </div>
+            <div class="store__grid">
+              <div class="store__item">
+                <div class="ph">
+                  <img src="https://tupsy.netlify.app/assets/store-item-01.jpg" alt=""
+                       width="600" height="690" loading="lazy" onerror="this.remove()">
+                </div>
+                <span class="store__line"></span>
+                <span class="store__line store__line--sm"></span>
+              </div>
+              <div class="store__item">
+                <div class="ph">
+                  <img src="https://tupsy.netlify.app/assets/store-item-02.jpg" alt=""
+                       width="600" height="690" loading="lazy" onerror="this.remove()">
+                </div>
+                <span class="store__line"></span>
+                <span class="store__line store__line--sm"></span>
+              </div>
+              <div class="store__item">
+                <div class="ph">
+                  <img src="https://tupsy.netlify.app/assets/store-item-03.jpg" alt=""
+                       width="600" height="690" loading="lazy" onerror="this.remove()">
+                </div>
+                <span class="store__line"></span>
+                <span class="store__line store__line--sm"></span>
+              </div>
+            </div>
+            <p class="store__note">Illustrative only</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight" id="work">
+    <div class="container">
+      <h2 class="display h2">Some things we've made.</h2>
+
+      <div class="work-grid">
+        <article class="card card--wide">
+          <div class="ph" data-label="AfroCue × Tupsy — project imagery">
+            <img src="https://tupsy.netlify.app/assets/work-afrocue.jpg"
+                 alt="AfroCue × Tupsy merchandise collaboration"
+                 width="1600" height="1000" loading="lazy" onerror="this.remove()">
+          </div>
+          <div class="card__meta">
+            <span class="card__title">AfroCue × Tupsy</span>
+            <span class="card__tag">In development</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="ph" data-label="Project 02">
+            <img src="https://tupsy.netlify.app/assets/work-02.jpg" alt="Tupsy project 02"
+                 width="1000" height="1250" loading="lazy" onerror="this.remove()">
+          </div>
+          <div class="card__meta">
+            <span class="card__title">Project 02</span>
+            <span class="card__tag">Placeholder</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="ph" data-label="Project 03">
+            <img src="https://tupsy.netlify.app/assets/work-03.jpg" alt="Tupsy project 03"
+                 width="1000" height="1250" loading="lazy" onerror="this.remove()">
+          </div>
+          <div class="card__meta">
+            <span class="card__title">Project 03</span>
+            <span class="card__tag">Placeholder</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="ph" data-label="Project 04">
+            <img src="https://tupsy.netlify.app/assets/work-04.jpg" alt="Tupsy project 04"
+                 width="1000" height="1250" loading="lazy" onerror="this.remove()">
+          </div>
+          <div class="card__meta">
+            <span class="card__title">Project 04</span>
+            <span class="card__tag">Placeholder</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="ph" data-label="Project 05">
+            <img src="https://tupsy.netlify.app/assets/work-05.jpg" alt="Tupsy project 05"
+                 width="1000" height="1250" loading="lazy" onerror="this.remove()">
+          </div>
+          <div class="card__meta">
+            <span class="card__title">Project 05</span>
+            <span class="card__tag">Placeholder</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="container band__inner">
+      <div>
+        <h2 class="display h2" style="max-width:14ch;margin-bottom:28px">
+          Good merch starts with a good idea.
+        </h2>
+      </div>
+
+      <div class="band__copy">
+        <ul class="band__lines">
+          <li>It's the material.</li>
+          <li>The fit.</li>
+          <li>The design.</li>
+          <li>The details.</li>
+        </ul>
+
+        <p style="margin-top:30px">
+          We know that making something people actually want to wear is about
+          more than putting a logo on a shirt. That's why we combine creative
+          thinking with access to the right production partners — helping you
+          make decisions from the first conversation through to the final
+          product.
+        </p>
+        <p class="kick">You bring the idea. We help make it real.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--blush" id="about">
+    <div class="container about">
+      <div class="about__copy">
+        <h2 class="display h2">Tupsy is a creative fashion and merchandise studio.</h2>
+        <p>
+          We work with creators, brands, parties, events, communities and
+          businesses to bring merchandise ideas to life.
+        </p>
+        <p>
+          From figuring out what to make to producing it — and, when needed,
+          helping you sell it — we're here to make the whole process easier,
+          more considered and more enjoyable.
+        </p>
+      </div>
+
+      <div class="fay">
+        <div class="ph">
+          <img src="https://tupsy.netlify.app/assets/fay-portrait.jpg"
+               alt="Fay, lead fashion designer at Tupsy"
+               width="800" height="960" loading="lazy" onerror="this.remove()">
+        </div>
+        <div>
+          <p class="fay__label">Lead Fashion Designer</p>
+          <p class="fay__name">Fay</p>
+          <p class="fay__text">
+            Fay brings experience across fashion design, garment development and
+            production to the creative side of Tupsy.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--forest final">
+    <div class="container">
+      <h2 class="display h2">Let's make something.</h2>
+      <p>You don't need the full plan. Just tell us what you're thinking.</p>
+      <button class="btn btn--rose" data-open-modal>
+        Start a Project <span class="arw" aria-hidden="true">→</span>
+      </button>
+    </div>
+  </section>
+
 </main>
 
-<footer class="foot">
-  <div class="foot__inner">
-    <span>© <span id="year"></span> Tupsy. All rights reserved.</span>
-    <span>You bring the idea. We help make it real.</span>
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div>
+        <a href="#top" class="logo" aria-label="Tupsy — home">
+          <img class="logo__img logo__img--light"
+               src="https://tupsy.netlify.app/assets/tupsy-logo-light.svg"
+               alt="Tupsy" width="140" height="30">
+        </a>
+        <p class="footer__tag">
+          A creative fashion and merchandise studio. You bring the idea — we
+          help make it real.
+        </p>
+      </div>
+
+      <nav class="footer__links" aria-label="Footer">
+        <div class="footer__col">
+          <h5>Explore</h5>
+          <a href="#work">Work</a>
+          <a href="#how">How It Works</a>
+          <a href="#about">About</a>
+        </div>
+        <div class="footer__col">
+          <h5>Start</h5>
+          <a href="#" data-open-modal>Start a Project</a>
+          <a href="#host">Host Your Merch</a>
+        </div>
+        <div class="footer__col">
+          <h5>Contact</h5>
+          <a href="#">Instagram</a>
+          <a href="#">WhatsApp</a>
+          <a href="#">Email</a>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© <span id="year"></span> Tupsy. All rights reserved.</span>
+      <span>Creative direction · Design · Sourcing · Production · Selling · Fulfilment</span>
+    </div>
   </div>
 </footer>
 
+<div class="modal" id="project-modal" aria-hidden="true">
+  <div class="modal__backdrop" data-close-modal></div>
+
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal__bar">
+      <span class="logo" aria-hidden="true">
+        <img class="logo__img logo__img--modal"
+             src="https://tupsy.netlify.app/assets/tupsy-logo-dark.svg"
+             alt="Tupsy" width="104" height="22">
+      </span>
+      <button class="modal__close" type="button" data-close-modal aria-label="Close">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="modal__scroll">
+      <form id="project-form" novalidate>
+        <h2 class="display h3 form__title" id="modal-title">Let's make something.</h2>
+        <p class="form__sub">
+          Tell us a little about what you're thinking. We'll get back to you and
+          take it from there.
+        </p>
+
+        <fieldset class="field">
+          <legend class="field__label">Who are you?</legend>
+          <div class="pills">
+            <label class="pill"><input type="radio" name="who" value="Creator / Artist"><span>Creator / Artist</span></label>
+            <label class="pill"><input type="radio" name="who" value="Brand / Business"><span>Brand / Business</span></label>
+            <label class="pill"><input type="radio" name="who" value="Party / Event"><span>Party / Event</span></label>
+            <label class="pill"><input type="radio" name="who" value="Community"><span>Community</span></label>
+            <label class="pill"><input type="radio" name="who" value="Personal Project"><span>Personal Project</span></label>
+            <label class="pill"><input type="radio" name="who" value="Other"><span>Other</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend class="field__label">What are you looking to make? <span class="opt">Select all that apply</span></legend>
+          <div class="pills">
+            <label class="pill"><input type="checkbox" name="items" value="T-Shirts"><span>T-Shirts</span></label>
+            <label class="pill"><input type="checkbox" name="items" value="Tops"><span>Tops</span></label>
+            <label class="pill"><input type="checkbox" name="items" value="Crop Tops"><span>Crop Tops</span></label>
+            <label class="pill"><input type="checkbox" name="items" value="Hoodies"><span>Hoodies</span></label>
+            <label class="pill"><input type="checkbox" name="items" value="Jackets"><span>Jackets</span></label>
+            <label class="pill"><input type="checkbox" name="items" value="Pants / Shorts"><span>Pants / Shorts</span></label>
+            <label class="pill"><input type="checkbox" name="items" value="Sets"><span>Sets</span></label>
+            <label class="pill"><input type="checkbox" name="items" value="Accessories"><span>Accessories</span></label>
+            <label class="pill"><input type="checkbox" name="items" value="Other"><span>Other</span></label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label class="field__label" for="idea">What are you thinking of making?</label>
+          <input class="input" type="text" id="idea" name="idea"
+                 placeholder="e.g. A 3-piece capsule for my audience">
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="about">Tell us about it</label>
+          <textarea class="textarea" id="about" name="about"
+            placeholder="Tell us what you're imagining, who it's for, any references you already have, or anything else you think we should know."></textarea>
+        </div>
+
+        <fieldset class="field">
+          <legend class="field__label">How many samples?</legend>
+          <div class="pills">
+            <label class="pill"><input type="radio" name="samples" value="3"><span>3</span></label>
+            <label class="pill"><input type="radio" name="samples" value="4–5"><span>4–5</span></label>
+            <label class="pill"><input type="radio" name="samples" value="More than 5"><span>More than 5</span></label>
+            <label class="pill"><input type="radio" name="samples" value="Not sure yet"><span>Not sure yet</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend class="field__label">Estimated first production run</legend>
+          <div class="pills">
+            <label class="pill"><input type="radio" name="run" value="1–20"><span>1–20</span></label>
+            <label class="pill"><input type="radio" name="run" value="20–50"><span>20–50</span></label>
+            <label class="pill"><input type="radio" name="run" value="50–100"><span>50–100</span></label>
+            <label class="pill"><input type="radio" name="run" value="100–500"><span>100–500</span></label>
+            <label class="pill"><input type="radio" name="run" value="500+"><span>500+</span></label>
+            <label class="pill"><input type="radio" name="run" value="Not sure yet"><span>Not sure yet</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend class="field__label">Desired timeline</legend>
+          <div class="pills">
+            <label class="pill"><input type="radio" name="when" value="As soon as possible"><span>As soon as possible</span></label>
+            <label class="pill"><input type="radio" name="when" value="Within 1 month"><span>Within 1 month</span></label>
+            <label class="pill"><input type="radio" name="when" value="1–3 months"><span>1–3 months</span></label>
+            <label class="pill"><input type="radio" name="when" value="3+ months"><span>3+ months</span></label>
+            <label class="pill"><input type="radio" name="when" value="Not sure yet"><span>Not sure yet</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend class="field__label">Would you like Tupsy to host and sell your collection? <span class="opt">Optional</span></legend>
+          <div class="pills">
+            <label class="pill"><input type="radio" name="hosting" value="Yes"><span>Yes, I'm interested</span></label>
+            <label class="pill"><input type="radio" name="hosting" value="Maybe"><span>Maybe — tell me more</span></label>
+            <label class="pill"><input type="radio" name="hosting" value="No"><span>No, I'll sell it myself</span></label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label class="field__label" for="name">Your details</label>
+          <div class="grid-2" style="margin-bottom:16px">
+            <input class="input" type="text" id="name" name="name" placeholder="Name" required>
+            <input class="input" type="text" id="brand" name="brand" placeholder="Brand / Company / Project">
+          </div>
+          <div class="grid-2" style="margin-bottom:16px">
+            <input class="input" type="email" id="email" name="email" placeholder="Email" required>
+            <input class="input" type="tel" id="phone" name="phone" placeholder="Phone / WhatsApp">
+          </div>
+          <input class="input" type="text" id="social" name="social" placeholder="Instagram / Website">
+        </div>
+
+        <button class="btn btn--rose form__submit" type="submit">
+          Start My Project <span class="arw" aria-hidden="true">→</span>
+        </button>
+
+        <p class="form__foot">
+          We'll review your details and get back to you to talk it through.
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
+
 <script>
+(function () {
+  'use strict';
+
+  var modal   = document.getElementById('project-modal');
+  var form    = document.getElementById('project-form');
+  var scroll  = modal.querySelector('.modal__scroll');
+  var lastFocus = null;
+
+  function openModal(e) {
+    if (e) e.preventDefault();
+    lastFocus = document.activeElement;
+
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('is-locked');
+
+    form.reset();
+    scroll.scrollTop = 0;
+
+    var first = modal.querySelector('.modal__close');
+    if (first) first.focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('is-locked');
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('[data-open-modal]')) { openModal(e); return; }
+    if (e.target.closest('[data-close-modal]')) { closeModal(); }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+  });
+
+  modal.addEventListener('keydown', function (e) {
+    if (e.key !== 'Tab' || !modal.classList.contains('is-open')) return;
+
+    var focusables = modal.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    var visible = Array.prototype.filter.call(focusables, function (el) {
+      return el.offsetParent !== null;
+    });
+    if (!visible.length) return;
+
+    var first = visible[0];
+    var last  = visible[visible.length - 1];
+
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault(); first.focus();
+    }
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var name  = form.querySelector('#name');
+    var email = form.querySelector('#email');
+
+    if (!name.value.trim()) { name.focus(); name.reportValidity(); return; }
+    if (!email.value.trim() || !/^\S+@\S+\.\S+$/.test(email.value)) {
+      email.focus(); email.reportValidity(); return;
+    }
+
+    var data = {
+      who:     (form.querySelector('input[name="who"]:checked') || {}).value || '',
+      items:   Array.prototype.map.call(
+                 form.querySelectorAll('input[name="items"]:checked'),
+                 function (i) { return i.value; }
+               ),
+      idea:    form.querySelector('#idea').value,
+      about:   form.querySelector('#about').value,
+      samples: (form.querySelector('input[name="samples"]:checked') || {}).value || '',
+      run:     (form.querySelector('input[name="run"]:checked') || {}).value || '',
+      when:    (form.querySelector('input[name="when"]:checked') || {}).value || '',
+      hosting: (form.querySelector('input[name="hosting"]:checked') || {}).value || '',
+      name:    name.value,
+      brand:   form.querySelector('#brand').value,
+      email:   email.value,
+      phone:   form.querySelector('#phone').value,
+      social:  form.querySelector('#social').value,
+      submittedAt: new Date().toISOString()
+    };
+    console.log('Tupsy — new project enquiry:', data);
+
+    window.location.href = '/thank-you.html';
+  });
+
   document.getElementById('year').textContent = new Date().getFullYear();
+})();
 </script>
 </body>
 </html>
