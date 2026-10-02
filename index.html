@@ -7,10 +7,9 @@
 <meta name="description" content="Tupsy is a creative fashion and merchandise studio. From the first sketch to the final piece — creative direction, design, sourcing, sampling, production, and optional selling and fulfilment.">
 <meta name="theme-color" content="#102C24">
 
-<!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
-<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="https://tupsy.netlify.app/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tupsy.netlify.app/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="https://tupsy.netlify.app/assets/apple-touch-icon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,13 +20,23 @@
    TUPSY — DESIGN TOKENS
    ============================================================ */
 :root{
+  /* Foundation */
   --forest:#102C24;
   --forest-soft:#16382D;
+  --ivory:#F7F2E9;
+  --charcoal:#252627;
+
+  /* Pink system */
+  --rose:#E8436B;            /* bright accent — the recurring pop */
+  --rose-dark:#C93359;
+  --blush:#F4DAD3;           /* soft surface — quiet, always present */
+
+  /* Warm surprise (rare) */
   --terracotta:#E65B32;
   --terracotta-dark:#C74924;
-  --ivory:#F7F2E9;
+
+  /* Neutral */
   --sage:#C8C7B9;
-  --charcoal:#252627;
 
   --display:'Archivo', 'Helvetica Neue', Arial, sans-serif;
   --body:'Inter', system-ui, -apple-system, sans-serif;
@@ -55,7 +64,7 @@ img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit}
 
-::selection{background:var(--terracotta);color:#fff}
+::selection{background:var(--rose);color:#fff}
 
 /* ============================================================
    LAYOUT
@@ -64,7 +73,7 @@ button{font:inherit;color:inherit}
 .section{padding:var(--pad) 0}
 .section--tight{padding:clamp(56px,6vw,88px) 0}
 .section--forest{background:var(--forest);color:var(--ivory)}
-.section--sage{background:var(--sage)}
+.section--blush{background:var(--blush)}
 
 [id]{scroll-margin-top:96px}
 
@@ -99,12 +108,12 @@ button{font:inherit;color:inherit}
   align-items:center;
   gap:10px;
   margin:0 0 26px;
-  opacity:.7;
+  opacity:.75;
 }
 .eyebrow::before{
   content:"";
   width:7px;height:7px;border-radius:50%;
-  background:var(--terracotta);
+  background:var(--rose);
   flex:none;
 }
 .lede{
@@ -114,9 +123,10 @@ button{font:inherit;color:inherit}
   max-width:46ch;
 }
 .hl{
-  background-image:linear-gradient(transparent 64%, rgba(230,91,50,.32) 64%);
+  background-image:linear-gradient(transparent 60%, rgba(244,218,211,.95) 60%);
   background-repeat:no-repeat;
-  padding-bottom:.04em;
+  padding:.04em .1em;
+  margin:0 -.1em;
 }
 
 /* ============================================================
@@ -140,8 +150,8 @@ button{font:inherit;color:inherit}
   transition:background .18s ease, color .18s ease, transform .18s ease, border-color .18s ease;
 }
 .btn:active{transform:translateY(1px)}
-.btn--terracotta{background:var(--terracotta);color:#fff}
-.btn--terracotta:hover{background:var(--terracotta-dark)}
+.btn--rose{background:var(--rose);color:#fff}
+.btn--rose:hover{background:var(--rose-dark)}
 .btn--forest{background:var(--forest);color:var(--ivory)}
 .btn--forest:hover{background:var(--forest-soft)}
 .btn--ghost{border-color:var(--edge);color:var(--charcoal);background:transparent}
@@ -194,7 +204,7 @@ button{font:inherit;color:inherit}
   position:absolute;
   left:0;bottom:0;
   height:1.5px;width:0;
-  background:var(--terracotta);
+  background:var(--rose);
   transition:width .22s ease;
 }
 .nav a:hover{opacity:1}
@@ -284,7 +294,7 @@ button{font:inherit;color:inherit}
   display:inline-block;
   width:5px;height:5px;
   border-radius:50%;
-  background:var(--terracotta);
+  background:var(--rose);
   margin-left:44px;
   vertical-align:middle;
 }
@@ -315,7 +325,7 @@ button{font:inherit;color:inherit}
   font-weight:700;
   font-size:.68rem;
   letter-spacing:.14em;
-  color:var(--terracotta);
+  color:var(--rose);
   padding-top:.42em;
   flex:none;
 }
@@ -349,7 +359,7 @@ button{font:inherit;color:inherit}
   font-weight:700;
   font-size:.7rem;
   letter-spacing:.16em;
-  color:var(--terracotta);
+  color:var(--rose);
 }
 .row__desc{margin:0;font-size:.98rem;line-height:1.6;opacity:.72;max-width:52ch}
 
@@ -378,7 +388,7 @@ button{font:inherit;color:inherit}
   font-weight:700;
   font-size:.72rem;
   letter-spacing:.16em;
-  color:var(--terracotta);
+  color:var(--rose);
   padding-top:.45em;
 }
 .step__body p{margin:10px 0 0;font-size:.96rem;line-height:1.6;opacity:.7;max-width:54ch}
@@ -386,7 +396,7 @@ button{font:inherit;color:inherit}
   display:block;
   margin-top:14px;
   padding-left:16px;
-  border-left:2px solid var(--terracotta);
+  border-left:2px solid var(--rose);
   font-size:.9rem;
   opacity:.85;
   max-width:48ch;
@@ -416,7 +426,7 @@ button{font:inherit;color:inherit}
   border-radius:999px;
   margin-bottom:28px;
 }
-.url-chip em{font-style:normal;color:var(--terracotta)}
+.url-chip em{font-style:normal;color:var(--rose)}
 
 .browser{
   background:#fff;
@@ -449,7 +459,7 @@ button{font:inherit;color:inherit}
   text-overflow:ellipsis;
 }
 .browser__url strong{color:var(--forest)}
-.browser__body{background:var(--ivory);padding:clamp(18px,2.4vw,30px)}
+.browser__body{background:var(--blush);padding:clamp(18px,2.4vw,30px)}
 .store__head{
   display:flex;
   align-items:center;
@@ -457,7 +467,7 @@ button{font:inherit;color:inherit}
   gap:16px;
   padding-bottom:18px;
   margin-bottom:20px;
-  border-bottom:1px solid var(--edge);
+  border-bottom:1px solid rgba(16,44,36,.14);
 }
 .store__brand{
   font-family:var(--display);
@@ -467,18 +477,18 @@ button{font:inherit;color:inherit}
   text-transform:uppercase;
 }
 .store__nav{display:flex;gap:14px}
-.store__nav i{display:block;width:34px;height:6px;border-radius:99px;background:var(--sage)}
+.store__nav i{display:block;width:34px;height:6px;border-radius:99px;background:rgba(16,44,36,.16)}
 .store__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .store__item{display:flex;flex-direction:column;gap:8px}
 .store__item .ph{aspect-ratio:1/1.15}
 .store__item .ph::after{display:none}
-.store__line{height:7px;border-radius:99px;background:var(--sage);width:78%}
-.store__line--sm{width:44%;background:var(--terracotta);opacity:.75}
+.store__line{height:7px;border-radius:99px;background:rgba(16,44,36,.16);width:78%}
+.store__line--sm{width:44%;background:var(--rose);opacity:.9}
 .store__note{
   font-size:.72rem;
   letter-spacing:.08em;
   text-transform:uppercase;
-  opacity:.45;
+  opacity:.5;
   margin:20px 0 0;
   text-align:right;
 }
@@ -501,7 +511,7 @@ button{font:inherit;color:inherit}
 .card__tag{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;opacity:.5}
 
 /* ============================================================
-   STATEMENT BAND
+   STATEMENT BAND — the rare terracotta moment
    ============================================================ */
 .band{background:var(--terracotta);color:var(--forest)}
 .band__inner{
@@ -531,7 +541,7 @@ button{font:inherit;color:inherit}
 }
 
 /* ============================================================
-   ABOUT
+   ABOUT — blush pink moment
    ============================================================ */
 .about{
   display:grid;
@@ -539,10 +549,10 @@ button{font:inherit;color:inherit}
   gap:clamp(34px,5vw,80px);
   align-items:start;
 }
-.about__copy p{font-size:1rem;line-height:1.68;margin:22px 0 0;max-width:46ch;opacity:.75}
+.about__copy p{font-size:1rem;line-height:1.68;margin:22px 0 0;max-width:46ch;opacity:.78}
 .fay{
   background:var(--ivory);
-  border:1px solid var(--edge);
+  border:1px solid rgba(16,44,36,.1);
   border-radius:4px;
   padding:clamp(20px,2.4vw,28px);
   display:flex;
@@ -557,7 +567,7 @@ button{font:inherit;color:inherit}
   font-size:.68rem;
   letter-spacing:.18em;
   text-transform:uppercase;
-  color:var(--terracotta);
+  color:var(--rose);
   margin:0 0 8px;
 }
 .fay__text{font-size:.92rem;line-height:1.6;margin:0;opacity:.78}
@@ -602,7 +612,7 @@ button{font:inherit;color:inherit}
   font-size:.66rem;
   letter-spacing:.2em;
   text-transform:uppercase;
-  color:var(--terracotta);
+  color:var(--rose);
   margin:0 0 14px;
 }
 .footer__col a{
@@ -612,7 +622,7 @@ button{font:inherit;color:inherit}
   padding:5px 0;
   transition:opacity .18s ease, color .18s ease;
 }
-.footer__col a:hover{opacity:1;color:var(--terracotta)}
+.footer__col a:hover{opacity:1;color:var(--rose)}
 .footer__bottom{
   display:flex;
   flex-wrap:wrap;
@@ -713,9 +723,9 @@ button{font:inherit;color:inherit}
   transition:background .16s ease, color .16s ease, border-color .16s ease;
   user-select:none;
 }
-.pill span:hover{border-color:rgba(16,44,36,.4)}
+.pill span:hover{border-color:var(--rose);background:rgba(244,218,211,.4)}
 .pill input:checked + span{background:var(--forest);color:var(--ivory);border-color:var(--forest)}
-.pill input:focus-visible + span{outline:2px solid var(--terracotta);outline-offset:2px}
+.pill input:focus-visible + span{outline:2px solid var(--rose);outline-offset:2px}
 
 .input, .textarea{
   width:100%;
@@ -731,8 +741,8 @@ button{font:inherit;color:inherit}
 .input::placeholder, .textarea::placeholder{color:rgba(37,38,39,.35)}
 .input:focus, .textarea:focus{
   outline:none;
-  border-color:var(--forest);
-  box-shadow:0 0 0 3px rgba(16,44,36,.08);
+  border-color:var(--rose);
+  box-shadow:0 0 0 3px rgba(232,67,107,.12);
 }
 .textarea{min-height:132px;resize:vertical;line-height:1.6}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -786,13 +796,10 @@ button{font:inherit;color:inherit}
 
 <body>
 
-<!-- ============================================================
-     HEADER
-     ============================================================ -->
 <header class="header">
   <div class="container header__inner">
     <a href="#top" class="logo" aria-label="Tupsy — home">
-      <img class="logo__img" src="/assets/tupsy-logo-dark.svg"
+      <img class="logo__img" src="https://tupsy.netlify.app/assets/tupsy-logo-dark.svg"
            alt="Tupsy" width="132" height="28">
     </a>
 
@@ -802,15 +809,12 @@ button{font:inherit;color:inherit}
       <a href="#about">About</a>
     </nav>
 
-    <button class="btn btn--terracotta btn--sm" data-open-modal>Start a Project</button>
+    <button class="btn btn--rose btn--sm" data-open-modal>Start a Project</button>
   </div>
 </header>
 
 <main id="top">
 
-  <!-- ============================================================
-       01 — HERO
-       ============================================================ -->
   <section class="hero">
     <div class="container">
       <p class="eyebrow">Creative Fashion &amp; Merchandise Studio</p>
@@ -840,17 +844,17 @@ button{font:inherit;color:inherit}
 
         <div class="hero__media">
           <div class="ph" data-label="Hero image — product / lifestyle">
-            <img src="/assets/hero-main.jpg"
+            <img src="https://tupsy.netlify.app/assets/hero-main.jpg"
                  alt="Tupsy merchandise — styled product lifestyle shot"
                  width="1200" height="1600" loading="eager" onerror="this.remove()">
           </div>
           <div class="ph" data-label="Fabric detail">
-            <img src="/assets/hero-fabric.jpg"
+            <img src="https://tupsy.netlify.app/assets/hero-fabric.jpg"
                  alt="Close-up of garment fabric and print detail"
                  width="800" height="800" loading="eager" onerror="this.remove()">
           </div>
           <div class="ph" data-label="On-body shot">
-            <img src="/assets/hero-onbody.jpg"
+            <img src="https://tupsy.netlify.app/assets/hero-onbody.jpg"
                  alt="Person wearing a Tupsy produced garment"
                  width="800" height="800" loading="eager" onerror="this.remove()">
           </div>
@@ -859,9 +863,6 @@ button{font:inherit;color:inherit}
     </div>
   </section>
 
-  <!-- ============================================================
-       MARQUEE
-       ============================================================ -->
   <div class="marquee" aria-hidden="true">
     <div class="marquee__track">
       <div class="marquee__set">
@@ -877,9 +878,6 @@ button{font:inherit;color:inherit}
     </div>
   </div>
 
-  <!-- ============================================================
-       02 — AUDIENCE
-       ============================================================ -->
   <section class="section" id="who">
     <div class="container">
       <h2 class="display h2">
@@ -909,9 +907,6 @@ button{font:inherit;color:inherit}
     </div>
   </section>
 
-  <!-- ============================================================
-       03 — SERVICES
-       ============================================================ -->
   <section class="section section--tight" id="services">
     <div class="container">
       <h2 class="display h2" style="max-width:16ch">
@@ -971,9 +966,6 @@ button{font:inherit;color:inherit}
     </div>
   </section>
 
-  <!-- ============================================================
-       04 — HOW IT WORKS
-       ============================================================ -->
   <section class="section section--forest" id="how">
     <div class="container how">
       <div class="how__head">
@@ -1037,9 +1029,6 @@ button{font:inherit;color:inherit}
     </div>
   </section>
 
-  <!-- ============================================================
-       05 — HOSTED MERCH
-       ============================================================ -->
   <section class="section" id="host">
     <div class="container host">
       <div class="host__copy">
@@ -1057,7 +1046,7 @@ button{font:inherit;color:inherit}
           Tupsy handles the orders and fulfilment behind the scenes.
         </p>
 
-        <button class="btn btn--terracotta" data-open-modal>
+        <button class="btn btn--rose" data-open-modal>
           Start a Project <span class="arw" aria-hidden="true">→</span>
         </button>
       </div>
@@ -1078,7 +1067,7 @@ button{font:inherit;color:inherit}
             <div class="store__grid">
               <div class="store__item">
                 <div class="ph">
-                  <img src="/assets/store-item-01.jpg" alt=""
+                  <img src="https://tupsy.netlify.app/assets/store-item-01.jpg" alt=""
                        width="600" height="690" loading="lazy" onerror="this.remove()">
                 </div>
                 <span class="store__line"></span>
@@ -1086,7 +1075,7 @@ button{font:inherit;color:inherit}
               </div>
               <div class="store__item">
                 <div class="ph">
-                  <img src="/assets/store-item-02.jpg" alt=""
+                  <img src="https://tupsy.netlify.app/assets/store-item-02.jpg" alt=""
                        width="600" height="690" loading="lazy" onerror="this.remove()">
                 </div>
                 <span class="store__line"></span>
@@ -1094,7 +1083,7 @@ button{font:inherit;color:inherit}
               </div>
               <div class="store__item">
                 <div class="ph">
-                  <img src="/assets/store-item-03.jpg" alt=""
+                  <img src="https://tupsy.netlify.app/assets/store-item-03.jpg" alt=""
                        width="600" height="690" loading="lazy" onerror="this.remove()">
                 </div>
                 <span class="store__line"></span>
@@ -1108,9 +1097,6 @@ button{font:inherit;color:inherit}
     </div>
   </section>
 
-  <!-- ============================================================
-       06 — WORK
-       ============================================================ -->
   <section class="section section--tight" id="work">
     <div class="container">
       <h2 class="display h2">Some things we've made.</h2>
@@ -1118,7 +1104,7 @@ button{font:inherit;color:inherit}
       <div class="work-grid">
         <article class="card card--wide">
           <div class="ph" data-label="AfroCue × Tupsy — project imagery">
-            <img src="/assets/work-afrocue.jpg"
+            <img src="https://tupsy.netlify.app/assets/work-afrocue.jpg"
                  alt="AfroCue × Tupsy merchandise collaboration"
                  width="1600" height="1000" loading="lazy" onerror="this.remove()">
           </div>
@@ -1130,7 +1116,7 @@ button{font:inherit;color:inherit}
 
         <article class="card">
           <div class="ph" data-label="Project 02">
-            <img src="/assets/work-02.jpg" alt="Tupsy project 02"
+            <img src="https://tupsy.netlify.app/assets/work-02.jpg" alt="Tupsy project 02"
                  width="1000" height="1250" loading="lazy" onerror="this.remove()">
           </div>
           <div class="card__meta">
@@ -1141,7 +1127,7 @@ button{font:inherit;color:inherit}
 
         <article class="card">
           <div class="ph" data-label="Project 03">
-            <img src="/assets/work-03.jpg" alt="Tupsy project 03"
+            <img src="https://tupsy.netlify.app/assets/work-03.jpg" alt="Tupsy project 03"
                  width="1000" height="1250" loading="lazy" onerror="this.remove()">
           </div>
           <div class="card__meta">
@@ -1152,7 +1138,7 @@ button{font:inherit;color:inherit}
 
         <article class="card">
           <div class="ph" data-label="Project 04">
-            <img src="/assets/work-04.jpg" alt="Tupsy project 04"
+            <img src="https://tupsy.netlify.app/assets/work-04.jpg" alt="Tupsy project 04"
                  width="1000" height="1250" loading="lazy" onerror="this.remove()">
           </div>
           <div class="card__meta">
@@ -1163,7 +1149,7 @@ button{font:inherit;color:inherit}
 
         <article class="card">
           <div class="ph" data-label="Project 05">
-            <img src="/assets/work-05.jpg" alt="Tupsy project 05"
+            <img src="https://tupsy.netlify.app/assets/work-05.jpg" alt="Tupsy project 05"
                  width="1000" height="1250" loading="lazy" onerror="this.remove()">
           </div>
           <div class="card__meta">
@@ -1175,9 +1161,7 @@ button{font:inherit;color:inherit}
     </div>
   </section>
 
-  <!-- ============================================================
-       STATEMENT BAND
-       ============================================================ -->
+  <!-- ============ The terracotta moment (now rare) ============ -->
   <section class="section band">
     <div class="container band__inner">
       <div>
@@ -1206,10 +1190,8 @@ button{font:inherit;color:inherit}
     </div>
   </section>
 
-  <!-- ============================================================
-       07 — ABOUT
-       ============================================================ -->
-  <section class="section section--sage" id="about">
+  <!-- ============ The blush pink moment ============ -->
+  <section class="section section--blush" id="about">
     <div class="container about">
       <div class="about__copy">
         <h2 class="display h2">Tupsy is a creative fashion and merchandise studio.</h2>
@@ -1226,7 +1208,7 @@ button{font:inherit;color:inherit}
 
       <div class="fay">
         <div class="ph">
-          <img src="/assets/fay-portrait.jpg"
+          <img src="https://tupsy.netlify.app/assets/fay-portrait.jpg"
                alt="Fay, lead fashion designer at Tupsy"
                width="800" height="960" loading="lazy" onerror="this.remove()">
         </div>
@@ -1242,14 +1224,11 @@ button{font:inherit;color:inherit}
     </div>
   </section>
 
-  <!-- ============================================================
-       08 — FINAL CTA
-       ============================================================ -->
   <section class="section section--forest final">
     <div class="container">
       <h2 class="display h2">Let's make something.</h2>
       <p>You don't need the full plan. Just tell us what you're thinking.</p>
-      <button class="btn btn--terracotta" data-open-modal>
+      <button class="btn btn--rose" data-open-modal>
         Start a Project <span class="arw" aria-hidden="true">→</span>
       </button>
     </div>
@@ -1257,15 +1236,13 @@ button{font:inherit;color:inherit}
 
 </main>
 
-<!-- ============================================================
-     FOOTER
-     ============================================================ -->
 <footer class="footer">
   <div class="container">
     <div class="footer__top">
       <div>
         <a href="#top" class="logo" aria-label="Tupsy — home">
-          <img class="logo__img logo__img--light" src="/assets/tupsy-logo-light.svg"
+          <img class="logo__img logo__img--light"
+               src="https://tupsy.netlify.app/assets/tupsy-logo-light.svg"
                alt="Tupsy" width="140" height="30">
         </a>
         <p class="footer__tag">
@@ -1302,16 +1279,14 @@ button{font:inherit;color:inherit}
   </div>
 </footer>
 
-<!-- ============================================================
-     START A PROJECT — MODAL
-     ============================================================ -->
 <div class="modal" id="project-modal" aria-hidden="true">
   <div class="modal__backdrop" data-close-modal></div>
 
   <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal__bar">
       <span class="logo" aria-hidden="true">
-        <img class="logo__img logo__img--modal" src="/assets/tupsy-logo-dark.svg"
+        <img class="logo__img logo__img--modal"
+             src="https://tupsy.netlify.app/assets/tupsy-logo-dark.svg"
              alt="Tupsy" width="104" height="22">
       </span>
       <button class="modal__close" type="button" data-close-modal aria-label="Close">
@@ -1423,7 +1398,7 @@ button{font:inherit;color:inherit}
           <input class="input" type="text" id="social" name="social" placeholder="Instagram / Website">
         </div>
 
-        <button class="btn btn--terracotta form__submit" type="submit">
+        <button class="btn btn--rose form__submit" type="submit">
           Start My Project <span class="arw" aria-hidden="true">→</span>
         </button>
 
@@ -1444,7 +1419,6 @@ button{font:inherit;color:inherit}
   var scroll  = modal.querySelector('.modal__scroll');
   var lastFocus = null;
 
-  /* ---------- OPEN / CLOSE ---------- */
   function openModal(e) {
     if (e) e.preventDefault();
     lastFocus = document.activeElement;
@@ -1476,7 +1450,6 @@ button{font:inherit;color:inherit}
     if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
   });
 
-  /* ---------- FOCUS TRAP ---------- */
   modal.addEventListener('keydown', function (e) {
     if (e.key !== 'Tab' || !modal.classList.contains('is-open')) return;
 
@@ -1498,7 +1471,6 @@ button{font:inherit;color:inherit}
     }
   });
 
-  /* ---------- SUBMIT → REDIRECT TO THANK-YOU ---------- */
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -1510,9 +1482,6 @@ button{font:inherit;color:inherit}
       email.focus(); email.reportValidity(); return;
     }
 
-    /* ---- COLLECT PAYLOAD ----
-       Phase 1: log it. Later: POST to a real endpoint, then redirect.
-    ---------------------------------------------------------- */
     var data = {
       who:     (form.querySelector('input[name="who"]:checked') || {}).value || '',
       items:   Array.prototype.map.call(
@@ -1534,25 +1503,9 @@ button{font:inherit;color:inherit}
     };
     console.log('Tupsy — new project enquiry:', data);
 
-    /* TODO: replace this block with a real POST before launch.
-       Example with Formspree:
-
-       fetch('https://formspree.io/f/YOUR_ID', {
-         method: 'POST',
-         headers: { 'Accept': 'application/json' },
-         body: JSON.stringify(data)
-       }).then(function () {
-         window.location.href = 'thank-you.html';
-       }).catch(function () {
-         alert('Something went wrong. Please try again or email us directly.');
-       });
-
-       For now (no backend yet) we redirect immediately so the flow
-       works end-to-end for review. */
-    window.location.href = 'thank-you.html';
+    window.location.href = '/thank-you.html';
   });
 
-  /* ---------- FOOTER YEAR ---------- */
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
 </script>
