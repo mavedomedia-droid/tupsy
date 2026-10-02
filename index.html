@@ -20,22 +20,18 @@
    TUPSY — DESIGN TOKENS
    ============================================================ */
 :root{
-  /* Foundation */
   --forest:#102C24;
   --forest-soft:#16382D;
   --ivory:#F7F2E9;
   --charcoal:#252627;
 
-  /* Pink system */
   --rose:#E8436B;
   --rose-dark:#C93359;
   --blush:#F4DAD3;
 
-  /* Warm surprise (rare) */
   --terracotta:#E65B32;
   --terracotta-dark:#C74924;
 
-  /* Neutral */
   --sage:#C8C7B9;
 
   --display:'Archivo', 'Helvetica Neue', Arial, sans-serif;
@@ -44,7 +40,8 @@
   --edge:rgba(16,44,36,.14);
   --edge-light:rgba(247,242,233,.16);
 
-  --pad:clamp(72px, 9vw, 140px);
+  --pad:clamp(56px, 6.5vw, 104px);
+  --pad-tight:clamp(40px, 4.5vw, 72px);
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -55,7 +52,7 @@ body{
   color:var(--charcoal);
   font-family:var(--body);
   font-size:16px;
-  line-height:1.62;
+  line-height:1.58;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
 }
@@ -63,19 +60,35 @@ body.is-locked{overflow:hidden}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit}
-
 ::selection{background:var(--rose);color:#fff}
+
+/* Accessibility: screen-reader only */
+.sr-only{
+  position:absolute;
+  width:1px;height:1px;
+  padding:0;margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+
+/* Global focus ring */
+:focus-visible{
+  outline:2px solid var(--rose);
+  outline-offset:3px;
+  border-radius:6px;
+}
 
 /* ============================================================
    LAYOUT
    ============================================================ */
 .container{width:min(1320px, 100% - 44px);margin-inline:auto}
 .section{padding:var(--pad) 0}
-.section--tight{padding:clamp(56px,6vw,88px) 0}
+.section--tight{padding:var(--pad-tight) 0}
 .section--forest{background:var(--forest);color:var(--ivory)}
 .section--blush{background:var(--blush)}
-
-[id]{scroll-margin-top:96px}
+[id]{scroll-margin-top:88px}
 
 /* ============================================================
    TYPE
@@ -87,13 +100,13 @@ button{font:inherit;color:inherit}
   line-height:1.02;
   margin:0;
 }
-.h1{font-size:clamp(2.6rem, 7.2vw, 6.4rem)}
-.h2{font-size:clamp(1.9rem, 4.6vw, 3.9rem)}
-.h3{font-size:clamp(1.4rem, 2.8vw, 2.2rem);letter-spacing:-.02em}
+.h1{font-size:clamp(2.5rem, 6.6vw, 5.6rem)}
+.h2{font-size:clamp(1.8rem, 4.1vw, 3.4rem)}
+.h3{font-size:clamp(1.35rem, 2.6vw, 2rem);letter-spacing:-.02em}
 .h4{
   font-family:var(--display);
   font-weight:700;
-  font-size:clamp(1.1rem,1.8vw,1.5rem);
+  font-size:clamp(1.05rem,1.7vw,1.35rem);
   letter-spacing:-.015em;
   line-height:1.15;
   margin:0;
@@ -101,32 +114,26 @@ button{font:inherit;color:inherit}
 .eyebrow{
   font-family:var(--display);
   font-weight:600;
-  font-size:.72rem;
+  font-size:.7rem;
   letter-spacing:.2em;
   text-transform:uppercase;
   display:inline-flex;
   align-items:center;
-  gap:10px;
-  margin:0 0 26px;
+  gap:9px;
+  margin:0 0 18px;
   opacity:.75;
 }
 .eyebrow::before{
   content:"";
-  width:7px;height:7px;border-radius:50%;
+  width:6px;height:6px;border-radius:50%;
   background:var(--rose);
   flex:none;
 }
 .lede{
-  font-size:clamp(1.05rem,1.5vw,1.32rem);
+  font-size:clamp(1rem,1.35vw,1.2rem);
   line-height:1.5;
-  margin:0 0 18px;
+  margin:0 0 16px;
   max-width:46ch;
-}
-.hl{
-  background-image:linear-gradient(transparent 60%, rgba(244,218,211,.95) 60%);
-  background-repeat:no-repeat;
-  padding:.04em .1em;
-  margin:0 -.1em;
 }
 
 /* ============================================================
@@ -136,13 +143,13 @@ button{font:inherit;color:inherit}
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  gap:10px;
-  padding:17px 30px;
+  gap:9px;
+  padding:15px 26px;
   border:1px solid transparent;
   border-radius:999px;
   font-family:var(--display);
   font-weight:700;
-  font-size:.76rem;
+  font-size:.74rem;
   letter-spacing:.11em;
   text-transform:uppercase;
   cursor:pointer;
@@ -156,7 +163,7 @@ button{font:inherit;color:inherit}
 .btn--forest:hover{background:var(--forest-soft)}
 .btn--ghost{border-color:var(--edge);color:var(--charcoal);background:transparent}
 .btn--ghost:hover{border-color:var(--forest);background:rgba(16,44,36,.04)}
-.btn--sm{padding:13px 22px;font-size:.7rem}
+.btn--sm{padding:11px 18px;font-size:.68rem}
 .btn .arw{transition:transform .2s ease}
 .btn:hover .arw{transform:translateX(3px)}
 
@@ -164,9 +171,9 @@ button{font:inherit;color:inherit}
    LOGO
    ============================================================ */
 .logo{display:inline-flex;align-items:center;flex:none;color:currentColor}
-.logo__img{display:block;height:28px;width:auto}
-.logo__img--light{height:30px}
-.logo__img--modal{height:22px}
+.logo__img{display:block;height:26px;width:auto}
+.logo__img--light{height:28px}
+.logo__img--modal{height:20px}
 
 /* ============================================================
    HEADER
@@ -185,17 +192,17 @@ button{font:inherit;color:inherit}
   align-items:center;
   justify-content:space-between;
   gap:24px;
-  height:76px;
+  height:68px;
 }
-.nav{display:flex;gap:34px;margin-left:auto;margin-right:8px}
+.nav{display:flex;gap:30px;margin-left:auto;margin-right:6px}
 .nav a{
   font-family:var(--display);
   font-weight:600;
-  font-size:.76rem;
+  font-size:.74rem;
   letter-spacing:.11em;
   text-transform:uppercase;
   position:relative;
-  padding:6px 0;
+  padding:5px 0;
   opacity:.75;
   transition:opacity .18s ease;
 }
@@ -213,24 +220,116 @@ button{font:inherit;color:inherit}
 /* ============================================================
    HERO
    ============================================================ */
-.hero{padding:clamp(56px,7vw,96px) 0 clamp(48px,6vw,80px)}
-.hero__title{margin-bottom:clamp(38px,5vw,64px)}
+.hero{padding:clamp(40px,5.5vw,72px) 0 clamp(36px,4.5vw,60px)}
+.hero__title{
+  margin-bottom:clamp(28px,3.6vw,44px);
+}
+.hero__line{
+  display:block;
+}
+
+/* --- Rotating headline --- */
+.hero__line--rotate{
+  display:block;
+  margin:.06em 0 .04em;
+  color:var(--charcoal);
+}
+.hero__for{
+  opacity:.55;
+  margin-right:.22em;
+}
+
+/* Rotator: stacked words slide up on a loop */
+.rotator{
+  display:inline-block;
+  position:relative;
+  overflow:hidden;
+  vertical-align:baseline;
+  color:var(--rose);
+  /* Height is set by the hidden sizer's line box */
+}
+.rotator__sizer{
+  /* Invisible — establishes width + baseline anchor */
+  visibility:hidden;
+  display:inline-block;
+  white-space:nowrap;
+}
+.rotator__word{
+  position:absolute;
+  left:0;
+  top:0;
+  white-space:nowrap;
+  opacity:0;
+  transform:translateY(115%);
+  animation:rotateWord 12s cubic-bezier(.22,.8,.25,1) infinite;
+  animation-delay:calc(var(--i) * 2.4s);
+  will-change:transform, opacity;
+  backface-visibility:hidden;
+}
+@keyframes rotateWord{
+  0%   { opacity:0; transform:translateY(115%); }
+  5%   { opacity:1; transform:translateY(0); }
+  15%  { opacity:1; transform:translateY(0); }
+  20%  { opacity:0; transform:translateY(-115%); }
+  100% { opacity:0; transform:translateY(-115%); }
+}
+
+/* --- Hero grid --- */
 .hero__grid{
   display:grid;
   grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:clamp(28px,5vw,72px);
+  gap:clamp(24px,4vw,60px);
   align-items:end;
 }
-.hero__sub{font-size:.95rem;max-width:42ch;margin:0 0 30px;opacity:.7}
-.hero__actions{display:flex;flex-wrap:wrap;gap:12px}
+.hero__sub{font-size:.92rem;max-width:40ch;margin:0 0 24px;opacity:.7}
+.hero__actions{display:flex;flex-wrap:wrap;gap:10px}
 .hero__media{
   display:grid;
   grid-template-columns:1.35fr 1fr;
   grid-template-rows:1fr 1fr;
-  gap:12px;
-  aspect-ratio:1/.92;
+  gap:10px;
+  aspect-ratio:1/.88;
 }
 .hero__media .ph:first-child{grid-row:span 2}
+
+/* --- Audience chip strip --- */
+.audience{
+  margin-top:clamp(36px,4.5vw,56px);
+  padding-top:clamp(28px,3.5vw,40px);
+  border-top:1px solid var(--edge);
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:10px 12px;
+}
+.audience__label{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:.7rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  opacity:.55;
+  margin-right:6px;
+}
+.chip{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 15px;
+  border:1px solid var(--edge);
+  border-radius:999px;
+  font-size:.86rem;
+  font-weight:500;
+  background:transparent;
+  transition:border-color .18s ease, background .18s ease;
+}
+.chip::before{
+  content:"";
+  width:5px;height:5px;border-radius:50%;
+  background:var(--rose);
+  flex:none;
+}
+.chip:hover{border-color:var(--rose);background:rgba(244,218,211,.4)}
 
 /* ============================================================
    IMAGE FRAMES
@@ -244,17 +343,17 @@ button{font:inherit;color:inherit}
   overflow:hidden;
   display:flex;
   align-items:flex-end;
-  min-height:60px;
+  min-height:50px;
 }
 .ph::after{
   content:attr(data-label);
   font-family:var(--display);
-  font-size:.6rem;
+  font-size:.58rem;
   font-weight:600;
   letter-spacing:.16em;
   text-transform:uppercase;
   color:rgba(16,44,36,.5);
-  padding:14px;
+  padding:12px;
   line-height:1.4;
   pointer-events:none;
 }
@@ -266,6 +365,7 @@ button{font:inherit;color:inherit}
   object-fit:cover;
   display:block;
   z-index:1;
+  transition:transform .8s cubic-bezier(.2,.8,.25,1);
 }
 
 /* ============================================================
@@ -275,15 +375,15 @@ button{font:inherit;color:inherit}
   background:var(--forest);
   color:var(--ivory);
   overflow:hidden;
-  padding:19px 0;
+  padding:14px 0;
   border-top:1px solid var(--edge-light);
 }
 .marquee__track{display:flex;width:max-content;animation:slide 44s linear infinite}
-.marquee__set{display:flex;align-items:center;gap:44px;padding-right:44px}
+.marquee__set{display:flex;align-items:center;gap:38px;padding-right:38px}
 .marquee__set span{
   font-family:var(--display);
   font-weight:600;
-  font-size:.76rem;
+  font-size:.72rem;
   letter-spacing:.18em;
   text-transform:uppercase;
   white-space:nowrap;
@@ -295,109 +395,69 @@ button{font:inherit;color:inherit}
   width:5px;height:5px;
   border-radius:50%;
   background:var(--rose);
-  margin-left:44px;
+  margin-left:38px;
   vertical-align:middle;
 }
 @keyframes slide{to{transform:translateX(-50%)}}
 
 /* ============================================================
-   SPLIT / AUDIENCE
-   ============================================================ */
-.split{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:clamp(32px,6vw,90px);
-  align-items:start;
-  margin-top:clamp(40px,5vw,64px);
-}
-.qlist{list-style:none;margin:0;padding:0}
-.qlist li{
-  display:flex;
-  gap:16px;
-  padding:17px 0;
-  border-top:1px solid var(--edge);
-  font-size:clamp(1rem,1.4vw,1.18rem);
-  line-height:1.42;
-}
-.qlist li:last-child{border-bottom:1px solid var(--edge)}
-.qlist b{
-  font-family:var(--display);
-  font-weight:700;
-  font-size:.68rem;
-  letter-spacing:.14em;
-  color:var(--rose);
-  padding-top:.42em;
-  flex:none;
-}
-.split__note{font-size:1.02rem;margin:0 0 22px;max-width:42ch;opacity:.75}
-.split__kick{
-  font-family:var(--display);
-  font-weight:700;
-  font-size:clamp(1.1rem,1.7vw,1.4rem);
-  letter-spacing:-.015em;
-  line-height:1.3;
-  margin:0;
-  max-width:26ch;
-}
-
-/* ============================================================
    SERVICES
    ============================================================ */
-.rows{margin-top:clamp(40px,5vw,72px);border-top:1px solid var(--edge)}
+.rows{margin-top:clamp(28px,3.4vw,44px);border-top:1px solid var(--edge)}
 .row{
   display:grid;
-  grid-template-columns:64px minmax(0,.85fr) minmax(0,1.15fr);
-  gap:clamp(16px,3vw,44px);
+  grid-template-columns:52px minmax(0,.85fr) minmax(0,1.15fr);
+  gap:clamp(14px,2.6vw,36px);
   align-items:baseline;
-  padding:clamp(26px,3vw,38px) 0;
+  padding:clamp(18px,2.2vw,26px) 0;
   border-bottom:1px solid var(--edge);
   transition:padding-left .25s ease;
 }
-.row:hover{padding-left:10px}
+.row:hover{padding-left:8px}
 .row__num{
   font-family:var(--display);
   font-weight:700;
-  font-size:.7rem;
+  font-size:.68rem;
   letter-spacing:.16em;
   color:var(--rose);
 }
-.row__desc{margin:0;font-size:.98rem;line-height:1.6;opacity:.72;max-width:52ch}
+.row__desc{margin:0;font-size:.94rem;line-height:1.55;opacity:.72;max-width:52ch}
 
 /* ============================================================
    HOW IT WORKS
    ============================================================ */
 .how{
   display:grid;
-  grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);
-  gap:clamp(32px,6vw,90px);
+  grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);
+  gap:clamp(28px,5vw,72px);
   align-items:start;
 }
-.how__head{position:sticky;top:110px}
-.how__head p{opacity:.6;font-size:.95rem;max-width:30ch;margin:20px 0 0}
+.how__head{position:sticky;top:100px}
+.how__head p{opacity:.6;font-size:.92rem;max-width:28ch;margin:16px 0 0}
 .steps{list-style:none;margin:0;padding:0}
 .step{
   display:grid;
-  grid-template-columns:64px minmax(0,1fr);
-  gap:clamp(12px,2vw,28px);
-  padding:clamp(22px,2.6vw,32px) 0;
+  grid-template-columns:52px minmax(0,1fr);
+  gap:clamp(10px,1.8vw,24px);
+  padding:clamp(16px,2vw,24px) 0;
   border-top:1px solid var(--edge-light);
 }
 .step:last-child{border-bottom:1px solid var(--edge-light)}
 .step__num{
   font-family:var(--display);
   font-weight:700;
-  font-size:.72rem;
+  font-size:.7rem;
   letter-spacing:.16em;
   color:var(--rose);
-  padding-top:.45em;
+  padding-top:.4em;
 }
-.step__body p{margin:10px 0 0;font-size:.96rem;line-height:1.6;opacity:.7;max-width:54ch}
+.step__body p{margin:8px 0 0;font-size:.93rem;line-height:1.55;opacity:.7;max-width:54ch}
 .step__body .fay{
   display:block;
-  margin-top:14px;
-  padding-left:16px;
+  margin-top:12px;
+  padding-left:14px;
   border-left:2px solid var(--rose);
-  font-size:.9rem;
+  font-size:.87rem;
   opacity:.85;
   max-width:48ch;
 }
@@ -408,23 +468,23 @@ button{font:inherit;color:inherit}
 .host{
   display:grid;
   grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
-  gap:clamp(36px,6vw,80px);
+  gap:clamp(30px,5vw,68px);
   align-items:center;
 }
-.host__copy p{font-size:1rem;opacity:.75;max-width:44ch;margin:22px 0 30px}
+.host__copy p{font-size:.95rem;opacity:.75;max-width:42ch;margin:18px 0 24px}
 .url-chip{
   display:inline-flex;
   align-items:center;
-  gap:10px;
+  gap:9px;
   font-family:var(--display);
   font-weight:700;
-  font-size:clamp(.95rem,1.6vw,1.25rem);
+  font-size:clamp(.9rem,1.5vw,1.15rem);
   letter-spacing:-.01em;
   background:var(--forest);
   color:var(--ivory);
-  padding:14px 22px;
+  padding:12px 20px;
   border-radius:999px;
-  margin-bottom:28px;
+  margin-bottom:22px;
 }
 .url-chip em{font-style:normal;color:var(--rose)}
 
@@ -433,63 +493,63 @@ button{font:inherit;color:inherit}
   border:1px solid var(--edge);
   border-radius:10px;
   overflow:hidden;
-  box-shadow:0 30px 70px -40px rgba(16,44,36,.45);
+  box-shadow:0 24px 56px -36px rgba(16,44,36,.45);
 }
 .browser__bar{
   display:flex;
   align-items:center;
-  gap:7px;
-  padding:13px 16px;
+  gap:6px;
+  padding:11px 14px;
   border-bottom:1px solid var(--edge);
   background:var(--ivory);
 }
-.browser__dot{width:9px;height:9px;border-radius:50%;background:var(--sage);flex:none}
+.browser__dot{width:8px;height:8px;border-radius:50%;background:var(--sage);flex:none}
 .browser__url{
-  margin-left:12px;
+  margin-left:10px;
   flex:1;
-  font-size:.72rem;
+  font-size:.7rem;
   letter-spacing:.04em;
   color:rgba(16,44,36,.55);
   background:#fff;
   border:1px solid var(--edge);
   border-radius:999px;
-  padding:6px 14px;
+  padding:5px 12px;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
 .browser__url strong{color:var(--forest)}
-.browser__body{background:var(--blush);padding:clamp(18px,2.4vw,30px)}
+.browser__body{background:var(--blush);padding:clamp(16px,2vw,26px)}
 .store__head{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:16px;
-  padding-bottom:18px;
-  margin-bottom:20px;
+  gap:14px;
+  padding-bottom:14px;
+  margin-bottom:16px;
   border-bottom:1px solid rgba(16,44,36,.14);
 }
 .store__brand{
   font-family:var(--display);
   font-weight:800;
-  font-size:.86rem;
+  font-size:.82rem;
   letter-spacing:.1em;
   text-transform:uppercase;
 }
-.store__nav{display:flex;gap:14px}
-.store__nav i{display:block;width:34px;height:6px;border-radius:99px;background:rgba(16,44,36,.16)}
-.store__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.store__item{display:flex;flex-direction:column;gap:8px}
+.store__nav{display:flex;gap:12px}
+.store__nav i{display:block;width:30px;height:5px;border-radius:99px;background:rgba(16,44,36,.16)}
+.store__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.store__item{display:flex;flex-direction:column;gap:6px}
 .store__item .ph{aspect-ratio:1/1.15}
 .store__item .ph::after{display:none}
-.store__line{height:7px;border-radius:99px;background:rgba(16,44,36,.16);width:78%}
+.store__line{height:6px;border-radius:99px;background:rgba(16,44,36,.16);width:78%}
 .store__line--sm{width:44%;background:var(--rose);opacity:.9}
 .store__note{
-  font-size:.72rem;
+  font-size:.68rem;
   letter-spacing:.08em;
   text-transform:uppercase;
   opacity:.5;
-  margin:20px 0 0;
+  margin:16px 0 0;
   text-align:right;
 }
 
@@ -499,16 +559,24 @@ button{font:inherit;color:inherit}
 .work-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:clamp(14px,2vw,24px);
-  margin-top:clamp(36px,4vw,56px);
+  gap:clamp(12px,1.8vw,20px);
+  margin-top:clamp(28px,3.4vw,44px);
 }
-.card{display:flex;flex-direction:column;gap:14px}
+.card{display:flex;flex-direction:column;gap:12px;cursor:pointer}
 .card .ph{aspect-ratio:4/5}
 .card--wide{grid-column:span 2}
 .card--wide .ph{aspect-ratio:16/10}
+.card:hover .ph img{transform:scale(1.04)}
 .card__meta{display:flex;align-items:baseline;justify-content:space-between;gap:14px}
-.card__title{font-family:var(--display);font-weight:700;font-size:1rem;letter-spacing:-.01em}
-.card__tag{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;opacity:.5}
+.card__title{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:.95rem;
+  letter-spacing:-.01em;
+  transition:color .2s ease;
+}
+.card:hover .card__title{color:var(--rose)}
+.card__tag{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;opacity:.5}
 
 /* ============================================================
    STATEMENT BAND
@@ -517,7 +585,7 @@ button{font:inherit;color:inherit}
 .band__inner{
   display:grid;
   grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:clamp(30px,5vw,72px);
+  gap:clamp(28px,4.5vw,64px);
   align-items:start;
 }
 .band__lines{margin:0;padding:0;list-style:none}
@@ -525,17 +593,17 @@ button{font:inherit;color:inherit}
   font-family:var(--display);
   font-weight:800;
   letter-spacing:-.025em;
-  font-size:clamp(1.6rem,3.2vw,2.8rem);
+  font-size:clamp(1.4rem,2.7vw,2.3rem);
   line-height:1.12;
   border-bottom:1px solid rgba(16,44,36,.22);
-  padding:12px 0;
+  padding:10px 0;
 }
 .band__lines li:first-child{border-top:1px solid rgba(16,44,36,.22)}
-.band__copy p{font-size:1rem;line-height:1.65;margin:0 0 18px;max-width:44ch;opacity:.85}
+.band__copy p{font-size:.95rem;line-height:1.6;margin:0 0 14px;max-width:42ch;opacity:.85}
 .band__copy .kick{
   font-family:var(--display);
   font-weight:700;
-  font-size:clamp(1.05rem,1.7vw,1.3rem);
+  font-size:clamp(1rem,1.6vw,1.2rem);
   letter-spacing:-.015em;
   opacity:1;
 }
@@ -546,90 +614,90 @@ button{font:inherit;color:inherit}
 .about{
   display:grid;
   grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);
-  gap:clamp(34px,5vw,80px);
+  gap:clamp(28px,4.5vw,68px);
   align-items:start;
 }
-.about__copy p{font-size:1rem;line-height:1.68;margin:22px 0 0;max-width:46ch;opacity:.78}
+.about__copy p{font-size:.95rem;line-height:1.62;margin:18px 0 0;max-width:46ch;opacity:.78}
 .fay{
   background:var(--ivory);
   border:1px solid rgba(16,44,36,.1);
   border-radius:4px;
-  padding:clamp(20px,2.4vw,28px);
+  padding:clamp(16px,2vw,24px);
   display:flex;
-  gap:20px;
+  gap:16px;
   align-items:flex-start;
 }
-.fay .ph{width:88px;aspect-ratio:1/1.2;flex:none}
+.fay .ph{width:80px;aspect-ratio:1/1.2;flex:none}
 .fay .ph::after{display:none}
 .fay__label{
   font-family:var(--display);
   font-weight:700;
-  font-size:.68rem;
+  font-size:.66rem;
   letter-spacing:.18em;
   text-transform:uppercase;
   color:var(--rose);
-  margin:0 0 8px;
+  margin:0 0 6px;
 }
-.fay__text{font-size:.92rem;line-height:1.6;margin:0;opacity:.78}
+.fay__text{font-size:.88rem;line-height:1.55;margin:0;opacity:.78}
 .fay__name{
   font-family:var(--display);
   font-weight:800;
-  font-size:1.05rem;
+  font-size:1rem;
   letter-spacing:-.01em;
-  margin:0 0 6px;
+  margin:0 0 4px;
 }
 
 /* ============================================================
    FINAL CTA
    ============================================================ */
 .final{text-align:center}
-.final .display{margin-bottom:24px}
+.final .display{margin-bottom:18px}
 .final p{
-  font-size:clamp(1rem,1.5vw,1.2rem);
+  font-size:clamp(.95rem,1.4vw,1.1rem);
   opacity:.7;
   max-width:38ch;
-  margin:0 auto 36px;
+  margin:0 auto 28px;
 }
 
 /* ============================================================
    FOOTER
    ============================================================ */
-.footer{background:var(--forest);color:var(--ivory);padding:clamp(48px,6vw,72px) 0 34px}
+.footer{background:var(--forest);color:var(--ivory);padding:clamp(40px,5vw,60px) 0 26px}
 .footer__top{
   display:flex;
   flex-wrap:wrap;
-  gap:32px;
+  gap:28px;
   justify-content:space-between;
   align-items:flex-start;
-  padding-bottom:38px;
+  padding-bottom:28px;
   border-bottom:1px solid var(--edge-light);
 }
-.footer__tag{font-size:.92rem;opacity:.6;max-width:30ch;margin:16px 0 0;line-height:1.6}
-.footer__links{display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,64px)}
+.footer__tag{font-size:.88rem;opacity:.6;max-width:30ch;margin:14px 0 0;line-height:1.55}
+.footer__links{display:flex;flex-wrap:wrap;gap:clamp(24px,3.5vw,56px)}
 .footer__col h5{
   font-family:var(--display);
   font-weight:700;
-  font-size:.66rem;
+  font-size:.64rem;
   letter-spacing:.2em;
   text-transform:uppercase;
   color:var(--rose);
-  margin:0 0 14px;
+  margin:0 0 12px;
 }
 .footer__col a{
   display:block;
-  font-size:.9rem;
+  font-size:.86rem;
   opacity:.7;
-  padding:5px 0;
+  padding:4px 0;
   transition:opacity .18s ease, color .18s ease;
 }
 .footer__col a:hover{opacity:1;color:var(--rose)}
 .footer__bottom{
   display:flex;
   flex-wrap:wrap;
-  gap:14px;
+  gap:12px;
   justify-content:space-between;
-  padding-top:24px;
-  font-size:.76rem;
+  padding-top:20px;
+  font-size:.72rem;
   letter-spacing:.06em;
   opacity:.45;
 }
@@ -649,9 +717,9 @@ button{font:inherit;color:inherit}
 }
 .modal__panel{
   position:relative;
-  width:min(780px, calc(100% - 28px));
-  max-height:calc(100dvh - 48px);
-  margin:24px auto;
+  width:min(760px, calc(100% - 28px));
+  max-height:calc(100dvh - 40px);
+  margin:20px auto;
   background:var(--ivory);
   border-radius:6px;
   box-shadow:0 40px 90px -40px rgba(0,0,0,.6);
@@ -667,37 +735,37 @@ button{font:inherit;color:inherit}
   align-items:center;
   justify-content:space-between;
   gap:16px;
-  padding:18px 22px;
+  padding:16px 20px;
   border-bottom:1px solid var(--edge);
   background:var(--ivory);
   flex:none;
 }
 .modal__close{
-  width:38px;height:38px;
+  width:34px;height:34px;
   border-radius:50%;
   border:1px solid var(--edge);
   background:transparent;
   display:grid;
   place-items:center;
   cursor:pointer;
-  transition:background .18s ease, border-color .18s ease;
+  transition:background .18s ease, border-color .18s ease, color .18s ease;
   flex:none;
 }
 .modal__close:hover{background:var(--forest);color:var(--ivory);border-color:var(--forest)}
-.modal__scroll{overflow-y:auto;padding:clamp(24px,3.4vw,40px);overscroll-behavior:contain}
+.modal__scroll{overflow-y:auto;padding:clamp(22px,3vw,34px);overscroll-behavior:contain}
 
-.form__title{margin-bottom:12px}
-.form__sub{font-size:.95rem;opacity:.7;margin:0 0 34px;max-width:52ch}
+.form__title{margin-bottom:10px}
+.form__sub{font-size:.92rem;opacity:.7;margin:0 0 28px;max-width:52ch}
 
-.field{margin-bottom:30px;border:0;padding:0}
+.field{margin-bottom:24px;border:0;padding:0}
 .field__label{
   display:block;
   font-family:var(--display);
   font-weight:700;
-  font-size:.7rem;
+  font-size:.68rem;
   letter-spacing:.16em;
   text-transform:uppercase;
-  margin-bottom:14px;
+  margin-bottom:12px;
   padding:0;
 }
 .field__label .opt{
@@ -708,16 +776,16 @@ button{font:inherit;color:inherit}
   opacity:.45;
   margin-left:6px;
 }
-.pills{display:flex;flex-wrap:wrap;gap:9px}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
 .pill{position:relative;display:inline-flex}
 .pill input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
 .pill span{
   display:inline-flex;
   align-items:center;
-  padding:11px 19px;
+  padding:9px 16px;
   border:1px solid var(--edge);
   border-radius:999px;
-  font-size:.86rem;
+  font-size:.84rem;
   font-weight:500;
   cursor:pointer;
   transition:background .16s ease, color .16s ease, border-color .16s ease;
@@ -732,9 +800,9 @@ button{font:inherit;color:inherit}
   background:#fff;
   border:1px solid var(--edge);
   border-radius:4px;
-  padding:15px 16px;
+  padding:13px 14px;
   font-family:var(--body);
-  font-size:.95rem;
+  font-size:.92rem;
   color:var(--charcoal);
   transition:border-color .16s ease, box-shadow .16s ease;
 }
@@ -744,10 +812,10 @@ button{font:inherit;color:inherit}
   border-color:var(--rose);
   box-shadow:0 0 0 3px rgba(232,67,107,.12);
 }
-.textarea{min-height:132px;resize:vertical;line-height:1.6}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.form__submit{width:100%;margin-top:8px;padding:20px 30px;font-size:.82rem}
-.form__foot{font-size:.78rem;opacity:.5;text-align:center;margin:16px 0 0;line-height:1.5}
+.textarea{min-height:112px;resize:vertical;line-height:1.55}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form__submit{width:100%;margin-top:6px;padding:18px 26px;font-size:.8rem}
+.form__foot{font-size:.76rem;opacity:.5;text-align:center;margin:14px 0 0;line-height:1.5}
 
 /* ============================================================
    RESPONSIVE
@@ -755,15 +823,14 @@ button{font:inherit;color:inherit}
 @media (max-width:1080px){
   .nav{display:none}
   .how{grid-template-columns:1fr}
-  .how__head{position:static;margin-bottom:8px}
+  .how__head{position:static;margin-bottom:6px}
   .band__inner{grid-template-columns:1fr}
 }
 @media (max-width:900px){
   .hero__grid,
-  .split,
   .host,
   .about{grid-template-columns:1fr}
-  .hero__media{aspect-ratio:4/3;max-width:620px}
+  .hero__media{aspect-ratio:4/3;max-width:600px}
   .host__copy{order:1}
   .browser{order:2}
   .work-grid{grid-template-columns:1fr 1fr}
@@ -771,25 +838,29 @@ button{font:inherit;color:inherit}
 }
 @media (max-width:680px){
   .container{width:calc(100% - 32px)}
-  .header__inner{height:66px}
-  .logo__img{height:22px}
-  .row{grid-template-columns:44px minmax(0,1fr);gap:14px}
+  .header__inner{height:62px}
+  .logo__img{height:20px}
+  .row{grid-template-columns:40px minmax(0,1fr);gap:12px}
   .row__desc{grid-column:2}
-  .step{grid-template-columns:44px minmax(0,1fr)}
+  .step{grid-template-columns:40px minmax(0,1fr)}
   .work-grid{grid-template-columns:1fr}
   .card--wide{grid-column:span 1}
   .card--wide .ph{aspect-ratio:4/5}
   .fay{flex-direction:column}
   .fay .ph{width:100%;aspect-ratio:16/9}
   .grid-2{grid-template-columns:1fr}
-  .modal__panel{max-height:calc(100dvh - 20px);margin:10px auto;width:calc(100% - 20px)}
+  .modal__panel{max-height:calc(100dvh - 16px);margin:8px auto;width:calc(100% - 16px)}
   .btn{width:100%}
   .btn--sm{width:auto}
   .hero__actions{flex-direction:column;align-items:stretch}
 }
+
+/* Respect reduced motion — freeze on the first word */
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
   html{scroll-behavior:auto}
+  .rotator__word:not(:first-child){display:none}
+  .rotator__word:first-child{opacity:1 !important;transform:none !important}
 }
 </style>
 </head>
@@ -800,7 +871,7 @@ button{font:inherit;color:inherit}
   <div class="container header__inner">
     <a href="#top" class="logo" aria-label="Tupsy — home">
       <img class="logo__img" src="https://tupsy.netlify.app/assets/tupsy-logo-dark.svg"
-           alt="Tupsy" width="132" height="28">
+           alt="Tupsy" width="132" height="26">
     </a>
 
     <nav class="nav" aria-label="Primary">
@@ -820,8 +891,9 @@ button{font:inherit;color:inherit}
       <p class="eyebrow">Creative Fashion &amp; Merchandise Studio</p>
 
       <h1 class="display h1 hero__title">
-        Got an idea?<br>
-        Let's <span class="hl">make it.</span>
+        <span class="hero__line">Got an idea</span>
+        <span class="hero__line hero__line--rotate"><span class="hero__for" aria-hidden="true">for</span><span class="rotator" aria-hidden="true"><span class="rotator__word" style="--i:0">merch</span><span class="rotator__word" style="--i:1">cute tops</span><span class="rotator__word" style="--i:2">beachwear</span><span class="rotator__word" style="--i:3">hoodies</span><span class="rotator__word" style="--i:4">a drop</span><span class="rotator__sizer">beachwear</span></span><span class="sr-only">merch, cute tops, beachwear, hoodies, or a drop.</span></span>
+        <span class="hero__line">Let's make it.</span>
       </h1>
 
       <div class="hero__grid">
@@ -860,6 +932,15 @@ button{font:inherit;color:inherit}
           </div>
         </div>
       </div>
+
+      <div class="audience">
+        <span class="audience__label">You might be a</span>
+        <span class="chip">Creator or artist</span>
+        <span class="chip">Brand or business</span>
+        <span class="chip">Party or event</span>
+        <span class="chip">Community</span>
+        <span class="chip">Personal project</span>
+      </div>
     </div>
   </section>
 
@@ -878,35 +959,6 @@ button{font:inherit;color:inherit}
     </div>
   </div>
 
-  <section class="section" id="who">
-    <div class="container">
-      <h2 class="display h2">
-        You have the idea.<br>
-        We'll figure out the rest.
-      </h2>
-
-      <div class="split">
-        <ul class="qlist">
-          <li><b>01</b> Are you a creator looking to make something for your audience?</li>
-          <li><b>02</b> A brand looking to create merch or a collection?</li>
-          <li><b>03</b> Planning something for a party or event?</li>
-          <li><b>04</b> A community that wants something people can wear?</li>
-          <li><b>05</b> Or maybe you just have a personal project in mind.</li>
-        </ul>
-
-        <div>
-          <p class="split__note">
-            Whatever you're thinking, Tupsy helps you take it from an idea to
-            something real — and something you're proud of.
-          </p>
-          <p class="split__kick">
-            Tell us what you're thinking. We'll take it from there.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="section section--tight" id="services">
     <div class="container">
       <h2 class="display h2" style="max-width:16ch">
@@ -918,8 +970,8 @@ button{font:inherit;color:inherit}
           <span class="row__num">01</span>
           <h3 class="h4">Creative Direction</h3>
           <p class="row__desc">
-            We help shape your idea into something that works — from the design
-            and materials to the little details that make it feel right.
+            We help shape your idea into something that works — design,
+            materials, and the little details that make it feel right.
           </p>
         </div>
         <div class="row">
@@ -942,8 +994,8 @@ button{font:inherit;color:inherit}
           <span class="row__num">04</span>
           <h3 class="h4">Production</h3>
           <p class="row__desc">
-            From your first run to repeat orders, we manage the process of
-            getting everything made properly.
+            From your first run to repeat orders, we manage getting everything
+            made properly.
           </p>
         </div>
         <div class="row">
@@ -959,7 +1011,7 @@ button{font:inherit;color:inherit}
           <h3 class="h4">Fulfilment</h3>
           <p class="row__desc">
             If you're selling through us, we can handle orders, packaging and
-            delivery — so you don't have to.
+            delivery.
           </p>
         </div>
       </div>
@@ -986,7 +1038,7 @@ button{font:inherit;color:inherit}
           <div class="step__body">
             <h3 class="h4">Consultation</h3>
             <p>
-              We'll talk it through properly — concept, garments, materials,
+              We talk it through properly — concept, garments, materials,
               sizing, quantities, budget and timeline.
             </p>
             <span class="fay">
@@ -1000,8 +1052,8 @@ button{font:inherit;color:inherit}
           <div class="step__body">
             <h3 class="h4">Sample Development</h3>
             <p>
-              We'll agree on the sample, send you a quote and timeline, and get
-              to work.
+              We agree on the sample, send you a quote and timeline, and get to
+              work.
             </p>
           </div>
         </li>
@@ -1010,8 +1062,8 @@ button{font:inherit;color:inherit}
           <div class="step__body">
             <h3 class="h4">Production</h3>
             <p>
-              Once you're happy with the sample, we agree on your first
-              production quantity and get it made.
+              Once you're happy with the sample, we agree on your first run and
+              get it made.
             </p>
           </div>
         </li>
@@ -1042,8 +1094,8 @@ button{font:inherit;color:inherit}
 
         <p>
           Your page can feature your identity, products, images and pricing.
-          Share the link with your audience and customers can buy directly.
-          Tupsy handles the orders and fulfilment behind the scenes.
+          Share the link and customers can buy directly. Tupsy handles orders
+          and fulfilment behind the scenes.
         </p>
 
         <button class="btn btn--rose" data-open-modal>
@@ -1164,7 +1216,7 @@ button{font:inherit;color:inherit}
   <section class="section band">
     <div class="container band__inner">
       <div>
-        <h2 class="display h2" style="max-width:14ch;margin-bottom:28px">
+        <h2 class="display h2" style="max-width:14ch;margin-bottom:22px">
           Good merch starts with a good idea.
         </h2>
       </div>
@@ -1177,12 +1229,10 @@ button{font:inherit;color:inherit}
           <li>The details.</li>
         </ul>
 
-        <p style="margin-top:30px">
-          We know that making something people actually want to wear is about
-          more than putting a logo on a shirt. That's why we combine creative
-          thinking with access to the right production partners — helping you
-          make decisions from the first conversation through to the final
-          product.
+        <p style="margin-top:24px">
+          Making something people actually want to wear is about more than
+          putting a logo on a shirt. We combine creative thinking with the right
+          production partners — from the first conversation to the final product.
         </p>
         <p class="kick">You bring the idea. We help make it real.</p>
       </div>
@@ -1199,8 +1249,8 @@ button{font:inherit;color:inherit}
         </p>
         <p>
           From figuring out what to make to producing it — and, when needed,
-          helping you sell it — we're here to make the whole process easier,
-          more considered and more enjoyable.
+          helping you sell it — we make the whole process easier and more
+          considered.
         </p>
       </div>
 
@@ -1241,7 +1291,7 @@ button{font:inherit;color:inherit}
         <a href="#top" class="logo" aria-label="Tupsy — home">
           <img class="logo__img logo__img--light"
                src="https://tupsy.netlify.app/assets/tupsy-logo-light.svg"
-               alt="Tupsy" width="140" height="30">
+               alt="Tupsy" width="140" height="28">
         </a>
         <p class="footer__tag">
           A creative fashion and merchandise studio. You bring the idea — we
@@ -1285,10 +1335,10 @@ button{font:inherit;color:inherit}
       <span class="logo" aria-hidden="true">
         <img class="logo__img logo__img--modal"
              src="https://tupsy.netlify.app/assets/tupsy-logo-dark.svg"
-             alt="Tupsy" width="104" height="22">
+             alt="Tupsy" width="104" height="20">
       </span>
       <button class="modal__close" type="button" data-close-modal aria-label="Close">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
           <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
         </svg>
       </button>
@@ -1385,11 +1435,11 @@ button{font:inherit;color:inherit}
 
         <div class="field">
           <label class="field__label" for="name">Your details</label>
-          <div class="grid-2" style="margin-bottom:16px">
+          <div class="grid-2" style="margin-bottom:14px">
             <input class="input" type="text" id="name" name="name" placeholder="Name" required>
             <input class="input" type="text" id="brand" name="brand" placeholder="Brand / Company / Project">
           </div>
-          <div class="grid-2" style="margin-bottom:16px">
+          <div class="grid-2" style="margin-bottom:14px">
             <input class="input" type="email" id="email" name="email" placeholder="Email" required>
             <input class="input" type="tel" id="phone" name="phone" placeholder="Phone / WhatsApp">
           </div>
