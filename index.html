@@ -15,6 +15,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
+<script src="/tupsy.js" defer></script>
+
 <style>
 /* ============================================================
    TUPSY — DESIGN TOKENS
@@ -137,7 +139,7 @@ button{font:inherit;color:inherit}
 }
 
 /* ============================================================
-   BUTTONS — slight radius
+   BUTTONS
    ============================================================ */
 .btn{
   display:inline-flex;
@@ -218,11 +220,9 @@ button{font:inherit;color:inherit}
 .nav a:hover::after{width:100%}
 
 /* ============================================================
-   HERO — headline and image sit side by side
+   HERO
    ============================================================ */
-.hero{
-  padding:clamp(28px,4vw,52px) 0 clamp(28px,4vw,56px);
-}
+.hero{padding:clamp(28px,4vw,52px) 0 clamp(28px,4vw,56px)}
 .hero__grid{
   display:grid;
   grid-template-columns:minmax(0,1fr) minmax(0,1fr);
@@ -235,11 +235,8 @@ button{font:inherit;color:inherit}
   align-items:flex-start;
   gap:clamp(16px,1.8vw,24px);
 }
-.hero__title{
-  margin:0;
-}
+.hero__title{margin:0}
 
-/* --- Rotating headline --- */
 .hero__line{display:block}
 .hero__line--rotate{
   display:block;
@@ -284,7 +281,6 @@ button{font:inherit;color:inherit}
 
 .hero__actions{display:flex;flex-wrap:wrap;gap:10px}
 
-/* --- Hero media --- */
 .hero__media{
   display:grid;
   grid-template-columns:1.35fr 1fr;
@@ -297,7 +293,6 @@ button{font:inherit;color:inherit}
 }
 .hero__media .ph:first-child{grid-row:span 2}
 
-/* --- Audience chip strip --- */
 .audience{
   margin-top:clamp(32px,4vw,52px);
   padding-top:clamp(24px,3vw,36px);
@@ -556,6 +551,96 @@ button{font:inherit;color:inherit}
   opacity:.5;
   margin:16px 0 0;
   text-align:right;
+}
+
+/* ============================================================
+   FEATURED (partners) — NEW
+   ============================================================ */
+.featured__head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:28px;
+  flex-wrap:wrap;
+  margin-bottom:clamp(28px,3.4vw,44px);
+}
+.featured__head .h2{margin-top:14px}
+.featured__sub{
+  max-width:40ch;
+  font-size:.95rem;
+  opacity:.7;
+  margin:0;
+  line-height:1.55;
+}
+.featured__grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:clamp(12px,1.8vw,22px);
+}
+.feat{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  text-decoration:none;
+  color:inherit;
+  transition:transform .28s cubic-bezier(.2,.8,.25,1);
+}
+.feat:hover{transform:translateY(-4px)}
+.feat__img{
+  aspect-ratio:4/5;
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:
+    repeating-linear-gradient(135deg, rgba(16,44,36,.05) 0 1.5px, transparent 1.5px 13px),
+    var(--sage);
+  position:relative;
+}
+.feat__img img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .8s cubic-bezier(.2,.8,.25,1);
+}
+.feat:hover .feat__img img{transform:scale(1.05)}
+.feat__brand{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:.66rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--rose);
+  margin:0;
+}
+.feat__name{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:.94rem;
+  letter-spacing:-.01em;
+  line-height:1.25;
+  margin:0;
+  transition:color .18s ease;
+}
+.feat:hover .feat__name{color:var(--rose)}
+.feat__price{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:.92rem;
+  letter-spacing:-.01em;
+  margin-top:auto;
+}
+.feat--placeholder{cursor:default}
+.feat--placeholder:hover{transform:none}
+.feat--placeholder .feat__name{opacity:.35}
+.feat--placeholder .feat__brand{color:var(--charcoal);opacity:.35}
+.feat--placeholder .feat__price{opacity:.35}
+.featured__empty{
+  grid-column:1 / -1;
+  text-align:center;
+  padding:clamp(24px,4vw,48px) 0;
+  font-size:.95rem;
+  opacity:.55;
 }
 
 /* ============================================================
@@ -830,6 +915,7 @@ button{font:inherit;color:inherit}
   .how{grid-template-columns:1fr}
   .how__head{position:static;margin-bottom:6px}
   .band__inner{grid-template-columns:1fr}
+  .featured__grid{grid-template-columns:repeat(3,1fr)}
 }
 @media (max-width:900px){
   .hero__grid{
@@ -847,6 +933,8 @@ button{font:inherit;color:inherit}
   .browser{order:2}
   .work-grid{grid-template-columns:1fr 1fr}
   .card--wide{grid-column:span 2}
+  .featured__grid{grid-template-columns:repeat(2,1fr)}
+  .featured__head{align-items:flex-start}
 }
 @media (max-width:680px){
   .container{width:calc(100% - 48px)}
@@ -866,6 +954,7 @@ button{font:inherit;color:inherit}
   .hero__actions{gap:8px}
   .audience{padding-top:20px;margin-top:28px}
   .footer__bottom{flex-direction:column;gap:6px}
+  .featured__grid{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
@@ -897,6 +986,7 @@ button{font:inherit;color:inherit}
 
 <main id="top">
 
+  <!-- ============================ HERO ============================ -->
   <section class="hero">
     <div class="container">
       <div class="hero__grid">
@@ -953,6 +1043,7 @@ button{font:inherit;color:inherit}
     </div>
   </section>
 
+  <!-- ============================ MARQUEE ============================ -->
   <div class="marquee" aria-hidden="true">
     <div class="marquee__track">
       <div class="marquee__set">
@@ -968,6 +1059,7 @@ button{font:inherit;color:inherit}
     </div>
   </div>
 
+  <!-- ============================ SERVICES ============================ -->
   <section class="section section--tight" id="services">
     <div class="container">
       <h2 class="display h2" style="max-width:16ch">
@@ -1027,6 +1119,7 @@ button{font:inherit;color:inherit}
     </div>
   </section>
 
+  <!-- ============================ HOW IT WORKS ============================ -->
   <section class="section section--forest" id="how">
     <div class="container how">
       <div class="how__head">
@@ -1090,6 +1183,7 @@ button{font:inherit;color:inherit}
     </div>
   </section>
 
+  <!-- ============================ HOSTED MERCH ============================ -->
   <section class="section" id="host">
     <div class="container host">
       <div class="host__copy">
@@ -1107,9 +1201,12 @@ button{font:inherit;color:inherit}
           and fulfilment behind the scenes.
         </p>
 
-        <button class="btn btn--rose" data-open-modal>
-          Start a Project <span class="arw" aria-hidden="true">→</span>
-        </button>
+        <div class="hero__actions">
+          <button class="btn btn--rose" data-open-modal>
+            Start a Project <span class="arw" aria-hidden="true">→</span>
+          </button>
+          <a class="btn btn--ghost" href="/partners.html">Open a storefront</a>
+        </div>
       </div>
 
       <div class="browser" aria-hidden="true">
@@ -1158,6 +1255,51 @@ button{font:inherit;color:inherit}
     </div>
   </section>
 
+  <!-- ============================ FEATURED (partners) ============================ -->
+  <section class="section section--tight" id="featured">
+    <div class="container">
+      <div class="featured__head">
+        <div>
+          <p class="eyebrow">From our partners</p>
+          <h2 class="display h2" style="max-width:16ch">Featured drops.</h2>
+        </div>
+        <p class="featured__sub">
+          Live pieces from partner collections. Shop directly — Tupsy handles
+          orders and fulfilment.
+        </p>
+      </div>
+
+      <div class="featured__grid" id="featured-grid">
+        <!-- Populated by tupsy.js. Fallback placeholders below show until data arrives. -->
+        <div class="feat feat--placeholder" aria-hidden="true">
+          <div class="feat__img"></div>
+          <p class="feat__brand">Partner</p>
+          <p class="feat__name">Coming soon</p>
+          <p class="feat__price">₦ —</p>
+        </div>
+        <div class="feat feat--placeholder" aria-hidden="true">
+          <div class="feat__img"></div>
+          <p class="feat__brand">Partner</p>
+          <p class="feat__name">Coming soon</p>
+          <p class="feat__price">₦ —</p>
+        </div>
+        <div class="feat feat--placeholder" aria-hidden="true">
+          <div class="feat__img"></div>
+          <p class="feat__brand">Partner</p>
+          <p class="feat__name">Coming soon</p>
+          <p class="feat__price">₦ —</p>
+        </div>
+        <div class="feat feat--placeholder" aria-hidden="true">
+          <div class="feat__img"></div>
+          <p class="feat__brand">Partner</p>
+          <p class="feat__name">Coming soon</p>
+          <p class="feat__price">₦ —</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ WORK ============================ -->
   <section class="section section--tight" id="work">
     <div class="container">
       <h2 class="display h2">Some things we've made.</h2>
@@ -1222,6 +1364,7 @@ button{font:inherit;color:inherit}
     </div>
   </section>
 
+  <!-- ============================ BAND ============================ -->
   <section class="section band">
     <div class="container band__inner">
       <div>
@@ -1248,6 +1391,7 @@ button{font:inherit;color:inherit}
     </div>
   </section>
 
+  <!-- ============================ ABOUT ============================ -->
   <section class="section section--blush" id="about">
     <div class="container about">
       <div class="about__copy">
@@ -1281,6 +1425,7 @@ button{font:inherit;color:inherit}
     </div>
   </section>
 
+  <!-- ============================ FINAL ============================ -->
   <section class="section section--forest final">
     <div class="container">
       <h2 class="display h2">Let's make something.</h2>
@@ -1319,6 +1464,7 @@ button{font:inherit;color:inherit}
           <h5>Start</h5>
           <a href="#" data-open-modal>Start a Project</a>
           <a href="#host">Host Your Merch</a>
+          <a href="/partners.html">Open a storefront</a>
         </div>
         <div class="footer__col">
           <h5>Contact</h5>
@@ -1336,6 +1482,7 @@ button{font:inherit;color:inherit}
   </div>
 </footer>
 
+<!-- ============================ MODAL ============================ -->
 <div class="modal" id="project-modal" aria-hidden="true">
   <div class="modal__backdrop" data-close-modal></div>
 
@@ -1476,6 +1623,7 @@ button{font:inherit;color:inherit}
   var scroll  = modal.querySelector('.modal__scroll');
   var lastFocus = null;
 
+  /* ---------- MODAL OPEN / CLOSE ---------- */
   function openModal(e) {
     if (e) e.preventDefault();
     lastFocus = document.activeElement;
@@ -1528,6 +1676,7 @@ button{font:inherit;color:inherit}
     }
   });
 
+  /* ---------- FORM SUBMIT — uses tupsy.js ---------- */
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -1538,6 +1687,11 @@ button{font:inherit;color:inherit}
     if (!email.value.trim() || !/^\S+@\S+\.\S+$/.test(email.value)) {
       email.focus(); email.reportValidity(); return;
     }
+
+    var submitBtn = form.querySelector('.form__submit');
+    var originalLabel = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Sending…';
 
     var data = {
       who:     (form.querySelector('input[name="who"]:checked') || {}).value || '',
@@ -1556,13 +1710,108 @@ button{font:inherit;color:inherit}
       email:   email.value,
       phone:   form.querySelector('#phone').value,
       social:  form.querySelector('#social').value,
+      source:  'Homepage',
       submittedAt: new Date().toISOString()
     };
-    console.log('Tupsy — new project enquiry:', data);
 
-    window.location.href = '/thank-you.html';
+    if (!window.Tupsy || typeof window.Tupsy.submitProject !== 'function') {
+      console.error('tupsy.js not loaded — cannot submit.');
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalLabel;
+      alert('Something went wrong. Please try again or message us on WhatsApp.');
+      return;
+    }
+
+    window.Tupsy.submitProject(data)
+      .then(function (res) {
+        if (res && res.ok) {
+          window.location.href = '/thank-you.html';
+        } else {
+          throw new Error((res && res.error) || 'Submission failed');
+        }
+      })
+      .catch(function (err) {
+        console.error('Tupsy submit error:', err);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalLabel;
+        alert('Something went wrong. Please try again or message us on WhatsApp.');
+      });
   });
 
+  /* ---------- FEATURED ITEMS — pull from tupsy.js ---------- */
+  (function loadFeatured() {
+    var grid = document.getElementById('featured-grid');
+    if (!grid) return;
+
+    function currencySymbol(code) {
+      var map = { NGN: '₦', USD: '$', GBP: '£', EUR: '€' };
+      return map[code] || (code ? code + ' ' : '');
+    }
+
+    function formatPrice(amount, currency) {
+      if (amount == null || amount === '') return '₦ —';
+      var n = Number(amount);
+      if (isNaN(n)) return String(amount);
+      return currencySymbol(currency) + n.toLocaleString('en-NG');
+    }
+
+    function escapeHtml(s) {
+      return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function render(items) {
+      if (!items || !items.length) return; // keep placeholders
+
+      var html = items.slice(0, 8).map(function (it) {
+        var brand = escapeHtml(it.brand || it.brandSlug || 'Partner');
+        var name  = escapeHtml(it.name || 'Untitled');
+        var price = formatPrice(it.price, it.currency);
+        var img   = it.image ? escapeHtml(it.image) : '';
+        var href  = '/' + escapeHtml((it.brandSlug || 'shop')) + '/' + escapeHtml(it.slug || it.id || '');
+
+        return '' +
+          '<a class="feat" href="' + href + '">' +
+            '<div class="feat__img">' +
+              (img
+                ? '<img src="' + img + '" alt="' + name + '" loading="lazy" onerror="this.remove()">'
+                : '') +
+            '</div>' +
+            '<p class="feat__brand">' + brand + '</p>' +
+            '<p class="feat__name">' + name + '</p>' +
+            '<p class="feat__price">' + price + '</p>' +
+          '</a>';
+      }).join('');
+
+      grid.innerHTML = html;
+    }
+
+    function load() {
+      if (!window.Tupsy || typeof window.Tupsy.getFeaturedItems !== 'function') {
+        return; // keep placeholders if tupsy.js didn't load
+      }
+      window.Tupsy.getFeaturedItems(8)
+        .then(function (res) {
+          var items = (res && res.items) || (res && res.data) || [];
+          render(items);
+        })
+        .catch(function (err) {
+          // Silent — the placeholder cards stay visible
+          console.warn('Featured items unavailable:', err);
+        });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', load);
+    } else {
+      load();
+    }
+  })();
+
+  /* ---------- YEAR ---------- */
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
 </script>
