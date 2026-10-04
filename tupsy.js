@@ -6,7 +6,7 @@
   'use strict';
 
   // === PASTE YOUR DEPLOYED GAS WEB APP URL HERE ===
-  var ENDPOINT = https://script.google.com/macros/s/AKfycbwA3Y78d7w7NAZEx2KbDMyd6A1XsfneH2c2GXXHaU3VuDHCKBZt1RStFXDq1Dipvadf/exec';
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbwA3Y78d7w7NAZEx2KbDMyd6A1XsfneH2c2GXXHaU3VuDHCKBZt1RStFXDq1Dipvadf/exec';
 
   function post(body) {
     return fetch(ENDPOINT, {
