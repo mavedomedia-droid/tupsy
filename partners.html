@@ -89,6 +89,18 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .commission p{margin:0 0 12px;font-size:.96rem;line-height:1.6;opacity:.85}
 .commission p:last-child{margin-bottom:0}
 .commission strong{color:var(--rose)}
+.commission .note{
+  display:inline-block;
+  padding:10px 14px;
+  background:rgba(247,242,233,.06);
+  border:1px solid rgba(247,242,233,.12);
+  border-radius:var(--radius);
+  font-size:.85rem;
+  opacity:.85;
+  margin-top:6px;
+  line-height:1.55;
+  max-width:44ch;
+}
 
 .form-wrap{background:#fff;border:1px solid var(--edge);border-radius:10px;overflow:hidden;margin-top:clamp(32px,4vw,48px)}
 .form-block{padding:clamp(26px,3.4vw,44px);border-bottom:1px solid var(--edge)}
@@ -124,12 +136,30 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .upload__name{font-size:.82rem;color:var(--rose);font-weight:600;margin-top:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .upload.has-file{border-style:solid;border-color:var(--rose);background:rgba(244,218,211,.35)}
 
-.price-calc{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px 18px;background:var(--blush);border-radius:var(--radius);margin-top:14px}
-.price-calc__row{display:flex;justify-content:space-between;gap:12px;font-size:.88rem}
-.price-calc__label{opacity:.72}
+.price-calc{display:grid;grid-template-columns:1fr;gap:10px;padding:18px 20px;background:var(--blush);border-radius:var(--radius);margin-top:14px}
+.price-calc__row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:.9rem}
+.price-calc__label{opacity:.78}
 .price-calc__value{font-family:var(--display);font-weight:700;letter-spacing:-.01em;white-space:nowrap}
-.price-calc__value--rose{color:var(--rose)}
-.price-calc__row--full{grid-column:1 / -1;padding-top:10px;border-top:1px solid rgba(16,44,36,.14);margin-top:6px}
+.price-calc__value--fee{color:var(--rose)}
+.price-calc__row--total{
+  padding-top:12px;
+  border-top:1px solid rgba(16,44,36,.16);
+  margin-top:2px;
+  font-size:1rem;
+}
+.price-calc__row--total .price-calc__value{
+  font-size:1.2rem;
+  font-weight:800;
+  color:var(--forest);
+}
+.price-calc__note{
+  font-size:.78rem;
+  opacity:.7;
+  line-height:1.5;
+  margin:6px 0 0;
+  padding-top:10px;
+  border-top:1px dashed rgba(16,44,36,.16);
+}
 
 .check{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid var(--edge);border-radius:var(--radius);cursor:pointer;transition:border-color .16s ease,background .16s ease}
 .check + .check{margin-top:10px}
@@ -147,7 +177,6 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .form-submit .btn{width:100%;padding:20px 30px;font-size:.82rem}
 .form-submit__note{font-size:.8rem;opacity:.6;margin:0;line-height:1.55;max-width:60ch}
 
-/* Slug availability */
 .slug-check{margin-top:8px;font-size:.8rem;display:flex;align-items:center;gap:6px;min-height:18px}
 .slug-check[data-state="checking"]{color:rgba(37,38,39,.5)}
 .slug-check[data-state="available"]{color:#1a7f37}
@@ -185,7 +214,6 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
   .header__inner{height:62px}
   .logo__img{height:20px}
   .grid-2{grid-template-columns:1fr}
-  .price-calc{grid-template-columns:1fr}
   .footer__bottom{flex-direction:column;gap:6px}
 }
 </style>
@@ -276,9 +304,12 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
           <div class="commission__num">95<span>% to you.</span></div>
         </div>
         <div>
-          <p><strong>You keep 95% of every sale.</strong> That's it — Tupsy takes 5% to cover hosting, payments, packing, shipping and fulfilment.</p>
+          <p><strong>You keep 95% of every sale.</strong> That's it — Tupsy takes 5% to cover hosting, payments, packing and fulfilment.</p>
           <p>Example: if you price a tee at <strong>₦10,000</strong>, you receive <strong>₦9,500</strong> straight to your bank account within 7 days of the order shipping.</p>
-          <p style="opacity:.6;font-size:.85rem">No listing fees. No subscriptions. No surprise deductions.</p>
+          <p class="note">
+            Shipping is added on top at checkout and paid by the customer. It covers the actual cost of delivery only —
+            it's not part of the 95/5 split, so neither of us pays it.
+          </p>
         </div>
       </div>
     </div>
@@ -456,21 +487,26 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
             <label class="field__label" for="p-price">Your retail price (₦)</label>
             <input class="input" type="number" id="p-price" name="samplePrice"
                    placeholder="10000" min="1000" step="100" inputmode="numeric" required>
-            <span class="field__hint">This is what customers pay. The split below shows what lands in your account per sale.</span>
+            <span class="field__hint">This is what customers pay for the product. The split below shows what lands in your account per sale.</span>
 
             <div class="price-calc">
               <div class="price-calc__row">
-                <span class="price-calc__label">Customer pays</span>
+                <span class="price-calc__label">Your retail price</span>
                 <span class="price-calc__value" id="calc-retail">₦ —</span>
               </div>
               <div class="price-calc__row">
-                <span class="price-calc__label">Tupsy covers hosting, fees &amp; shipping</span>
-                <span class="price-calc__value price-calc__value--rose" id="calc-fee">₦ —</span>
+                <span class="price-calc__label">Tupsy fee (5% — covers hosting, payments, packing &amp; fulfilment)</span>
+                <span class="price-calc__value price-calc__value--fee" id="calc-fee">− ₦ —</span>
               </div>
-              <div class="price-calc__row price-calc__row--full">
+              <div class="price-calc__row price-calc__row--total">
                 <span class="price-calc__label"><strong>You receive per sale</strong></span>
                 <span class="price-calc__value" id="calc-payout">₦ —</span>
               </div>
+              <p class="price-calc__note">
+                Shipping is charged to the customer at checkout on top of this
+                price. It covers the actual cost of delivery only — it isn't part
+                of the 95/5 split, so neither of us pays it.
+              </p>
             </div>
           </div>
 
@@ -523,7 +559,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
             <span class="check__box" aria-hidden="true">
               <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5L9.5 4" stroke="#F7F2E9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
-            <span class="check__text">I understand <strong>I receive 95% of every sale</strong>, paid within 7 days of the order shipping. Tupsy keeps 5% to cover hosting, payment processing, packing, shipping and fulfilment.</span>
+            <span class="check__text">I understand <strong>I receive 95% of every sale</strong>, paid within 7 days of the order shipping. Tupsy keeps 5% to cover hosting, payment processing, packing and fulfilment. Shipping is charged separately to the customer and is not part of the split.</span>
           </label>
 
           <label class="check">
@@ -567,25 +603,35 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
             <summary>Do I need to have my own stock ready before applying?</summary>
             <p>No. We produce the stock with you, or you supply it — either works. All we need to start is the finished units sitting in our warehouse by the time your page goes live. The minimum backlog keeps you from selling something you can't ship.</p>
           </details>
+
           <details class="faq__item">
             <summary>How is the 5% calculated — before or after shipping?</summary>
-            <p>5% is on the product retail price only. Shipping is charged separately to the customer and passes through at cost — we don't take a cut on shipping. Your 95% is always calculated on the product price alone.</p>
+            <p>5% is on the product retail price only. Shipping is <strong>not</strong> part of the split — it's charged separately to the customer at checkout, and it covers the actual cost of delivery only. So neither you nor Tupsy pays for shipping, and it never reduces your payout.</p>
           </details>
+
+          <details class="faq__item">
+            <summary>Who pays for shipping?</summary>
+            <p>The customer does. When they check out, the delivery fee is calculated based on their location and added to their total — on top of the product price. That fee passes through at cost. It isn't a revenue line for us and it isn't a cost for you.</p>
+          </details>
+
           <details class="faq__item">
             <summary>When do I get paid?</summary>
             <p>Within 7 working days of each order shipping. You'll get an email with the sale details and the exact amount paid to your account.</p>
           </details>
+
           <details class="faq__item">
             <summary>Can I sell more than one product?</summary>
             <p>Yes. We start with one sample piece so we can see your style and pricing, then add the rest together during onboarding. Every additional piece follows the same 95/5 split and stock backlog rules.</p>
           </details>
+
           <details class="faq__item">
             <summary>Can I change my prices later?</summary>
             <p>Absolutely. Just message us and we'll update them. Changes take effect immediately on your storefront.</p>
           </details>
+
           <details class="faq__item">
             <summary>Who handles returns and refunds?</summary>
-            <p>Tupsy handles the return logistics. Refunds are paid back to the customer, and the 5% on that sale is reversed — so you only keep the 95% on sales that stick.</p>
+            <p>Tupsy handles the return logistics. Refunds are paid back to the customer, and the 5% on that sale is reversed — so you only keep the 95% on sales that stick. Shipping is refunded at cost the same way it was charged.</p>
           </details>
         </div>
       </div>
@@ -730,14 +776,14 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
     var v = parseFloat(priceInput.value);
     if (isNaN(v) || v <= 0) {
       calcRetail.textContent = '₦ —';
-      calcFee.textContent = '₦ —';
+      calcFee.textContent = '− ₦ —';
       calcPayout.textContent = '₦ —';
       return;
     }
     var fee = Math.round(v * 0.05);
     var payout = v - fee;
     calcRetail.textContent = fmtNaira(v);
-    calcFee.textContent = fmtNaira(fee);
+    calcFee.textContent = '− ' + fmtNaira(fee);
     calcPayout.textContent = fmtNaira(payout);
   }
   if (priceInput) {
@@ -835,7 +881,9 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
       })
       .then(function (res) {
         if (res && res.ok) {
-          window.location.href = '/thank-you.html?type=partner';
+          var pid = (res && res.partnerId) ? res.partnerId : '';
+          var qs  = pid ? '?ref=' + encodeURIComponent(pid) : '';
+          window.location.href = '/thank-you/partners' + qs;
         } else {
           throw new Error((res && res.error) || 'Submission failed');
         }
