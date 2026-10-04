@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order confirmed — Tupsy</title>
+<meta name="description" content="Your order is confirmed. We'll email you a receipt and tracking.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#102C24">
+
+<link rel="icon" type="image/svg+xml" href="https://tupsy.netlify.app/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tupsy.netlify.app/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="https://tupsy.netlify.app/assets/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script src="/tupsy.js" defer></script>
+
+<style>
+:root{
+  --forest:#102C24;
+  --forest-soft:#16382D;
+  --rose:#E8436B;
+  --rose-dark:#C93359;
+  --blush:#F4DAD3;
+  --ivory:#F7F2E9;
+  --charcoal:#252627;
+  --sage:#C8C7B9;
+  --edge-light:rgba(247,242,233,.16);
+  --radius:8px;
+  --display:'Archivo','Helvetica Neue',Arial,sans-serif;
+  --body:'Inter',system-ui,-apple-system,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--forest);color:var(--ivory);
+  font-family:var(--body);font-size:16px;line-height:1.58;
+  -webkit-font-smoothing:antialiased;
+  min-height:100dvh;display:flex;flex-direction:column;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--rose);color:#fff}
+:focus-visible{outline:2px solid var(--rose);outline-offset:3px;border-radius:var(--radius)}
+
+/* ---------- TOP BAR ---------- */
+.top{padding:20px 0;border-bottom:1px solid var(--edge-light)}
+.top__inner{
+  width:min(1280px,100% - 44px);margin-inline:auto;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+}
+.logo{display:inline-flex;align-items:center}
+.logo img{height:26px;width:auto;display:block}
+.top__home{
+  font-family:var(--display);font-weight:600;font-size:.7rem;
+  letter-spacing:.12em;text-transform:uppercase;opacity:.6;
+  transition:opacity .18s ease;
+}
+.top__home:hover{opacity:1}
+
+/* ---------- MAIN ---------- */
+.main{flex:1;display:grid;place-items:center;padding:clamp(44px,6vw,80px) 0}
+.card{width:min(680px,100% - 48px);margin-inline:auto;text-align:center}
+
+.mark{
+  width:80px;height:80px;border-radius:50%;background:var(--rose);color:#fff;
+  display:grid;place-items:center;margin:0 auto 30px;
+  animation:pop .5s cubic-bezier(.2,.8,.3,1.2) both;
+}
+@keyframes pop{from{opacity:0;transform:scale(.7)}}
+
+.eyebrow{
+  font-family:var(--display);font-weight:600;font-size:.7rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--rose);margin:0 0 18px;
+}
+
+.h1{
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(2.2rem,5.6vw,3.8rem);
+  letter-spacing:-.025em;line-height:1.02;margin:0 0 22px;
+}
+
+.lede{
+  font-size:clamp(.95rem,1.3vw,1.08rem);line-height:1.55;opacity:.78;
+  max-width:46ch;margin:0 auto 20px;
+}
+
+.ref{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:10px 18px;border:1px solid var(--edge-light);border-radius:999px;
+  font-family:var(--display);font-weight:600;font-size:.8rem;
+  letter-spacing:.08em;margin:8px 0 34px;opacity:.85;
+}
+.ref strong{color:var(--rose);letter-spacing:.1em;font-family:'Courier New',monospace}
+
+.order{
+  background:rgba(247,242,233,.04);border:1px solid var(--edge-light);
+  border-radius:10px;padding:24px;margin:0 0 32px;text-align:left;
+}
+.order__title{
+  font-family:var(--display);font-weight:700;font-size:.7rem;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--rose);
+  margin:0 0 16px;
+}
+.order__row{
+  display:flex;justify-content:space-between;gap:16px;
+  padding:10px 0;font-size:.9rem;border-bottom:1px solid var(--edge-light);
+}
+.order__row:last-child{border-bottom:0}
+.order__row span:first-child{opacity:.7;line-height:1.4}
+.order__row span:last-child{font-weight:500;white-space:nowrap;text-align:right}
+.order__row--total{
+  padding-top:16px;margin-top:6px;
+  border-top:1px solid var(--edge-light) !important;
+  border-bottom:0 !important;
+  font-family:var(--display);font-weight:700;font-size:1.02rem;
+}
+.order__row--total span:first-child{opacity:1;color:var(--ivory)}
+.order__row--total span:last-child{color:var(--rose)}
+
+.next{
+  list-style:none;margin:0 auto 38px;padding:0;max-width:480px;
+  text-align:left;border-top:1px solid var(--edge-light);
+}
+.next li{
+  display:grid;grid-template-columns:40px 1fr;gap:14px;
+  padding:16px 0;border-bottom:1px solid var(--edge-light);
+  font-size:.92rem;line-height:1.5;opacity:.85;
+}
+.next b{
+  font-family:var(--display);font-weight:700;font-size:.66rem;
+  letter-spacing:.16em;color:var(--rose);padding-top:.42em;
+}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:16px 28px;border:1px solid transparent;border-radius:var(--radius);
+  font-family:var(--display);font-weight:700;font-size:.74rem;
+  letter-spacing:.12em;text-transform:uppercase;cursor:pointer;
+  transition:background .18s ease,color .18s ease,transform .18s ease;
+}
+.btn:active{transform:translateY(1px)}
+.btn--rose{background:var(--rose);color:#fff}
+.btn--rose:hover{background:var(--rose-dark)}
+.btn .arw{transition:transform .2s ease}
+.btn:hover .arw{transform:translateX(3px)}
+
+.help{
+  margin:32px 0 0;font-size:.82rem;opacity:.55;line-height:1.55;
+}
+.help a{
+  border-bottom:1px solid rgba(247,242,233,.35);padding-bottom:1px;
+  transition:border-color .18s ease,opacity .18s ease;
+}
+.help a:hover{border-color:var(--rose);opacity:1}
+
+/* Loading state — shown until verify + order fetch complete */
+.loading-state{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:18px;padding:40px 20px;text-align:center;
+}
+.loading-state__dot{
+  width:10px;height:10px;border-radius:50%;background:var(--rose);
+  animation:pulse 1.4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:.3;transform:scale(.85)}50%{opacity:1;transform:scale(1)}}
+.loading-state p{
+  font-family:var(--display);font-weight:600;font-size:.72rem;
+  letter-spacing:.18em;text-transform:uppercase;opacity:.6;margin:0;
+}
+
+/* Verify notice — shown if verify failed */
+.verify-warn{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:14px 16px;border-radius:var(--radius);
+  background:rgba(230,91,50,.14);
+  border:1px solid rgba(230,91,50,.32);
+  margin:0 0 28px;text-align:left;
+}
+.verify-warn__icon{
+  width:22px;height:22px;flex:none;border-radius:50%;
+  background:#E65B32;color:#fff;
+  display:grid;place-items:center;
+  font-family:var(--display);font-weight:800;font-size:.78rem;
+  margin-top:1px;
+}
+.verify-warn p{
+  margin:0;font-size:.86rem;line-height:1.55;
+  color:var(--ivory);opacity:.9;
+}
+.verify-warn strong{color:#E65B32}
+
+.foot{
+  padding:20px 0;border-top:1px solid var(--edge-light);
+  font-size:.72rem;letter-spacing:.06em;opacity:.4;
+}
+.foot__inner{
+  width:min(1280px,100% - 44px);margin-inline:auto;
+  display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
+}
+
+@media (max-width:520px){
+  .top__home{display:none}
+  .card{width:calc(100% - 40px)}
+  .next li{grid-template-columns:34px 1fr;gap:10px}
+  .order{padding:18px}
+  .order__row{font-size:.86rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms !important;transition-duration:.001ms !important}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top__inner">
+    <a href="/" class="logo" aria-label="Tupsy — home">
+      <img src="https://tupsy.netlify.app/assets/tupsy-logo-light.svg"
+           alt="Tupsy" width="140" height="26">
+    </a>
+    <a href="/" class="top__home">← Back to home</a>
+  </div>
+</header>
+
+<main class="main">
+  <div class="card">
+
+    <!-- Shown while verifying -->
+    <div id="loading" class="loading-state">
+      <div class="loading-state__dot"></div>
+      <p>Confirming your payment…</p>
+    </div>
+
+    <!-- Shown when everything's done -->
+    <div id="content" hidden>
+      <div class="mark" aria-hidden="true">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
+          <path d="M4 12.5l5.2 5.2L20 6.8"
+                stroke="currentColor" stroke-width="2.4"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <p class="eyebrow">Payment successful</p>
+
+      <h1 class="h1">Order confirmed.</h1>
+
+      <p class="lede">
+        Thank you. We've received your payment and your order is now in our
+        fulfilment queue.
+      </p>
+
+      <div class="ref">
+        Order reference
+        <strong id="order-ref">—</strong>
+      </div>
+
+      <!-- Verify warning (hidden by default) -->
+      <div class="verify-warn" id="verify-warn" hidden>
+        <span class="verify-warn__icon" aria-hidden="true">!</span>
+        <p>
+          <strong>We couldn't confirm your payment automatically.</strong>
+          If your card was charged, don't worry — we'll reconcile and email
+          your receipt shortly. If you're unsure, message us on WhatsApp and
+          quote the reference above.
+        </p>
+      </div>
+
+      <div class="order" id="order-summary" hidden>
+        <p class="order__title">Your order</p>
+        <div id="order-items"></div>
+        <div class="order__row order__row--total">
+          <span>Total paid</span>
+          <span id="order-total">—</span>
+        </div>
+      </div>
+
+      <ul class="next">
+        <li>
+          <b>01</b>
+          <span>We've emailed you a receipt. Check your spam folder if it hasn't arrived in a few minutes.</span>
+        </li>
+        <li>
+          <b>02</b>
+          <span>Your order will be packed within 24–48 hours and shipped to the address you provided.</span>
+        </li>
+        <li>
+          <b>03</b>
+          <span>You'll get tracking details by email as soon as your parcel leaves the warehouse.</span>
+        </li>
+      </ul>
+
+      <a class="btn btn--rose" href="/">
+        Back to weartupsy.com <span class="arw" aria-hidden="true">→</span>
+      </a>
+
+      <p class="help">
+        Order question? Message us on
+        <a href="#">WhatsApp</a> or email
+        <a href="#">support@weartupsy.com</a>.
+      </p>
+    </div>
+
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="foot__inner">
+    <span>© <span id="year"></span> Tupsy. All rights reserved.</span>
+    <span>Fulfilled by Tupsy · weartupsy.com</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ============================================================
+     HELPERS
+     ============================================================ */
+  function fmt(n, currency) {
+    var sym = { NGN: '₦', USD: '$', GBP: '£', EUR: '€' }[currency || 'NGN'] || '';
+    return sym + Number(n || 0).toLocaleString('en-NG', { maximumFractionDigits: 0 });
+  }
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  /* ============================================================
+     READ REFERENCE FROM URL OR LOCALSTORAGE
+     ============================================================ */
+  var params = new URLSearchParams(window.location.search);
+  var urlRef = params.get('ref') || params.get('reference') || params.get('order_id') || '';
+
+  function getRef() {
+    if (urlRef) return urlRef;
+    try { return localStorage.getItem('tupsy_last_order') || ''; } catch (e) { return ''; }
+  }
+
+  var orderRef = getRef();
+
+  /* ============================================================
+     RENDER ORDER
+     ============================================================ */
+  function renderOrder(order) {
+    var itemsHtml = (order.items || []).map(function (it) {
+      var opt = [];
+      if (it.colour) opt.push(it.colour);
+      if (it.size)   opt.push(it.size);
+      var optStr = opt.length ? ' · ' + opt.join(' · ') : '';
+      return '<div class="order__row">' +
+        '<span>' + esc(it.name) + esc(optStr) + ' × ' + it.qty + '</span>' +
+        '<span>' + fmt(it.lineTotal || (it.price * it.qty), order.currency) + '</span>' +
+      '</div>';
+    }).join('');
+
+    document.getElementById('order-items').innerHTML = itemsHtml;
+    document.getElementById('order-total').textContent = fmt(order.total, order.currency);
+    document.getElementById('order-summary').hidden = false;
+  }
+
+  function showContent() {
+    document.getElementById('loading').hidden = true;
+    document.getElementById('content').hidden = false;
+  }
+
+  function showVerifyWarning() {
+    document.getElementById('verify-warn').hidden = false;
+  }
+
+  /* ============================================================
+     BOOT — verify then load
+     ============================================================ */
+  function boot() {
+    /* Clear cart + last-order ref regardless of outcome */
+    try { localStorage.removeItem('tupsy_cart_v1'); } catch (e) {}
+    try { localStorage.removeItem('tupsy_last_order'); } catch (e) {}
+
+    document.getElementById('order-ref').textContent = orderRef || '—';
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* No ref → just show generic confirmation */
+    if (!orderRef) {
+      showContent();
+      return;
+    }
+
+    /* tupsy.js not loaded → show generic confirmation */
+    if (!window.Tupsy || typeof window.Tupsy.endpoint !== 'string') {
+      console.warn('tupsy.js not loaded — skipping verify');
+      showContent();
+      return;
+    }
+
+    var endpoint = window.Tupsy.endpoint;
+
+    /* Step 1: ask backend to verify with Paystack (marks Paid if success) */
+    fetch(endpoint + '?action=verifyOrder&ref=' + encodeURIComponent(orderRef) + '&_=' + Date.now())
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (!res || !res.ok) {
+          console.warn('Verify did not confirm:', res);
+          showVerifyWarning();
+        }
+        /* Step 2: load the order (now Paid if verify worked) */
+        return fetch(endpoint + '?action=order&ref=' + encodeURIComponent(orderRef) + '&_=' + Date.now());
+      })
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (res && res.ok && res.order) {
+          renderOrder(res.order);
+        }
+        showContent();
+      })
+      .catch(function (err) {
+        console.warn('Load order failed:', err);
+        showVerifyWarning();
+        showContent();
+      });
+  }
+
+  /* ============================================================
+     RUN
+     ============================================================ */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();
+</script>
+</body>
+</html>
