@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open a storefront — Tupsy</title>
+<meta name="description" content="Sell your merch on Tupsy. We host your collection, handle every order, and ship to your customers. 95% of every sale goes straight to you.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#102C24">
+
+<link rel="icon" type="image/svg+xml" href="https://tupsy.netlify.app/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tupsy.netlify.app/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="https://tupsy.netlify.app/assets/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script src="/tupsy.js" defer></script>
+
+<style>
+:root{
+  --forest:#102C24;--forest-soft:#16382D;--ivory:#F7F2E9;--charcoal:#252627;
+  --rose:#E8436B;--rose-dark:#C93359;--blush:#F4DAD3;
+  --terracotta:#E65B32;--terracotta-dark:#C74924;--sage:#C8C7B9;
+  --display:'Archivo','Helvetica Neue',Arial,sans-serif;
+  --body:'Inter',system-ui,-apple-system,sans-serif;
+  --edge:rgba(16,44,36,.14);--edge-light:rgba(247,242,233,.16);
+  --pad:clamp(56px,6.5vw,108px);--radius:8px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--ivory);color:var(--charcoal);font-family:var(--body);font-size:16px;line-height:1.58;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+::selection{background:var(--rose);color:#fff}
+:focus-visible{outline:2px solid var(--rose);outline-offset:3px;border-radius:var(--radius)}
+
+.container{width:min(1280px,100% - 44px);margin-inline:auto}
+.section{padding:var(--pad) 0}
+
+.display{font-family:var(--display);font-weight:800;letter-spacing:-.025em;line-height:1.02;margin:0}
+.h1{font-size:clamp(2.1rem,4.6vw,4.4rem)}
+.h2{font-size:clamp(1.6rem,3.4vw,2.6rem)}
+.h3{font-size:clamp(1.3rem,2.4vw,1.75rem);letter-spacing:-.02em}
+.h4{font-family:var(--display);font-weight:700;font-size:1rem;letter-spacing:-.01em;line-height:1.25;margin:0}
+
+.eyebrow{font-family:var(--display);font-weight:600;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;display:inline-flex;align-items:center;gap:9px;margin:0 0 16px;opacity:.75}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--rose);flex:none}
+.lede{font-size:clamp(1rem,1.35vw,1.15rem);line-height:1.55;margin:0;max-width:52ch}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:15px 26px;border:1px solid transparent;border-radius:var(--radius);font-family:var(--display);font-weight:700;font-size:.74rem;letter-spacing:.11em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:background .18s ease,color .18s ease,transform .18s ease,border-color .18s ease}
+.btn:active{transform:translateY(1px)}
+.btn--rose{background:var(--rose);color:#fff}
+.btn--rose:hover{background:var(--rose-dark)}
+.btn--ghost{border-color:var(--edge);color:var(--charcoal);background:transparent}
+.btn--ghost:hover{border-color:var(--forest);background:rgba(16,44,36,.04)}
+.btn .arw{transition:transform .2s ease}
+.btn:hover .arw{transform:translateX(3px)}
+.btn[disabled]{opacity:.6;cursor:not-allowed}
+
+.logo{display:inline-flex;align-items:center;flex:none}
+.logo__img{display:block;height:26px;width:auto}
+
+.header{position:sticky;top:0;z-index:60;background:rgba(247,242,233,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--edge)}
+.header__inner{display:flex;align-items:center;justify-content:space-between;gap:24px;height:68px}
+.header__back{font-family:var(--display);font-weight:600;font-size:.74rem;letter-spacing:.11em;text-transform:uppercase;opacity:.7;display:inline-flex;align-items:center;gap:8px;transition:opacity .18s ease,color .18s ease}
+.header__back:hover{opacity:1;color:var(--rose)}
+
+.phero{padding:clamp(48px,6vw,96px) 0 clamp(32px,4vw,56px)}
+.phero__grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(32px,5vw,80px);align-items:end}
+.phero__title{margin:0 0 22px}
+.phero__actions{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px}
+
+.stat{display:flex;flex-direction:column;gap:6px;padding:22px 24px;background:#fff;border:1px solid var(--edge);border-radius:var(--radius)}
+.stat + .stat{margin-top:12px}
+.stat__num{font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:-.03em;color:var(--rose);line-height:1}
+.stat__label{font-size:.85rem;opacity:.7;line-height:1.4}
+
+.gets{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.2vw,24px);margin-top:clamp(32px,4vw,52px)}
+.get{padding:clamp(20px,2.6vw,28px);background:#fff;border:1px solid var(--edge);border-radius:var(--radius);display:flex;flex-direction:column;gap:12px}
+.get__num{font-family:var(--display);font-weight:700;font-size:.68rem;letter-spacing:.16em;color:var(--rose)}
+.get p{margin:0;font-size:.92rem;line-height:1.55;opacity:.75}
+
+.commission{background:var(--forest);color:var(--ivory);padding:clamp(28px,4vw,48px);border-radius:var(--radius);margin-top:clamp(32px,4vw,52px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:center}
+.commission__num{font-family:var(--display);font-weight:800;font-size:clamp(3.5rem,9vw,7rem);letter-spacing:-.04em;line-height:.85;color:var(--rose)}
+.commission__num span{font-size:.32em;color:var(--ivory);opacity:.6;letter-spacing:0}
+.commission p{margin:0 0 12px;font-size:.96rem;line-height:1.6;opacity:.85}
+.commission p:last-child{margin-bottom:0}
+.commission strong{color:var(--rose)}
+
+.form-wrap{background:#fff;border:1px solid var(--edge);border-radius:10px;overflow:hidden;margin-top:clamp(32px,4vw,48px)}
+.form-block{padding:clamp(26px,3.4vw,44px);border-bottom:1px solid var(--edge)}
+.form-block:last-of-type{border-bottom:0}
+.form-block__head{margin-bottom:26px}
+.form-block__num{font-family:var(--display);font-weight:700;font-size:.68rem;letter-spacing:.18em;color:var(--rose);margin:0 0 8px}
+.form-block__sub{font-size:.9rem;opacity:.65;margin:8px 0 0;max-width:56ch;line-height:1.55}
+
+.field{margin-bottom:22px;border:0;padding:0}
+.field:last-child{margin-bottom:0}
+.field__label{display:block;font-family:var(--display);font-weight:700;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px;padding:0}
+.field__label .opt{font-family:var(--body);font-weight:500;letter-spacing:.06em;text-transform:none;opacity:.45;margin-left:6px}
+.field__hint{display:block;font-size:.82rem;opacity:.6;margin-top:8px;line-height:1.5}
+
+.input,.textarea,.select{width:100%;background:#fff;border:1px solid var(--edge);border-radius:6px;padding:13px 14px;font-family:var(--body);font-size:.94rem;color:var(--charcoal);transition:border-color .16s ease,box-shadow .16s ease}
+.input::placeholder,.textarea::placeholder{color:rgba(37,38,39,.35)}
+.input:focus,.textarea:focus,.select:focus{outline:none;border-color:var(--rose);box-shadow:0 0 0 3px rgba(232,67,107,.12)}
+.textarea{min-height:110px;resize:vertical;line-height:1.55}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+.disclaimer{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:var(--radius);background:var(--blush);border:1px solid rgba(230,91,50,.18);margin-bottom:22px}
+.disclaimer__icon{width:22px;height:22px;flex:none;border-radius:50%;background:var(--terracotta);color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:.78rem;margin-top:1px}
+.disclaimer p{margin:0;font-size:.88rem;line-height:1.55;color:var(--charcoal);opacity:.88}
+.disclaimer strong{color:var(--forest)}
+
+.upload{display:flex;align-items:center;gap:16px;border:1.5px dashed var(--edge);border-radius:var(--radius);padding:18px 20px;cursor:pointer;transition:border-color .18s ease,background .18s ease}
+.upload:hover{border-color:var(--rose);background:rgba(244,218,211,.25)}
+.upload input[type="file"]{display:none}
+.upload__icon{width:38px;height:38px;border-radius:6px;background:var(--blush);color:var(--forest);display:grid;place-items:center;flex:none}
+.upload__text{flex:1;min-width:0}
+.upload__title{font-size:.92rem;font-weight:600;margin:0 0 4px}
+.upload__hint{font-size:.78rem;opacity:.6;margin:0;line-height:1.5}
+.upload__name{font-size:.82rem;color:var(--rose);font-weight:600;margin-top:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.upload.has-file{border-style:solid;border-color:var(--rose);background:rgba(244,218,211,.35)}
+
+.price-calc{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px 18px;background:var(--blush);border-radius:var(--radius);margin-top:14px}
+.price-calc__row{display:flex;justify-content:space-between;gap:12px;font-size:.88rem}
+.price-calc__label{opacity:.72}
+.price-calc__value{font-family:var(--display);font-weight:700;letter-spacing:-.01em;white-space:nowrap}
+.price-calc__value--rose{color:var(--rose)}
+.price-calc__row--full{grid-column:1 / -1;padding-top:10px;border-top:1px solid rgba(16,44,36,.14);margin-top:6px}
+
+.check{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid var(--edge);border-radius:var(--radius);cursor:pointer;transition:border-color .16s ease,background .16s ease}
+.check + .check{margin-top:10px}
+.check:hover{border-color:var(--rose);background:rgba(244,218,211,.25)}
+.check input{position:absolute;opacity:0;pointer-events:none}
+.check__box{width:18px;height:18px;border:1.5px solid var(--edge);border-radius:4px;flex:none;margin-top:2px;display:grid;place-items:center;transition:background .16s ease,border-color .16s ease}
+.check__box svg{opacity:0;transition:opacity .16s ease}
+.check input:checked + .check__box{background:var(--forest);border-color:var(--forest)}
+.check input:checked + .check__box svg{opacity:1}
+.check input:focus-visible + .check__box{outline:2px solid var(--rose);outline-offset:2px}
+.check__text{font-size:.9rem;line-height:1.5}
+.check__text strong{font-weight:600}
+
+.form-submit{padding:clamp(26px,3.4vw,44px);background:var(--ivory);border-top:1px solid var(--edge);display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.form-submit .btn{width:100%;padding:20px 30px;font-size:.82rem}
+.form-submit__note{font-size:.8rem;opacity:.6;margin:0;line-height:1.55;max-width:60ch}
+
+/* Slug availability */
+.slug-check{margin-top:8px;font-size:.8rem;display:flex;align-items:center;gap:6px;min-height:18px}
+.slug-check[data-state="checking"]{color:rgba(37,38,39,.5)}
+.slug-check[data-state="available"]{color:#1a7f37}
+.slug-check[data-state="taken"]{color:var(--rose)}
+.slug-check[data-state="error"]{color:var(--rose)}
+.slug-check__dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.slug-check[data-state="checking"] .slug-check__dot{animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+
+.faq{margin-top:clamp(48px,6vw,80px)}
+.faq__list{margin-top:clamp(24px,3vw,36px);border-top:1px solid var(--edge)}
+.faq__item{border-bottom:1px solid var(--edge);padding:22px 0}
+.faq__item summary{font-family:var(--display);font-weight:700;font-size:1rem;letter-spacing:-.01em;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.faq__item summary::-webkit-details-marker{display:none}
+.faq__item summary::after{content:"+";font-family:var(--display);font-weight:400;font-size:1.4rem;color:var(--rose);transition:transform .2s ease}
+.faq__item[open] summary::after{transform:rotate(45deg)}
+.faq__item p{margin:14px 0 0;font-size:.94rem;line-height:1.6;opacity:.75;max-width:64ch}
+
+.footer{background:var(--forest);color:var(--ivory);padding:clamp(40px,5vw,60px) 0 26px}
+.footer__inner{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:flex-start;padding-bottom:24px;border-bottom:1px solid var(--edge-light)}
+.footer__tag{font-size:.88rem;opacity:.6;max-width:32ch;margin:14px 0 0;line-height:1.55}
+.footer__links{display:flex;flex-wrap:wrap;gap:clamp(24px,3.5vw,48px)}
+.footer__col h5{font-family:var(--display);font-weight:700;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);margin:0 0 12px}
+.footer__col a{display:block;font-size:.86rem;opacity:.7;padding:4px 0;transition:opacity .18s ease,color .18s ease}
+.footer__col a:hover{opacity:1;color:var(--rose)}
+.footer__bottom{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;padding-top:20px;font-size:.72rem;letter-spacing:.06em;opacity:.45}
+
+@media (max-width:980px){
+  .phero__grid{grid-template-columns:1fr;gap:32px;align-items:start}
+  .gets{grid-template-columns:1fr}
+  .commission{grid-template-columns:1fr;gap:20px}
+}
+@media (max-width:680px){
+  .container{width:calc(100% - 48px)}
+  .header__inner{height:62px}
+  .logo__img{height:20px}
+  .grid-2{grid-template-columns:1fr}
+  .price-calc{grid-template-columns:1fr}
+  .footer__bottom{flex-direction:column;gap:6px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="container header__inner">
+    <a href="/" class="logo" aria-label="Tupsy — home">
+      <img class="logo__img" src="https://tupsy.netlify.app/assets/tupsy-logo-dark.svg"
+           alt="Tupsy" width="132" height="26">
+    </a>
+    <a href="/" class="header__back">← Back to home</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="phero">
+    <div class="container">
+      <div class="phero__grid">
+        <div>
+          <p class="eyebrow">Partner storefronts</p>
+          <h1 class="display h1 phero__title">
+            Sell your merch<br>on Tupsy.
+          </h1>
+          <p class="lede">
+            We host your collection on its own branded page, handle every order,
+            and ship to your customers. <strong>95% of every sale goes straight to you.</strong>
+          </p>
+          <div class="phero__actions">
+            <a class="btn btn--rose" href="#apply">Apply now <span class="arw" aria-hidden="true">→</span></a>
+            <a class="btn btn--ghost" href="#how-it-works">How it works</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="stat">
+            <span class="stat__num">95%</span>
+            <span class="stat__label">Goes to you. Every sale. No listing fees, no monthly fees, no hidden cuts.</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">weartupsy.com/you</span>
+            <span class="stat__label">Your own branded page — your logo, your colours, your prices.</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">10+</span>
+            <span class="stat__label">Minimum units we keep finished and ready to ship, so nothing ever goes out of stock.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HOW IT WORKS ===================== -->
+  <section class="section" id="how-it-works" style="padding-top:0">
+    <div class="container">
+      <p class="eyebrow">How it works</p>
+      <h2 class="display h2" style="max-width:20ch">Built to feel effortless.</h2>
+
+      <div class="gets">
+        <div class="get">
+          <span class="get__num">01</span>
+          <h3 class="h4">Apply</h3>
+          <p>Fill in the form below. Tell us your brand, the piece you want to sell first, and how you'd like to price it. It takes 5 minutes.</p>
+        </div>
+        <div class="get">
+          <span class="get__num">02</span>
+          <h3 class="h4">We set it up</h3>
+          <p>We build your branded page at weartupsy.com/yourbrand, add your product to it, and get the first stock ready.</p>
+        </div>
+        <div class="get">
+          <span class="get__num">03</span>
+          <h3 class="h4">You get paid</h3>
+          <p>When customers order, we handle the payment, packing and shipping. 95% goes straight to your bank account.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== COMMISSION ===================== -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="commission">
+        <div>
+          <div class="commission__num">95<span>% to you.</span></div>
+        </div>
+        <div>
+          <p><strong>You keep 95% of every sale.</strong> That's it — Tupsy takes 5% to cover hosting, payments, packing, shipping and fulfilment.</p>
+          <p>Example: if you price a tee at <strong>₦10,000</strong>, you receive <strong>₦9,500</strong> straight to your bank account within 7 days of the order shipping.</p>
+          <p style="opacity:.6;font-size:.85rem">No listing fees. No subscriptions. No surprise deductions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== APPLY ===================== -->
+  <section class="section" id="apply" style="padding-top:0">
+    <div class="container">
+      <p class="eyebrow">Application</p>
+      <h2 class="display h2" style="max-width:20ch">Open your Tupsy storefront.</h2>
+      <p class="lede" style="margin-top:18px">
+        We review every application within 3 working days. If it's a fit, we'll
+        reach out to talk next steps.
+      </p>
+
+      <form id="partner-form" class="form-wrap" novalidate>
+
+        <!-- ============ 01 YOUR BRAND ============ -->
+        <div class="form-block">
+          <div class="form-block__head">
+            <p class="form-block__num">01 — Your brand</p>
+            <h3 class="display h3">Who are you?</h3>
+            <p class="form-block__sub">The essentials. We'll use these to set up your storefront and to get in touch.</p>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="p-brand">Brand name</label>
+            <input class="input" type="text" id="p-brand" name="brandName" placeholder="e.g. AfroCue" required>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label class="field__label" for="p-contact">Your name</label>
+              <input class="input" type="text" id="p-contact" name="contactName" placeholder="Full name" required>
+            </div>
+            <div class="field">
+              <label class="field__label" for="p-email">Email</label>
+              <input class="input" type="email" id="p-email" name="email" placeholder="you@brand.com" required>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label class="field__label" for="p-phone">Phone / WhatsApp</label>
+              <input class="input" type="tel" id="p-phone" name="phone" placeholder="+234 ..." required>
+            </div>
+            <div class="field">
+              <label class="field__label" for="p-social">Instagram / Website <span class="opt">Optional</span></label>
+              <input class="input" type="text" id="p-social" name="social" placeholder="@yourbrand">
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ 02 BRAND ASSETS ============ -->
+        <div class="form-block">
+          <div class="form-block__head">
+            <p class="form-block__num">02 — Brand assets</p>
+            <h3 class="display h3">Your visual identity.</h3>
+            <p class="form-block__sub">We'll use these on your storefront. PNG, JPG or SVG. Max 5MB each.</p>
+          </div>
+
+          <div class="field">
+            <label class="field__label">Brand logo <span class="opt">Required</span></label>
+            <label class="upload" for="p-logo">
+              <input type="file" id="p-logo" name="logo" accept="image/png,image/jpeg,image/svg+xml,image/webp">
+              <span class="upload__icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </span>
+              <span class="upload__text">
+                <span class="upload__title">Upload your logo</span>
+                <span class="upload__hint">Square or horizontal works best. Transparent PNG preferred.</span>
+                <span class="upload__name" data-file-name></span>
+              </span>
+            </label>
+          </div>
+
+          <div class="field">
+            <label class="field__label">Texture / pattern image <span class="opt">Optional</span></label>
+            <label class="upload" for="p-texture">
+              <input type="file" id="p-texture" name="texture" accept="image/png,image/jpeg,image/webp">
+              <span class="upload__icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </span>
+              <span class="upload__text">
+                <span class="upload__title">Upload a texture or pattern</span>
+                <span class="upload__hint">Used as a subtle background on your storefront. Optional but nice.</span>
+                <span class="upload__name" data-file-name></span>
+              </span>
+            </label>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label class="field__label" for="p-color-1">Brand colour <span class="opt">Optional</span></label>
+              <input class="input" type="text" id="p-color-1" name="colorPrimary" placeholder="#102C24" maxlength="9">
+            </div>
+            <div class="field">
+              <label class="field__label" for="p-color-2">Secondary colour <span class="opt">Optional</span></label>
+              <input class="input" type="text" id="p-color-2" name="colorSecondary" placeholder="#E8436B" maxlength="9">
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ 03 STOREFRONT ============ -->
+        <div class="form-block">
+          <div class="form-block__head">
+            <p class="form-block__num">03 — Your storefront</p>
+            <h3 class="display h3">Where will it live?</h3>
+            <p class="form-block__sub">Pick the slug for your Tupsy page. Lowercase letters, numbers and hyphens only.</p>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="p-slug">Your page URL</label>
+            <div style="display:flex;align-items:center;gap:0;border:1px solid var(--edge);border-radius:6px;overflow:hidden;background:#fff">
+              <span style="padding:13px 14px;font-size:.94rem;opacity:.55;background:var(--ivory);border-right:1px solid var(--edge);white-space:nowrap">weartupsy.com/</span>
+              <input class="input" type="text" id="p-slug" name="slug"
+                     placeholder="yourbrand" pattern="[a-z0-9-]+"
+                     style="border:0;border-radius:0;padding:13px 14px" required>
+            </div>
+            <span class="slug-check" id="slug-check" data-state="idle"></span>
+            <span class="field__hint">This becomes your public link. Once approved, you can share it anywhere.</span>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="p-tagline">Short tagline</label>
+            <input class="input" type="text" id="p-tagline" name="tagline"
+                   placeholder="e.g. Everyday pieces rooted in West African craft"
+                   maxlength="120" required>
+            <span class="field__hint">One line — appears under your brand name on your page.</span>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="p-story">About your brand <span class="opt">Optional</span></label>
+            <textarea class="textarea" id="p-story" name="story"
+              placeholder="A few sentences about your brand, your style, and what makes your pieces worth wearing."></textarea>
+          </div>
+        </div>
+
+        <!-- ============ 04 SAMPLE ITEM ============ -->
+        <div class="form-block">
+          <div class="form-block__head">
+            <p class="form-block__num">04 — A sample piece</p>
+            <h3 class="display h3">Show us what you're thinking.</h3>
+            <p class="form-block__sub">Just one piece — we use it as an example so we can see your style, price point and what your storefront would look like.</p>
+          </div>
+
+          <div class="disclaimer">
+            <span class="disclaimer__icon" aria-hidden="true">i</span>
+            <p><strong>This is just one example.</strong> Once approved, we'll collect the details for every other piece you want to sell — sizes, colours, materials, imagery — directly with you during onboarding.</p>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label class="field__label" for="p-item-name">Sample product name</label>
+              <input class="input" type="text" id="p-item-name" name="sampleName" placeholder="e.g. AfroCue Logo Tee" required>
+            </div>
+            <div class="field">
+              <label class="field__label" for="p-item-category">Category</label>
+              <select class="select" id="p-item-category" name="sampleCategory" required>
+                <option value="">Select a category</option>
+                <option>T-Shirts</option><option>Tops</option><option>Crop Tops</option>
+                <option>Hoodies</option><option>Jackets</option><option>Pants / Shorts</option>
+                <option>Sets</option><option>Accessories</option><option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="p-item-desc">Describe the piece</label>
+            <textarea class="textarea" id="p-item-desc" name="sampleDescription"
+              placeholder="Material, fit, what makes it feel good. A few sentences is perfect." required></textarea>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="p-price">Your retail price (₦)</label>
+            <input class="input" type="number" id="p-price" name="samplePrice"
+                   placeholder="10000" min="1000" step="100" inputmode="numeric" required>
+            <span class="field__hint">This is what customers pay. The split below shows what lands in your account per sale.</span>
+
+            <div class="price-calc">
+              <div class="price-calc__row">
+                <span class="price-calc__label">Customer pays</span>
+                <span class="price-calc__value" id="calc-retail">₦ —</span>
+              </div>
+              <div class="price-calc__row">
+                <span class="price-calc__label">Tupsy covers hosting, fees &amp; shipping</span>
+                <span class="price-calc__value price-calc__value--rose" id="calc-fee">₦ —</span>
+              </div>
+              <div class="price-calc__row price-calc__row--full">
+                <span class="price-calc__label"><strong>You receive per sale</strong></span>
+                <span class="price-calc__value" id="calc-payout">₦ —</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="p-backlog">Minimum stock backlog</label>
+            <input class="input" type="number" id="p-backlog" name="backlog"
+                   value="10" min="10" max="500" step="1" required>
+            <span class="field__hint">The minimum number of units we keep finished and ready to ship. Must be at least <strong>10</strong>. When stock dips below this, we'll restock so nothing sells out.</span>
+          </div>
+        </div>
+
+        <!-- ============ 05 PAYOUT ============ -->
+        <div class="form-block">
+          <div class="form-block__head">
+            <p class="form-block__num">05 — Payout details</p>
+            <h3 class="display h3">Where should we send your money?</h3>
+            <p class="form-block__sub">Your 95% is paid to this account within 7 days of each order shipping. The account must be in your name.</p>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="p-bank">Bank name</label>
+            <input class="input" type="text" id="p-bank" name="bankName"
+                   placeholder="e.g. GTBank, Zenith, Access" required>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label class="field__label" for="p-account-name">Account name</label>
+              <input class="input" type="text" id="p-account-name" name="accountName"
+                     placeholder="As it appears on your bank statement" required>
+            </div>
+            <div class="field">
+              <label class="field__label" for="p-account-number">Account number</label>
+              <input class="input" type="text" id="p-account-number" name="accountNumber"
+                     placeholder="10 digits" inputmode="numeric"
+                     pattern="\d{10}" maxlength="10" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ 06 AGREEMENT ============ -->
+        <div class="form-block">
+          <div class="form-block__head">
+            <p class="form-block__num">06 — Before you submit</p>
+            <h3 class="display h3">A few agreements.</h3>
+          </div>
+
+          <label class="check">
+            <input type="checkbox" name="agreePayout" required>
+            <span class="check__box" aria-hidden="true">
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5L9.5 4" stroke="#F7F2E9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="check__text">I understand <strong>I receive 95% of every sale</strong>, paid within 7 days of the order shipping. Tupsy keeps 5% to cover hosting, payment processing, packing, shipping and fulfilment.</span>
+          </label>
+
+          <label class="check">
+            <input type="checkbox" name="agreeBacklog" required>
+            <span class="check__box" aria-hidden="true">
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5L9.5 4" stroke="#F7F2E9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="check__text">I agree to keep a <strong>minimum stock backlog of at least 10 units</strong> finished and ready to ship, and to restock when stock runs low.</span>
+          </label>
+
+          <label class="check">
+            <input type="checkbox" name="agreeBank" required>
+            <span class="check__box" aria-hidden="true">
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5L9.5 4" stroke="#F7F2E9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="check__text">I confirm the bank details above are correct and belong to me or my brand. I understand payouts go to this account only.</span>
+          </label>
+        </div>
+
+        <!-- ============ SUBMIT ============ -->
+        <div class="form-submit">
+          <button class="btn btn--rose" type="submit">
+            Submit application <span class="arw" aria-hidden="true">→</span>
+          </button>
+          <p class="form-submit__note">We review every application within 3 working days. If it's a fit, we'll reach out on WhatsApp or email to talk next steps.</p>
+        </div>
+
+      </form>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="faq">
+        <p class="eyebrow">Questions</p>
+        <h2 class="display h2" style="max-width:20ch">Things people ask us.</h2>
+
+        <div class="faq__list">
+          <details class="faq__item">
+            <summary>Do I need to have my own stock ready before applying?</summary>
+            <p>No. We produce the stock with you, or you supply it — either works. All we need to start is the finished units sitting in our warehouse by the time your page goes live. The minimum backlog keeps you from selling something you can't ship.</p>
+          </details>
+          <details class="faq__item">
+            <summary>How is the 5% calculated — before or after shipping?</summary>
+            <p>5% is on the product retail price only. Shipping is charged separately to the customer and passes through at cost — we don't take a cut on shipping. Your 95% is always calculated on the product price alone.</p>
+          </details>
+          <details class="faq__item">
+            <summary>When do I get paid?</summary>
+            <p>Within 7 working days of each order shipping. You'll get an email with the sale details and the exact amount paid to your account.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Can I sell more than one product?</summary>
+            <p>Yes. We start with one sample piece so we can see your style and pricing, then add the rest together during onboarding. Every additional piece follows the same 95/5 split and stock backlog rules.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Can I change my prices later?</summary>
+            <p>Absolutely. Just message us and we'll update them. Changes take effect immediately on your storefront.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Who handles returns and refunds?</summary>
+            <p>Tupsy handles the return logistics. Refunds are paid back to the customer, and the 5% on that sale is reversed — so you only keep the 95% on sales that stick.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div>
+        <a href="/" class="logo" aria-label="Tupsy — home">
+          <img class="logo__img" style="height:28px"
+               src="https://tupsy.netlify.app/assets/tupsy-logo-light.svg"
+               alt="Tupsy" width="140" height="28">
+        </a>
+        <p class="footer__tag">A creative fashion and merchandise studio. You bring the idea — we help make it real.</p>
+      </div>
+      <nav class="footer__links" aria-label="Footer">
+        <div class="footer__col">
+          <h5>Explore</h5>
+          <a href="/#work">Work</a>
+          <a href="/#how">How It Works</a>
+          <a href="/#about">About</a>
+        </div>
+        <div class="footer__col">
+          <h5>Partners</h5>
+          <a href="/partners.html">Open a storefront</a>
+          <a href="#apply">Apply</a>
+          <a href="#how-it-works">How it works</a>
+        </div>
+        <div class="footer__col">
+          <h5>Contact</h5>
+          <a href="#">Instagram</a>
+          <a href="#">WhatsApp</a>
+          <a href="#">Email</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span id="year"></span> Tupsy. All rights reserved.</span>
+      <span>Partner storefronts · 95% to you · weartupsy.com</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var form = document.getElementById('partner-form');
+
+  /* ---------- FILE UPLOAD UI ---------- */
+  function wireUpload(inputId) {
+    var input = document.getElementById(inputId);
+    if (!input) return;
+    var wrap = input.closest('.upload');
+    var nameEl = wrap.querySelector('[data-file-name]');
+    input.addEventListener('change', function () {
+      var f = input.files && input.files[0];
+      if (!f) { wrap.classList.remove('has-file'); if (nameEl) nameEl.textContent = ''; return; }
+      wrap.classList.add('has-file');
+      if (nameEl) nameEl.textContent = f.name;
+    });
+  }
+  wireUpload('p-logo');
+  wireUpload('p-texture');
+
+  /* ---------- SLUG SANITIZER + LIVE AVAILABILITY ---------- */
+  var slugInput = document.getElementById('p-slug');
+  var slugCheck = document.getElementById('slug-check');
+  var slugTimer = null;
+  var lastCheckedSlug = '';
+
+  function setSlugState(state, msg) {
+    if (!slugCheck) return;
+    slugCheck.setAttribute('data-state', state);
+    slugCheck.innerHTML = msg
+      ? '<span class="slug-check__dot"></span><span>' + msg + '</span>'
+      : '';
+  }
+
+  function checkSlugAvailability(slug) {
+    if (slug === lastCheckedSlug) return;
+    lastCheckedSlug = slug;
+
+    if (!slug || slug.length < 2) { setSlugState('idle', ''); return; }
+
+    if (!window.Tupsy || typeof window.Tupsy.endpoint !== 'string') {
+      setSlugState('idle', '');
+      return;
+    }
+
+    setSlugState('checking', 'Checking availability…');
+
+    var url = window.Tupsy.endpoint + '?action=checkSlug&slug=' +
+              encodeURIComponent(slug) + '&_=' + Date.now();
+
+    fetch(url)
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (!res || !res.ok) { setSlugState('error', 'Could not check'); return; }
+        if (res.available) setSlugState('available', 'weartupsy.com/' + slug + ' is available');
+        else               setSlugState('taken', 'weartupsy.com/' + slug + ' is already taken');
+      })
+      .catch(function () { setSlugState('error', 'Could not check'); });
+  }
+
+  if (slugInput) {
+    slugInput.addEventListener('input', function () {
+      slugInput.value = slugInput.value
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
+
+      clearTimeout(slugTimer);
+      var s = slugInput.value.trim();
+      if (s.length < 2) { setSlugState('idle', ''); return; }
+      slugTimer = setTimeout(function () { checkSlugAvailability(s); }, 450);
+    });
+
+    slugInput.addEventListener('blur', function () {
+      var s = slugInput.value.trim();
+      if (s.length >= 2) checkSlugAvailability(s);
+    });
+  }
+
+  /* ---------- LIVE PRICE CALCULATION ---------- */
+  var priceInput = document.getElementById('p-price');
+  var calcRetail = document.getElementById('calc-retail');
+  var calcFee = document.getElementById('calc-fee');
+  var calcPayout = document.getElementById('calc-payout');
+
+  function fmtNaira(n) {
+    return '₦' + Number(n).toLocaleString('en-NG', { maximumFractionDigits: 0 });
+  }
+
+  function updateCalc() {
+    var v = parseFloat(priceInput.value);
+    if (isNaN(v) || v <= 0) {
+      calcRetail.textContent = '₦ —';
+      calcFee.textContent = '₦ —';
+      calcPayout.textContent = '₦ —';
+      return;
+    }
+    var fee = Math.round(v * 0.05);
+    var payout = v - fee;
+    calcRetail.textContent = fmtNaira(v);
+    calcFee.textContent = fmtNaira(fee);
+    calcPayout.textContent = fmtNaira(payout);
+  }
+  if (priceInput) {
+    priceInput.addEventListener('input', updateCalc);
+    updateCalc();
+  }
+
+  /* ---------- FILE → BASE64 ---------- */
+  function fileToBase64(file) {
+    return new Promise(function (resolve, reject) {
+      if (!file) { resolve(null); return; }
+      if (file.size > 5 * 1024 * 1024) {
+        reject(new Error('"' + file.name + '" is larger than 5MB.'));
+        return;
+      }
+      var reader = new FileReader();
+      reader.onload = function () {
+        var dataUrl = reader.result;
+        var comma = dataUrl.indexOf(',');
+        resolve({
+          name: file.name,
+          type: file.type,
+          size: file.size,
+          data: dataUrl.substring(comma + 1)
+        });
+      };
+      reader.onerror = function () { reject(new Error('Could not read file.')); };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  /* ---------- SUBMIT ---------- */
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
+    if (slugCheck && slugCheck.getAttribute('data-state') === 'taken') {
+      alert('That URL is already taken. Please choose another.');
+      slugInput.focus();
+      return;
+    }
+
+    var submitBtn = form.querySelector('.btn[type="submit"]');
+    var originalLabel = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Submitting…';
+
+    var logoFile    = document.getElementById('p-logo').files[0] || null;
+    var textureFile = document.getElementById('p-texture').files[0] || null;
+
+    Promise.all([fileToBase64(logoFile), fileToBase64(textureFile)])
+      .then(function (files) {
+        var logo = files[0], texture = files[1];
+
+        var data = {
+          brandName:      form.querySelector('#p-brand').value.trim(),
+          contactName:    form.querySelector('#p-contact').value.trim(),
+          email:          form.querySelector('#p-email').value.trim(),
+          phone:          form.querySelector('#p-phone').value.trim(),
+          social:         form.querySelector('#p-social').value.trim(),
+
+          logo:           logo,
+          texture:        texture,
+          colorPrimary:   form.querySelector('#p-color-1').value.trim(),
+          colorSecondary: form.querySelector('#p-color-2').value.trim(),
+
+          slug:           form.querySelector('#p-slug').value.trim(),
+          tagline:        form.querySelector('#p-tagline').value.trim(),
+          story:          form.querySelector('#p-story').value.trim(),
+
+          sampleName:        form.querySelector('#p-item-name').value.trim(),
+          sampleCategory:    form.querySelector('#p-item-category').value,
+          sampleDescription: form.querySelector('#p-item-desc').value.trim(),
+          samplePrice:       Number(form.querySelector('#p-price').value),
+          currency:          'NGN',
+          backlog:           Number(form.querySelector('#p-backlog').value),
+
+          bankName:      form.querySelector('#p-bank').value.trim(),
+          accountName:   form.querySelector('#p-account-name').value.trim(),
+          accountNumber: form.querySelector('#p-account-number').value.trim(),
+
+          agreePayout:  form.querySelector('input[name="agreePayout"]').checked,
+          agreeBacklog: form.querySelector('input[name="agreeBacklog"]').checked,
+          agreeBank:    form.querySelector('input[name="agreeBank"]').checked,
+
+          submittedAt: new Date().toISOString(),
+          source:      'Partners page'
+        };
+
+        if (!window.Tupsy || typeof window.Tupsy.submitPartner !== 'function') {
+          throw new Error('tupsy.js not loaded.');
+        }
+        return window.Tupsy.submitPartner(data);
+      })
+      .then(function (res) {
+        if (res && res.ok) {
+          window.location.href = '/thank-you.html?type=partner';
+        } else {
+          throw new Error((res && res.error) || 'Submission failed');
+        }
+      })
+      .catch(function (err) {
+        console.error('Partner submit error:', err);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalLabel;
+        alert(err.message || 'Something went wrong. Please try again.');
+      });
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
