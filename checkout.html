@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout — Tupsy</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#102C24">
+
+<link rel="icon" type="image/svg+xml" href="https://tupsy.netlify.app/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://tupsy.netlify.app/assets/favicon-32.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script src="/tupsy.js" defer></script>
+
+<style>
+:root{
+  --forest:#102C24;--ivory:#F7F2E9;--charcoal:#252627;
+  --rose:#E8436B;--rose-dark:#C93359;--blush:#F4DAD3;
+  --terracotta:#E65B32;--sage:#C8C7B9;
+  --display:'Archivo','Helvetica Neue',Arial,sans-serif;
+  --body:'Inter',system-ui,-apple-system,sans-serif;
+  --edge:rgba(16,44,36,.13);--edge-light:rgba(247,242,233,.16);
+  --radius:8px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ivory);color:var(--charcoal);font-family:var(--body);font-size:16px;line-height:1.58;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+::selection{background:var(--rose);color:#fff}
+:focus-visible{outline:2px solid var(--rose);outline-offset:3px;border-radius:var(--radius)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.container{width:min(1080px,100% - 44px);margin-inline:auto}
+
+.display{font-family:var(--display);font-weight:800;letter-spacing:-.025em;line-height:1.05;margin:0}
+.eyebrow{font-family:var(--display);font-weight:600;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;margin:0;opacity:.7}
+.eyebrow::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--rose);flex:none}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:15px 24px;border:1px solid transparent;border-radius:var(--radius);font-family:var(--display);font-weight:700;font-size:.74rem;letter-spacing:.11em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:background .18s ease,border-color .18s ease,opacity .18s ease}
+.btn--rose{background:var(--rose);color:#fff}
+.btn--rose:hover{background:var(--rose-dark)}
+.btn--rose:disabled{opacity:.45;cursor:default;background:var(--rose)}
+.btn--ghost{border-color:var(--edge);background:transparent}
+.btn--ghost:hover{border-color:var(--forest)}
+.btn--block{width:100%}
+.btn .arw{transition:transform .2s ease}
+.btn:hover:not(:disabled) .arw{transform:translateX(3px)}
+
+/* HEADER */
+.header{border-bottom:1px solid var(--edge);background:var(--ivory)}
+.header__inner{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+.logo__img{display:block;height:25px;width:auto}
+.header__back{font-family:var(--display);font-weight:600;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;opacity:.55}
+.header__back:hover{opacity:1}
+
+.main{padding:clamp(24px,3vw,40px) 0 clamp(50px,6vw,80px)}
+.head{margin-bottom:clamp(20px,2.5vw,30px)}
+.head h1{font-size:clamp(1.5rem,2.8vw,2.1rem);margin-top:7px}
+
+.layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(24px,3.5vw,48px);align-items:start}
+@media (max-width:840px){.layout{grid-template-columns:1fr}}
+
+/* ---------- cart ---------- */
+.block{margin-bottom:clamp(24px,3vw,34px)}
+.block__title{font-family:var(--display);font-weight:700;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;margin:0 0 14px;opacity:.6}
+
+.line{display:grid;grid-template-columns:68px 1fr auto;gap:14px;padding:16px 0;border-top:1px solid var(--edge)}
+.line:last-of-type{border-bottom:1px solid var(--edge)}
+.line__img{aspect-ratio:4/5;border-radius:6px;overflow:hidden;background:repeating-linear-gradient(135deg,rgba(16,44,36,.05) 0 1.5px,transparent 1.5px 13px),var(--sage);position:relative}
+.line__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.line__name{font-family:var(--display);font-weight:700;font-size:.93rem;margin:0 0 3px}
+.line__opts{margin:0;font-size:.79rem;opacity:.6;line-height:1.5}
+.line__measure{margin:5px 0 0;font-size:.77rem;opacity:.75;line-height:1.5}
+.line__measure b{font-weight:600}
+.line__lead{display:inline-flex;align-items:center;gap:6px;margin:7px 0 0;font-size:.74rem;opacity:.68}
+.line__lead::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--terracotta);flex:none}
+.line__right{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;gap:10px;text-align:right}
+.line__price{font-family:var(--display);font-weight:700;font-size:.92rem;white-space:nowrap}
+
+.qty{display:inline-flex;align-items:center;border:1px solid var(--edge);border-radius:6px;overflow:hidden}
+.qty button{width:30px;height:30px;background:transparent;border:0;cursor:pointer;font-size:.95rem;line-height:1;transition:background .16s ease}
+.qty button:hover{background:rgba(16,44,36,.05)}
+.qty span{min-width:30px;text-align:center;font-size:.84rem;font-weight:600;border-inline:1px solid var(--edge);height:30px;line-height:30px}
+.line__remove{background:none;border:0;padding:0;cursor:pointer;font-size:.75rem;opacity:.45;text-decoration:underline;text-underline-offset:3px}
+.line__remove:hover{opacity:1;color:var(--rose)}
+
+/* ---------- form ---------- */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:540px){.grid2{grid-template-columns:1fr}}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;opacity:.55;margin-bottom:5px}
+.req{color:var(--rose)}
+.input,.textarea,.select{width:100%;padding:12px 13px;border:1px solid var(--edge);border-radius:6px;font-family:var(--body);font-size:.9rem;background:#fff;color:var(--charcoal)}
+.input:focus,.textarea:focus,.select:focus{outline:none;border-color:var(--forest)}
+.input.is-bad,.select.is-bad{border-color:var(--terracotta);background:rgba(230,91,50,.04)}
+.textarea{resize:vertical;min-height:70px;line-height:1.5}
+.hint{font-size:.76rem;opacity:.5;margin:5px 0 0}
+
+/* ---------- summary ---------- */
+.summary{border:1px solid var(--edge);border-radius:var(--radius);padding:20px;position:sticky;top:20px;background:#fff}
+.sum__row{display:flex;justify-content:space-between;gap:16px;padding:9px 0;font-size:.88rem}
+.sum__row span:first-child{opacity:.6}
+.sum__row--total{border-top:1px solid var(--edge);margin-top:7px;padding-top:15px;font-family:var(--display);font-weight:700;font-size:1.05rem}
+.sum__row--total span:first-child{opacity:1}
+.sum__note{font-size:.78rem;opacity:.55;line-height:1.5;margin:4px 0 0}
+.summary .btn{margin-top:16px}
+.secure{display:flex;align-items:center;gap:7px;justify-content:center;margin:12px 0 0;font-size:.76rem;opacity:.5}
+.secure::before{content:"";width:5px;height:5px;border-radius:50%;background:#3F7A5E}
+
+.made{margin-top:16px;padding:13px 15px;border-radius:var(--radius);background:var(--blush);font-size:.81rem;line-height:1.55;color:var(--forest)}
+
+.err{display:none;margin:0 0 16px;padding:13px 15px;border-radius:var(--radius);background:rgba(230,91,50,.09);border:1px solid rgba(230,91,50,.3);font-size:.86rem;line-height:1.5}
+.err.is-on{display:block}
+
+.empty{text-align:center;padding:70px 20px;border:1px dashed var(--edge);border-radius:var(--radius)}
+.empty p{opacity:.6;margin:0 0 20px}
+
+.footer{border-top:1px solid var(--edge);padding:20px 0;font-size:.75rem;opacity:.4}
+.footer__inner{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+
+@media (prefers-reduced-motion:reduce){*{transition-duration:.001ms !important}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container header__inner">
+    <a href="/" class="logo" aria-label="Tupsy — home">
+      <img class="logo__img" src="https://tupsy.netlify.app/assets/tupsy-logo-dark.svg" alt="Tupsy" width="132" height="25">
+    </a>
+    <a href="/shop" class="header__back">← Keep shopping</a>
+  </div>
+</header>
+
+<main class="main">
+  <div class="container">
+
+    <!-- empty -->
+    <div id="view-empty" hidden>
+      <div class="empty">
+        <p>Your cart is empty.</p>
+        <a class="btn btn--rose" href="/shop">Browse the shop <span class="arw" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+
+    <!-- checkout -->
+    <div id="view-cart" hidden>
+      <div class="head">
+        <p class="eyebrow">Checkout</p>
+        <h1 class="display">Almost there.</h1>
+      </div>
+
+      <div class="err" id="err" role="alert"></div>
+
+      <div class="layout">
+        <div>
+          <!-- cart lines -->
+          <section class="block">
+            <h2 class="block__title">Your order</h2>
+            <div id="lines"></div>
+          </section>
+
+          <!-- details -->
+          <section class="block">
+            <h2 class="block__title">Your details</h2>
+            <form id="form" novalidate>
+              <div class="grid2">
+                <div class="field">
+                  <label for="f-name">Full name <span class="req">*</span></label>
+                  <input class="input" type="text" id="f-name" name="name" autocomplete="name" required>
+                </div>
+                <div class="field">
+                  <label for="f-phone">Phone / WhatsApp <span class="req">*</span></label>
+                  <input class="input" type="tel" id="f-phone" name="phone" autocomplete="tel" placeholder="08012345678" required>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="f-email">Email <span class="req">*</span></label>
+                <input class="input" type="email" id="f-email" name="email" autocomplete="email" required>
+                <p class="hint">Your receipt and updates go here.</p>
+              </div>
+
+              <div class="field">
+                <label for="f-address">Delivery address <span class="req">*</span></label>
+                <input class="input" type="text" id="f-address" name="address" autocomplete="street-address" placeholder="Street, number, landmark" required>
+              </div>
+
+              <div class="grid2">
+                <div class="field">
+                  <label for="f-city">City <span class="req">*</span></label>
+                  <input class="input" type="text" id="f-city" name="city" autocomplete="address-level2" required>
+                </div>
+                <div class="field">
+                  <label for="f-state">State <span class="req">*</span></label>
+                  <select class="select" id="f-state" name="state" required>
+                    <option value="">Select</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="f-notes">Delivery notes</label>
+                <textarea class="textarea" id="f-notes" name="notes" placeholder="Anything that helps us get it to you."></textarea>
+              </div>
+            </form>
+          </section>
+        </div>
+
+        <!-- summary -->
+        <aside>
+          <div class="summary">
+            <h2 class="block__title">Summary</h2>
+            <div class="sum__row"><span>Subtotal</span><span id="s-subtotal">₦0</span></div>
+            <div class="sum__row">
+              <span>Delivery</span>
+              <span id="s-shipping">Arranged after</span>
+            </div>
+            <div class="sum__row sum__row--total"><span>Total</span><span id="s-total">₦0</span></div>
+            <p class="sum__note" id="s-note"></p>
+
+            <button class="btn btn--rose btn--block" type="button" id="pay">
+              Pay with Paystack <span class="arw" aria-hidden="true">→</span>
+            </button>
+            <p class="secure">Secure payment handled by Paystack</p>
+
+            <div class="made" id="made" hidden></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <span>© <span id="year"></span> Tupsy</span>
+    <span>Made in Lagos</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var STATES = ['Abia','Adamawa','Akwa Ibom','Anambra','Bauchi','Bayelsa','Benue','Borno',
+    'Cross River','Delta','Ebonyi','Edo','Ekiti','Enugu','FCT Abuja','Gombe','Imo','Jigawa',
+    'Kaduna','Kano','Katsina','Kebbi','Kogi','Kwara','Lagos','Nasarawa','Niger','Ogun','Ondo',
+    'Osun','Oyo','Plateau','Rivers','Sokoto','Taraba','Yobe','Zamfara'];
+
+  var FORM_KEY = 'tupsy_checkout_details';
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function money(n, c) {
+    if (window.Tupsy && Tupsy.money) return Tupsy.money(n, c);
+    return '₦' + Number(n || 0).toLocaleString('en-NG', { maximumFractionDigits: 0 });
+  }
+
+  /* ---------- cart, read through tupsy.js when it is there ---------- */
+  function getCart() {
+    if (window.Tupsy && Tupsy.getCart) return Tupsy.getCart();
+    try {
+      var raw = JSON.parse(localStorage.getItem('tupsy_cart_v1'));
+      if (raw && raw.items && raw.items.length) return raw;
+    } catch (e) {}
+    return { brand:'', brandSlug:'', items:[] };
+  }
+  function saveCart(cart) {
+    if (window.Tupsy && Tupsy.saveCart) return Tupsy.saveCart(cart);
+    try { localStorage.setItem('tupsy_cart_v1', JSON.stringify(cart)); } catch (e) {}
+    return cart;
+  }
+
+  /* ---------- render ---------- */
+  function subtotal(cart) {
+    var n = 0;
+    cart.items.forEach(function (it) { n += (it.price || 0) * it.qty; });
+    return n;
+  }
+  function maxLead(cart) {
+    var n = 0;
+    cart.items.forEach(function (it) { if ((it.leadTime || 0) > n) n = it.leadTime; });
+    return n;
+  }
+
+  function renderLines(cart) {
+    document.getElementById('lines').innerHTML = cart.items.map(function (it) {
+      var opts = [];
+      if (it.variant) opts.push(it.variant);
+      if (it.colour)  opts.push(it.colour);
+      if (it.size)    opts.push(it.size);
+
+      return '' +
+      '<div class="line">' +
+        '<div class="line__img">' +
+          (it.image ? '<img src="' + esc(it.image) + '" alt="" onerror="this.remove()">' : '') +
+        '</div>' +
+        '<div>' +
+          '<p class="line__name">' + esc(it.name) + '</p>' +
+          (opts.length ? '<p class="line__opts">' + esc(opts.join(' · ')) + '</p>' : '') +
+          (it.measurements ? '<p class="line__measure"><b>Measurements</b> ' + esc(it.measurements) + '</p>' : '') +
+          (it.fitNote ? '<p class="line__measure"><b>Fit note</b> ' + esc(it.fitNote) + '</p>' : '') +
+          (it.leadTime ? '<p class="line__lead">Made in ' + it.leadTime + ' working days</p>' : '') +
+        '</div>' +
+        '<div class="line__right">' +
+          '<p class="line__price">' + money(it.price * it.qty, it.currency) + '</p>' +
+          '<div class="qty">' +
+            '<button type="button" data-minus="' + esc(it.key) + '" aria-label="Decrease">−</button>' +
+            '<span>' + it.qty + '</span>' +
+            '<button type="button" data-plus="' + esc(it.key) + '" aria-label="Increase">+</button>' +
+          '</div>' +
+          '<button class="line__remove" type="button" data-remove="' + esc(it.key) + '">Remove</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function renderSummary(cart) {
+    var sub = subtotal(cart);
+    document.getElementById('s-subtotal').textContent = money(sub, cart.items[0] && cart.items[0].currency);
+    document.getElementById('s-total').textContent = money(sub, cart.items[0] && cart.items[0].currency);
+    document.getElementById('s-note').textContent =
+      'Delivery is arranged once your order is ready, and charged separately.';
+
+    var lead = maxLead(cart);
+    var made = document.getElementById('made');
+    if (lead) {
+      made.hidden = false;
+      made.innerHTML = '<strong>Made to order.</strong> We start the day your payment lands. ' +
+        'Allow about <strong>' + lead + ' working days</strong> before it is ready, then we message you to arrange delivery.';
+    } else {
+      made.hidden = true;
+    }
+  }
+
+  function paint() {
+    var cart = getCart();
+    var empty = !cart.items.length;
+    document.getElementById('view-empty').hidden = !empty;
+    document.getElementById('view-cart').hidden = empty;
+    if (empty) return;
+    renderLines(cart);
+    renderSummary(cart);
+  }
+
+  /* ---------- cart edits ---------- */
+  document.getElementById('lines').addEventListener('click', function (e) {
+    var cart = getCart(), changed = false;
+
+    var minus = e.target.closest('[data-minus]');
+    var plus  = e.target.closest('[data-plus]');
+    var rm    = e.target.closest('[data-remove]');
+
+    if (minus || plus) {
+      var key = (minus || plus).getAttribute(minus ? 'data-minus' : 'data-plus');
+      cart.items.forEach(function (it) {
+        if (it.key === key) {
+          it.qty = Math.max(1, Math.min(10, it.qty + (minus ? -1 : 1)));
+          changed = true;
+        }
+      });
+    }
+    if (rm) {
+      var rkey = rm.getAttribute('data-remove');
+      cart.items = cart.items.filter(function (it) { return it.key !== rkey; });
+      changed = true;
+    }
+    if (!changed) return;
+
+    if (!cart.items.length) { cart.brand = ''; cart.brandSlug = ''; }
+    saveCart(cart);
+    paint();
+  });
+
+  /* ---------- validation ---------- */
+  var FIELDS = ['name','phone','email','address','city','state'];
+
+  function showError(msg) {
+    var el = document.getElementById('err');
+    el.textContent = msg;
+    el.classList.add('is-on');
+    el.scrollIntoView({ behavior:'smooth', block:'center' });
+  }
+  function clearError() {
+    document.getElementById('err').classList.remove('is-on');
+  }
+
+  function readForm() {
+    var out = {};
+    FIELDS.concat(['notes']).forEach(function (f) {
+      out[f] = (document.getElementById('f-' + f).value || '').trim();
+    });
+    out.country = 'Nigeria';
+    return out;
+  }
+
+  function validate(d) {
+    var bad = null;
+    FIELDS.forEach(function (f) {
+      var el = document.getElementById('f-' + f);
+      var ok = !!d[f];
+      if (f === 'email') ok = /^\S+@\S+\.\S+$/.test(d.email);
+      if (f === 'phone') ok = d.phone.replace(/\D/g, '').length >= 10;
+      el.classList.toggle('is-bad', !ok);
+      if (!ok && !bad) bad = { el: el, field: f };
+    });
+    return bad;
+  }
+
+  /* Remember details so a failed payment does not mean retyping. */
+  function saveForm(d) {
+    try { localStorage.setItem(FORM_KEY, JSON.stringify(d)); } catch (e) {}
+  }
+  function loadForm() {
+    try {
+      var d = JSON.parse(localStorage.getItem(FORM_KEY));
+      if (!d) return;
+      Object.keys(d).forEach(function (f) {
+        var el = document.getElementById('f-' + f);
+        if (el && d[f]) el.value = d[f];
+      });
+    } catch (e) {}
+  }
+
+  /* ---------- pay ---------- */
+  document.getElementById('pay').addEventListener('click', function () {
+    clearError();
+
+    var cart = getCart();
+    if (!cart.items.length) { paint(); return; }
+
+    var details = readForm();
+    var bad = validate(details);
+    if (bad) {
+      var label = { name:'your name', phone:'a valid phone number', email:'a valid email',
+                    address:'your delivery address', city:'your city', state:'your state' }[bad.field];
+      showError('Please add ' + label + ' before paying.');
+      bad.el.focus();
+      return;
+    }
+    saveForm(details);
+
+    var btn = this;
+    var original = btn.innerHTML;
+    btn.disabled = true;
+    btn.textContent = 'Starting payment…';
+
+    if (!window.Tupsy || typeof Tupsy.createOrder !== 'function') {
+      btn.disabled = false; btn.innerHTML = original;
+      showError('We could not reach the payment service. Refresh and try again, or message us on WhatsApp.');
+      return;
+    }
+
+    Tupsy.createOrder(cart, details)
+      .then(function (res) {
+        if (!res || !res.ok) {
+          throw new Error((res && res.error) || 'We could not start the payment.');
+        }
+        /* Kept so the confirmation page can find the order if Paystack
+           drops the ref on the way back. */
+        try { localStorage.setItem('tupsy_last_order', res.orderId); } catch (e) {}
+
+        if (!res.authorization_url) {
+          throw new Error('Payment is not set up yet. Your order reference is ' +
+            res.orderId + '. Please message us on WhatsApp to complete it.');
+        }
+        window.location.href = res.authorization_url;
+      })
+      .catch(function (err) {
+        btn.disabled = false; btn.innerHTML = original;
+        showError(err.message || 'Something went wrong. Please try again.');
+      });
+  });
+
+  /* ---------- boot ---------- */
+  document.getElementById('f-state').innerHTML =
+    '<option value="">Select</option>' +
+    STATES.map(function (s) { return '<option value="' + esc(s) + '">' + esc(s) + '</option>'; }).join('');
+
+  loadForm();
+  paint();
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>

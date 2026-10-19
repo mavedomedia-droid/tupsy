@@ -1,0 +1,32 @@
+# Tupsy — Netlify routing
+# Order matters: the first match wins, so specific rules come first
+# and the partner catch-all sits last.
+
+# ---------- Tupsy's own shop ----------
+/shop                 /shop.html              200
+/shop/*               /shop.html              200
+
+# ---------- checkout and confirmation ----------
+/checkout             /checkout.html          200
+/purchase-complete    /purchase-complete.html 200
+
+# Paystack is configured with the .html callback, but if that ever
+# changes these keep the old shapes working.
+/order-complete       /purchase-complete.html 200
+/thank-you/purchase-complete.html  /purchase-complete.html  301
+
+# ---------- thank you pages ----------
+/thank-you            /thank-you.html         200
+/thank-you/partners   /thank-you/partners.html 200
+
+# ---------- partners ----------
+/partners             /partners.html          200
+
+# ---------- partner storefronts ----------
+# Anything left over is treated as a brand slug: tupsy.netlify.app/afrocue
+# brand.html reads the slug off the path and asks the API for it, and
+# renders a Not found state if there is no live storefront with that slug.
+#
+# Real files and real directories are served before this rule is reached,
+# so /assets/..., /shop.html and the rest are unaffected.
+/*                    /brand.html             200
