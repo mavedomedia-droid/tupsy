@@ -116,7 +116,10 @@ button{font:inherit;color:inherit}
 .piece__price{font-family:var(--display);font-weight:700;font-size:.9rem;margin:0}
 .piece__price small{font-weight:600;font-size:.72rem;opacity:.45;letter-spacing:.03em}
 .piece.is-out .frame{opacity:.55}
-.empty{grid-column:1/-1;padding:54px 20px;text-align:center;border:1px dashed var(--edge);border-radius:var(--radius);font-size:.88rem;opacity:.5}
+.empty{grid-column:1/-1;padding:clamp(44px,7vw,76px) 24px;text-align:center;border:1px dashed var(--edge);border-radius:var(--radius)}
+.empty__title{font-family:var(--display);font-weight:700;font-size:1.05rem;margin:0 0 8px}
+.empty__body{font-size:.88rem;opacity:.6;margin:0;line-height:1.55;max-width:42ch;margin-inline:auto}
+.empty .btn{margin-top:20px}
 
 /* DETAIL */
 .detail{padding:clamp(20px,2.6vw,30px) 0 var(--pad)}
@@ -412,32 +415,11 @@ button{font:inherit;color:inherit}
      ------------------------------------------------------------ */
   var SIZE_GUIDE = { cols:[], rows:[] };
 
-  /* ------------------------------------------------------------
-     PLACEHOLDER — replaced by Items rows with Partner Slug = tupsy
-     ------------------------------------------------------------ */
-  var PLACEHOLDER = [
-    {
-      id:'tp-crochet-skirt', slug:'crochet-skirt', name:'Crochet Skirt', category:'Skirts',
-      currency:'NGN',
-      description:'Crocheted by hand, sits on the waist, finished with a tie. ' +
-                  'Choose it with the fringe or clean at the hem.',
-      stockMode:'made', leadTime:14,
-      specs:[['Material','Crochet, cotton blend yarn'],['Length','16 inches']],
-      variantLabel:'Finish',
-      variants:[
-        { label:'With fringe',    price:40000, leadTime:18, note:'Heavier, fuller hem. More yarn, more time.' },
-        { label:'Without fringe', price:25000, leadTime:14, note:'Clean hem, lighter drape.' }
-      ],
-      colours:[
-        { name:'Cream', hex:'#EADFC8' }, { name:'Terracotta', hex:'#C96F4A' },
-        { name:'Sage',  hex:'#9CA88B' }, { name:'Rose',       hex:'#D98BA0' },
-        { name:'Cocoa', hex:'#6B4A3A' }, { name:'Black',      hex:'#1C1C1C' }
-      ],
-      sizes:['UK 6','UK 8','UK 10','UK 12','UK 14','UK 16','UK 18'],
-      measureFields:['Waist','Hips'],
-      tag:'Available now'
-    }
-  ];
+  /* There is deliberately no placeholder catalogue here. Everything on
+     this page comes from the Items tab, rows with Partner Slug = tupsy
+     and Status = Live. If the sheet is empty or the API is unreachable
+     the page says so plainly, rather than showing pieces that are not
+     really for sale. */
 
   /* ============================================================
      HELPERS
@@ -471,17 +453,29 @@ button{font:inherit;color:inherit}
     }
     return parsePairs(v).map(function (p) { return { name:p[0], hex:p[1] }; });
   }
-  /* "With fringe:40000:18:Heavier hem, Without fringe:25000:14" */
+  /* "With fringe:40000:18:Heavier hem, Without fringe:25000:14"
+     Commas separate variants, but a note may contain commas too. A
+     chunk only starts a new variant when it looks like "label:number",
+     so anything else is joined back onto the note it came from. */
   function parseVariants(v) {
     if (Array.isArray(v)) return v;
     if (!v) return [];
-    return parseList(v).map(function (chunk) {
-      var b = chunk.split(':');
+
+    var chunks = String(v).split(',');
+    var groups = [];
+    chunks.forEach(function (chunk) {
+      if (/^\s*[^:]+:\s*\d/.test(chunk) || !groups.length) groups.push(chunk);
+      else groups[groups.length - 1] += ',' + chunk;
+    });
+
+    return groups.map(function (g) {
+      var b = g.split(':');
       return {
-        label:(b[0] || '').trim(),
-        price:Number(b[1]) || 0,
-        leadTime:Number(b[2]) || 0,
-        note:(b[3] || '').trim()
+        label:    (b[0] || '').trim(),
+        price:    Number(b[1]) || 0,
+        leadTime: Number(b[2]) || 0,
+        /* rejoin, so a note containing a colon survives too */
+        note:     b.slice(3).join(':').trim()
       };
     }).filter(function (x) { return x.label && x.price; });
   }
@@ -959,11 +953,19 @@ button{font:inherit;color:inherit}
     });
   }
 
-  function start(items) {
-    state.pieces = normalise(items);
-    renderFilters();
-    renderGrid();
+  /* Runs whatever happens to the catalogue, so the footer, the cart
+     count and the contact links work even when the grid cannot load. */
+  function initChrome() {
     paintCount(getCart());
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    if (WHATSAPP) {
+      Array.prototype.forEach.call(document.querySelectorAll('[data-whatsapp]'), function (a) {
+        a.setAttribute('href', WHATSAPP);
+        a.setAttribute('target', '_blank');
+        a.setAttribute('rel', 'noopener');
+      });
+    }
 
     if (SIZE_GUIDE.rows && SIZE_GUIDE.rows.length) {
       document.getElementById('guide-toggle').hidden = false;
@@ -975,32 +977,84 @@ button{font:inherit;color:inherit}
         }).join('') + '</tr>';
       }).join('');
     }
+  }
 
+  function start(items) {
+    state.pieces = normalise(items);
+    renderFilters();
+    renderGrid();
+
+    /* /shop/<slug> opens that piece straight away. */
     var slug = (window.location.pathname.match(/^\/shop\/(.+)$/) || [])[1];
-    if (slug) openPiece(slug, false);
-
-    if (WHATSAPP) {
-      Array.prototype.forEach.call(document.querySelectorAll('[data-whatsapp]'), function (a) {
-        a.setAttribute('href', WHATSAPP);
-        a.setAttribute('target', '_blank');
-        a.setAttribute('rel', 'noopener');
-      });
+    if (slug) {
+      if (find(slug)) openPiece(slug, false);
+      else gridMessage('We could not find that piece',
+             'It may have sold out or moved. <a href="/shop" style="text-decoration:underline">See everything else</a>.',
+             false);
     }
-    document.getElementById('year').textContent = new Date().getFullYear();
+  }
+
+  /* Three states the grid can be in besides showing pieces. Each one
+     says what is actually true, so a broken connection never looks
+     like an empty shop and an empty shop never looks broken. */
+  function gridMessage(title, body, showRetry) {
+    document.getElementById('count').textContent = '';
+    document.getElementById('filters').innerHTML = '';
+    document.getElementById('grid').innerHTML =
+      '<div class="empty">' +
+        '<p class="empty__title">' + esc(title) + '</p>' +
+        '<p class="empty__body">' + body + '</p>' +
+        (showRetry ? '<button class="btn btn--ghost" type="button" id="retry">Try again</button>' : '') +
+      '</div>';
+    var r = document.getElementById('retry');
+    if (r) r.addEventListener('click', boot);
   }
 
   function boot() {
-    if (!window.Tupsy || typeof window.Tupsy.getPartnerItems !== 'function') { start(PLACEHOLDER); return; }
+    document.getElementById('grid').innerHTML =
+      '<div class="empty"><p class="empty__body">Loading pieces…</p></div>';
+
+    if (!window.Tupsy || typeof window.Tupsy.getPartnerItems !== 'function') {
+      gridMessage('We could not load the shop',
+        'Something went wrong on our side. Refresh the page, or message us and we will sort it out.',
+        true);
+      return;
+    }
+
     window.Tupsy.getPartnerItems(SHOP_SLUG)
       .then(function (res) {
-        var items = (res && res.ok && res.items) || [];
-        start(items.length ? items : PLACEHOLDER);
+        if (!res || !res.ok) {
+          console.warn('partnerItems failed:', res);
+          gridMessage('We could not load the shop',
+            'Something went wrong on our side. Refresh the page, or ' +
+            '<a href="mailto:tupsyonline@gmail.com" style="text-decoration:underline">email us</a> ' +
+            'and we will sort it out.',
+            true);
+          return;
+        }
+        if (!res.items || !res.items.length) {
+          gridMessage('Nothing live just yet',
+            'New pieces are on the way. Follow ' +
+            '<a href="https://instagram.com/tupsy01" target="_blank" rel="noopener" ' +
+            'style="text-decoration:underline">@tupsy01</a> to see them first.',
+            false);
+          return;
+        }
+        start(res.items);
       })
-      .catch(function () { start(PLACEHOLDER); });
+      .catch(function (err) {
+        console.warn('partnerItems error:', err);
+        gridMessage('We could not load the shop',
+          'Check your connection and try again, or ' +
+          '<a href="mailto:tupsyonline@gmail.com" style="text-decoration:underline">email us</a>.',
+          true);
+      });
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
+  function run() { initChrome(); boot(); }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
+  else run();
 })();
 </script>
 </body>
